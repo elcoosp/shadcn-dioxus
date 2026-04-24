@@ -12,3 +12,6 @@ dioxus = { version = "0.7" }
 
 # workspace
 ui = { path = "packages/ui" }
+[workspace.lints.rust]
+static_mut_refs = "allow"
+uninhabited_statics = "allow"
