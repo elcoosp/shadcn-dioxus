@@ -111,6 +111,8 @@ mod carousel;
 pub use carousel::*;
 mod sidebar;
 pub use sidebar::*;
+mod stepper;
+pub use stepper::*;
 
 #[cfg(test)]
 mod tests {
@@ -118,25 +120,16 @@ mod tests {
     #[test]
     fn test_ring_arbitrary_value_merge() {
         let result = tw_merge!("ring-[3px]", "ring-0");
-        assert_eq!(
-            result, "ring-0",
-            "Arbitrary ring value should be overridden"
-        );
+        assert_eq!(result, "ring-0", "Arbitrary ring value should be overridden");
     }
     #[test]
     fn test_ring_arbitrary_value_with_variant() {
         let result = tw_merge!("focus-visible:ring-[3px]", "focus-visible:ring-0");
-        assert_eq!(
-            result, "focus-visible:ring-0",
-            "Variant with arbitrary ring should be overridden",
-        );
+        assert_eq!(result, "focus-visible:ring-0", "Variant with arbitrary ring should be overridden");
     }
     #[test]
     fn test_ring_width_and_inset_separate() {
         let result = tw_merge!("ring-1", "ring-inset");
-        assert_eq!(
-            result, "ring-1 ring-inset",
-            "ring-width and ring-inset should not conflict",
-        );
+        assert_eq!(result, "ring-1 ring-inset", "ring-width and ring-inset should not conflict");
     }
 }
