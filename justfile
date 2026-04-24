@@ -14,8 +14,8 @@
 # just fmt            — format all Rust code
 # just fmt-check      — check formatting without writing
 # just clean          — remove target directory
-#   just css            — build Tailwind CSS only
-#   css-watch          — watch CSS sources and rebuild on change
+#   just css            — install deps + build Tailwind CSS
+#   css-watch          — install deps + watch Tailwind CSS on change
 #   just serve          — build CSS + serve web app in dev mode
 #   just serve-no-css   — serve web app without rebuilding CSS
 #   just run-desktop    — build + run desktop app
@@ -92,13 +92,17 @@ fmt-check:
 lint: fmt clippy
 
 # ---------------------------------------------------------------------------
-# CSS (uses pnpm, not npm — see package.json "packageManager": "pnpm@10.13.1")
+# CSS (uses pnpm — see package.json "packageManager": "pnpm@10.13.1")
 # ---------------------------------------------------------------------------
 css:
-    cd packages/web && pnpm exec @tailwindcss/cli -i tailwind.css -o assets/tailwind.css
+    pnpm install
+    cd packages/web &&
+    pnpm exec @tailwind/css/cli -i tailwind.css -o assets/tailwind.css
 
 css-watch:
-    cd packages/web && pnpm exec @tailwindcss/cli -i tailwind.css -o assets/tailwind.css --watch
+    pnpm install
+    cd packages/web &&
+    pnpm exec @tailwind/css/cli -i tailwind.css -o assets/tailwind.css --watch
 
 # ---------------------------------------------------------------------------
 # Serve / Dev
