@@ -102,6 +102,8 @@ pub use pagination::*;
 mod drawer;
 pub use drawer::*;
 mod calendar;
+mod date_picker;
+pub use date_picker::*;
 pub use calendar::*;
 mod toast;
 pub use toast::{ToastProvider, add_toast, remove_toast, clear_toasts};
