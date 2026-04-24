@@ -19,7 +19,7 @@ pub struct SwitchProps {
 pub fn Switch(props: SwitchProps) -> Element {
     let mut internal_state = use_signal(|| props.default_checked);
     let get_checked = move || {
-        props.checked.map(|s| s()).unwrap_or_else(|| internal_state())
+        props.checked.map(|s| s()).unwrap_or_else(&*internal_state)
     };
     let mut set_checked = move |new_state: bool| {
         if let Some(mut controlled) = props.checked {
