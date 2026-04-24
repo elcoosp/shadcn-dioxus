@@ -81,13 +81,13 @@ check:
     cargo check
 
 clippy:
-    cargo clippy -- -W clippy::all
+    cargo clippy -W clippy::all
 
 fmt:
     cargo fmt --all
 
 fmt-check:
-    cargo fmt --all -- --check
+    cargo fmt --all --check
 
 lint: fmt clippy
 
@@ -96,31 +96,35 @@ lint: fmt clippy
 # ---------------------------------------------------------------------------
 css:
     pnpm install
-    cd packages/web &&
+    cd packages/web && \
     pnpm exec @tailwind/css/cli -i tailwind.css -o assets/tailwind.css
 
 css-watch:
     pnpm install
-    cd packages/web &&
+    cd packages/web && \
     pnpm exec @tailwind/css/cli -i tailwind.css -o assets/tailwind.css --watch
 
 # ---------------------------------------------------------------------------
 # Serve / Dev
 # ---------------------------------------------------------------------------
 serve: css
-    cd packages/web && dx serve
+    cd packages/web && \
+    dx serve
 
 serve-no-css:
-    cd packages/web && dx serve
+    cd packages/web && \
+    dx serve
 
 # ---------------------------------------------------------------------------
 # Run apps
 # ---------------------------------------------------------------------------
 run-desktop: build-desktop
-    cd packages/desktop && cargo run
+    cd packages/desktop && \
+    cargo run
 
 run-mobile: build-mobile
-    cd packages/mobile && cargo run
+    cd packages/mobile && \
+    cargo run
 
 # ---------------------------------------------------------------------------
 # Watch (auto-rebuild CSS + restart dx serve on file change)
