@@ -27,8 +27,8 @@ pub struct CalendarProps {
 
 #[component]
 pub fn Calendar(props: CalendarProps) -> Element {
-    let mut year = use_signal(|| props.default_year);
-    let mut month = use_signal(|| props.default_month);
+    let year = use_signal(|| props.default_year);
+    let month = use_signal(|| props.default_month);
     let mut selected_date = use_signal(|| props.default_date);
 
     let set_selected_date = use_callback(move |val: Option<(i32, u32, u32)>| {

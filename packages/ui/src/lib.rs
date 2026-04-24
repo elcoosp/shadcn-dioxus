@@ -107,6 +107,10 @@ mod toast;
 pub use toast::{ToastProvider, add_toast, remove_toast, clear_toasts};
 mod command;
 pub use command::*;
+mod carousel;
+pub use carousel::*;
+mod sidebar;
+pub use sidebar::*;
 
 #[cfg(test)]
 mod tests {
