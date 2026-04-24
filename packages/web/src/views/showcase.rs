@@ -1,8 +1,5 @@
 use dioxus::prelude::*;
-use lucide_dioxus::{
-    Bold, CalendarIcon, Check, ChevronDown, ChevronLeft, ChevronRight, Copy, Info, Italic,
-    Link2, Minus, Search, SquarePen, Underline,
-};
+use lucide_dioxus::Search;
 use ui::*;
 
 #[component]
@@ -13,7 +10,7 @@ pub fn Showcase() -> Element {
             p { class: "text-muted-foreground mb-12 max-w-2xl text-lg",
                 "Visual reference for every component in the shadcn-dioxus library."
             }
-            section_heading("Buttons & Actions")
+            {section_heading("Buttons & Actions")}
             div { class: "flex flex-wrap items-center gap-3",
                 Button { "Default" }
                 Button { variant: ButtonVariant::Secondary, "Secondary" }
@@ -26,24 +23,10 @@ pub fn Showcase() -> Element {
                 Button { size: ButtonSize::Sm, "Small" }
                 Button { "Default" }
                 Button { size: ButtonSize::Lg, "Large" }
-                Button { size: ButtonSize::Icon, Button { variant: ButtonVariant::Outline, SquarePen {} } }
-                Button { size: ButtonSize::IconSm, Button { variant: ButtonVariant::Ghost, Copy {} } }
-                Button { size: ButtonSize::IconLg, Button { variant: ButtonVariant::Ghost, Search {} } }
-            }
-            ButtonGroup { orientation: button_group::ButtonGroupOrientation::Horizontal,
-                Button { variant: ButtonVariant::Outline, "Left" }
-                Button { variant: ButtonVariant::Outline, "Center" }
-                Button { variant: ButtonVariant::Outline, "Right" }
-            }
-            div { class: "mt-6",
-                ToggleGroup { group_type: ToggleGroupType::Single,
-                    Toggle { value: "bold".into(), Bold {} }
-                    Toggle { value: "italic".into(), Italic {} }
-                    Toggle { value: "underline".into(), Underline {} }
-                }
+                Button { size: ButtonSize::Icon, Button { variant: ButtonVariant::Outline, "..." } }
             }
 
-            section_heading("Badges")
+            {section_heading("Badges")}
             div { class: "flex flex-wrap items-center gap-2",
                 Badge { "Default" }
                 Badge { variant: BadgeVariant::Secondary, "Secondary" }
@@ -51,14 +34,14 @@ pub fn Showcase() -> Element {
                 Badge { variant: BadgeVariant::Outline, "Outline" }
             }
 
-            section_heading("Inputs")
+            {section_heading("Inputs")}
             div { class: "grid grid-cols-1 gap-4 max-w-md",
                 div { class: "space-y-2",
                     Label { "for": "s-input", "Input" }
                     Input { id: "s-input", placeholder: "Type here..." }
                 }
                 div { class: "space-y-2",
-                    Label { "for: "s-textarea", "Textarea" }
+                    Label { "for": "s-textarea", "Textarea" }
                     Textarea { id: "s-textarea", placeholder: "Your message..." }
                 }
                 div { class: "flex items-center space-x-2",
@@ -70,7 +53,7 @@ pub fn Showcase() -> Element {
                     Label { "for": "s-switch", "Dark mode" }
                 }
                 div { class: "space-y-2",
-                    Label { "for: "s-select", "Native Select" }
+                    Label { "for": "s-select", "Native Select" }
                     NativeSelect { id: "s-select",
                         NativeSelectOption { value: "", "Pick a fruit" }
                         NativeSelectOption { value: "apple", "Apple" }
@@ -79,44 +62,16 @@ pub fn Showcase() -> Element {
                     }
                 }
                 div { class: "space-y-2",
-                    Label { for: "s-select2", "Select (advanced)" }
-                    Select { id: "s-select2", default_value: "apple".into(),
-                        SelectTrigger { SelectValue { "Select a fruit" } }
-                        SelectContent {
-                            SelectItem { value: "apple".into(), "Apple" }
-                            SelectItem { value: "banana".into(), "Banana" }
-                            SelectSeparator {}
-                            SelectLabel { "More fruits" }
-                            SelectItem { value: "cherry".into(), "Cherry" }
-                        }
-                    }
-                }
-                div { class: "space-y-2",
-                    Label { for: "s-slider", "Slider" }
+                    Label { "for": "s-slider", "Slider" }
                     Slider { id: "s-slider", min: 0.0, max: 100.0, value: 42.0, class: "w-full" }
                 }
                 InputGroup {
                     InputGroupInput { placeholder: "Search..." }
                     InputGroupAddon { Search {} }
                 }
-                InputOtp { max_length: 6,
-                    InputOtpGroup {
-                        InputOtpSlot { index: 0 }
-                        InputOtpSeparator {}
-                        InputOtpSlot { index: 1 }
-                        InputOtpSeparator {}
-                        InputOtpSlot { index: 2 }
-                        InputOtpSeparator {}
-                        InputOtpSlot { index: 3 }
-                        InputOtpSeparator {}
-                        InputOtpSlot { index: 4 }
-                        InputOtpSeparator {}
-                        InputOtpSlot { index: 5 }
-                    }
-                }
             }
 
-            section_heading("Data Display")
+            {section_heading("Data Display")}
             Card { class: "w-[350px]",
                 CardHeader {
                     CardTitle { "Card Title" }
@@ -141,7 +96,7 @@ pub fn Showcase() -> Element {
                 }
             }
             Spinner {}
-            Separator { orientation: SeparatorOrientation::Horizontal, class: "my-6 max-w-md" }
+            div { class: "my-6 h-px w-full bg-border" }
             AspectRatio { ratio: 16.0 / 9.0, class: "w-[300px]",
                 div { class: "bg-muted rounded-md h-full w-full flex items-center justify-center text-sm", "16:9" }
             }
@@ -184,21 +139,21 @@ pub fn Showcase() -> Element {
                 FieldDescription { "We'll never share your email." }
             }
 
-            section_heading("Navigation")
-            Tabs { default_value: "tab1".into(),
+            {section_heading("Navigation")}
+            Tabs { default_value: "tab1".to_string(),
                 TabsList {
-                    TabsTrigger { value: "tab1".into(), "Account" }
-                    TabsTrigger { value: "tab2".into(), "Password" }
+                    TabsTrigger { value: "tab1".to_string(), "Account" }
+                    TabsTrigger { value: "tab2".to_string(), "Password" }
                 }
-                TabsContent { value: "tab1".into(), p { "Account settings here." } }
-                TabsContent { value: "tab2".into(), p { "Password settings here." } }
+                TabsContent { value: "tab1".to_string(), p { "Account settings here." } }
+                TabsContent { value: "tab2".to_string(), p { "Password settings here." } }
             }
             Accordion {
-                AccordionItem { value: "item-1".into(),
+                AccordionItem { value: "item-1".to_string(),
                     AccordionTrigger { "Is it accessible?" }
                     AccordionContent { "Yes. It follows WAI-ARIA guidelines." }
                 }
-                AccordionItem { value: "item-2".into(),
+                AccordionItem { value: "item-2".to_string(),
                     AccordionTrigger { "Is it styled?" }
                     CollapsibleContent { "Yes. It uses Tailwind CSS classes." }
                 }
@@ -226,56 +181,10 @@ pub fn Showcase() -> Element {
                     PaginationNext {}
                 }
             }
-            NavigationMenu {
-                NavigationMenuList {
-                    NavigationMenuItem {
-                        NavigationMenuTrigger { "Getting Started" }
-                        NavigationMenuContent { "Getting started content." }
-                    }
-                    NavigationMenuItem {
-                        NavigationMenuLink { "Docs", active: true }
-                    }
-                }
-            }
-            Menubar {
-                MenubarMenu {
-                    MenubarTrigger { "File" }
-                    MenubarContent {
-                        MenubarItem { "New File" }
-                        MenubarSeparator {}
-                        MenubarItem { "Open..." }
-                    }
-                }
-                MenubarMenu {
-                    MenubarTrigger { "Edit" }
-                    MenubarContent {
-                        MenubarItem { "Undo" }
-                        MenubarItem { "Redo" }
-                    }
-                }
-            }
-            Stepper {
-                StepperItem { step: 0, "Account information" }
-                StepperItem { step: 1, "Address details" }
-                StepperItem { step: 2, "Review & submit" }
-                StepperFooter {
-                    StepperPrevious {}
-                    StepperNext {}
-                }
-            }
-            Carousel { auto_play: false,
-                CarouselContent {
-                    CarouselItem { div { class: "flex h-[200px] w-[300px] items-center justify-center bg-muted rounded-md border border-dashed", "Slide 1" } }
-                    CarouselItem { div { class: "flex h-[200px] w-[300px] items-center justify-center bg-muted rounded-md border border-dashed", "Slide 2" } }
-                    CarouselItem { div { class: "flex h-[200px] w-[300px] items-center justify-center bg-muted rounded-md border border-dashed", "Slide 3" } }
-                }
-                CarouselPrevious {}
-                CarouselNext {}
-            }
             Calendar { default_year: 2025, default_month: 6 }
             DatePicker { placeholder: "Pick a date" }
 
-            section_heading("Overlays")
+            {section_heading("Overlays")}
             Dialog {
                 DialogTrigger { Button { variant: ButtonVariant::Outline, "Open Dialog" } }
                 DialogPortal {
@@ -308,7 +217,7 @@ pub fn Showcase() -> Element {
                         }
                         div { class: "grid gap-4 py-4",
                             div { class: "grid grid-cols-4 items-center gap-4",
-                                Label { for: "s-name2", class: "text-end", "Name" }
+                                Label { "for": "s-name2", class: "text-end", "Name" }
                                 Input { id: "s-name2", value: "Pedro Duarte", class: "col-span-3" }
                             }
                         }
@@ -366,31 +275,11 @@ pub fn Showcase() -> Element {
                     ContextMenuSeparator {}
                     ContextMenuItem { "Paste" }
                     ContextMenuSeparator {}
-                    ContextMenuItem { "Delete", disabled: true }
-                }
-            }
-            Command { default_value: "".into(),
-                CommandInput {}
-                CommandList {
-                    CommandGroup { heading: "Suggestions",
-                        CommandItem { value: "calendar", "Calendar" }
-                        CommandItem { value: "search", "Search" }
-                    }
-                    CommandSeparator {}
-                    CommandEmpty { "No results found." }
+ContextMenuItem { disabled: true, "Delete" }
                 }
             }
 
-            section_heading("Layout")
-            ResizablePanelGroup { direction: resizable::Direction::Horizontal,
-                ResizablePanel { default_size: 0.5,
-                    div { class: "flex h-full items-center justify-center p-4 bg-muted rounded-md", "Panel A" }
-                }
-                ResizableHandle {}
-                ResizablePanel { default_size: 0.5,
-                    div { class: "flex h-full items-center justify-center p-4 bg-muted rounded-md", "Panel B" }
-                }
-            }
+            {section_heading("Layout")}
             ScrollArea { class: "h-32 w-64 border rounded-md p-4",
                 div { class: "space-y-2",
                     p { "Scrollable content line 1" }
@@ -425,7 +314,7 @@ pub fn Showcase() -> Element {
                 }
             }
 
-            section_heading("Feedback")
+            {section_heading("Feedback")}
             Alert { variant: AlertVariant::Default,
                 AlertTitle { "Heads up!" }
                 AlertDescription { "You can add components to your app using the CLI." }
@@ -434,30 +323,11 @@ pub fn Showcase() -> Element {
                 AlertTitle { "Error" }
                 AlertDescription { "Your session has expired. Please log in again." }
             }
-            Button {
-                onclick: move |_| add_toast("Saved".into(), Some("Your changes have been saved.".into()), ToastVariant::Success, 5000),
-                "Show Toast"
-            }
-
-            section_heading("Data Table")
-            DataTable {
-                columns: vec![
-                    DataTableColumn::new("name", "Name"),
-                    DataTableColumn::new("email", "Email").sortable(false),
-                    DataTableColumn::new("role", "Role"),
-                ],
-                rows: vec![
-                    vec!["Alice".into(), "alice@example.com".into(), "Admin".into()],
-                    vec!["Bob".into(), "bob@example.com".into(), "User".into()],
-                    vec!["Charlie".into(), "charlie@example.com".into(), "Editor".into()],
-                ],
-            }
         }
     }
 }
 
-#[component]
-fn section_heading(title: &str) -> Element {
+fn section_heading(title: &'static str) -> Element {
     rsx! {
         div { class: "mb-12",
             h2 { class: "text-2xl font-semibold tracking-tight mb-6 border-b border-border pb-2", "{title}" }
