@@ -23,14 +23,15 @@
 #   just watch          — watch CSS + restart dx serve on change
 #   just wr             — watchexec wrapper (original)
 # =============================================================================
-
 # ---------------------------------------------------------------------------
 # Default
+
 # ---------------------------------------------------------------------------
 default: test
 
 # ---------------------------------------------------------------------------
 # Build
+
 # ---------------------------------------------------------------------------
 build:
     cargo build
@@ -52,6 +53,7 @@ build-ui:
 
 # ---------------------------------------------------------------------------
 # Test
+
 # ---------------------------------------------------------------------------
 test:
     cargo nextest run
@@ -76,6 +78,7 @@ test-no-fail:
 
 # ---------------------------------------------------------------------------
 # Lint & Format
+
 # ---------------------------------------------------------------------------
 check:
     cargo check
@@ -93,19 +96,21 @@ lint: fmt clippy
 
 # ---------------------------------------------------------------------------
 # CSS (uses pnpm — see package.json "packageManager": "pnpm@10.13.1")
+
 # ---------------------------------------------------------------------------
 css:
-    pnpm install
     cd packages/web && \
-    pnpm exec @tailwind/css/cli -i tailwind.css -o assets/tailwind.css
+    pnpm install && \
+    pnpm exec tailwindcss -i tailwind.css -o assets/tailwind.css
 
 css-watch:
-    pnpm install
     cd packages/web && \
-    pnpm exec @tailwind/css/cli -i tailwind.css -o assets/tailwind.css --watch
+    pnpm install && \
+    pnpm exec tailwindcss -i tailwind.css -o assets/tailwind.css --watch
 
 # ---------------------------------------------------------------------------
 # Serve / Dev
+
 # ---------------------------------------------------------------------------
 serve: css
     cd packages/web && \
@@ -117,6 +122,7 @@ serve-no-css:
 
 # ---------------------------------------------------------------------------
 # Run apps
+
 # ---------------------------------------------------------------------------
 run-desktop: build-desktop
     cd packages/desktop && \
@@ -128,6 +134,7 @@ run-mobile: build-mobile
 
 # ---------------------------------------------------------------------------
 # Watch (auto-rebuild CSS + restart dx serve on file change)
+
 # ---------------------------------------------------------------------------
 watch:
     watchexec -w "packages/web/tailwind.css" -w "packages/web/src/**/*.rs" -r "just css && just serve-no-css"
@@ -137,6 +144,7 @@ wr:
 
 # ---------------------------------------------------------------------------
 # Clean
+
 # ---------------------------------------------------------------------------
 clean:
     cargo clean
@@ -149,6 +157,7 @@ distclean: clean clean-css
 
 # ---------------------------------------------------------------------------
 # Utilities
+
 # ---------------------------------------------------------------------------
 loc:
     find packages -name "*.rs" | xargs wc -l
@@ -167,6 +176,7 @@ audit:
 
 # ---------------------------------------------------------------------------
 # Install tools (run once)
+
 # ---------------------------------------------------------------------------
 install-tools:
     cargo install cargo-nextest
