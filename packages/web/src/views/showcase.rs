@@ -81,8 +81,9 @@ pub fn Showcase() -> Element {
                 CardFooter { Button { "Action" } }
             }
             div { class: "flex items-center space-x-3",
-                Avatar { AvatarImage { src: "https://github.com/shadcn.png", alt: "shadcn" } }
+                Avatar { AvatarImage { src: "https://github.com/shadcn.png", alt: "shadcn" }
                 AvatarFallback { "CN" }
+                }
             }
             div { class: "space-y-4 max-w-md",
                 Progress { value: 60.0, class: "w-full" }
