@@ -11,14 +11,16 @@
 #   just test-ui         — run only ui package tests
 #   just check          — cargo check all
 #   just clippy         — cargo clippy all
-#   just fmt            — format all Rust code
-#   just fmt-check      — check formatting without writing
-#   just clean          — remove target directory
-#   just serve          — build CSS + serve web app in dev mode
+# just fmt            — format all Rust code
+# just fmt-check      — check formatting without writing
+# just clean          — remove target directory
 #   just css            — build Tailwind CSS only
-#   just watch          — watch CSS sources and re-run dx serve
-#   just run-desktop    — run desktop app
-#   run-mobile          — run mobile app
+#   css-watch          — watch CSS sources and rebuild on change
+#   just serve          — build CSS + serve web app in dev mode
+#   just serve-no-css   — serve web app without rebuilding CSS
+#   just run-desktop    — build + run desktop app
+#   just run-mobile     — build + run mobile app
+#   just watch          — watch CSS + restart dx serve on change
 #   just wr             — watchexec wrapper (original)
 # =============================================================================
 
@@ -90,13 +92,13 @@ fmt-check:
 lint: fmt clippy
 
 # ---------------------------------------------------------------------------
-# CSS
+# CSS (uses pnpm, not npm — see package.json "packageManager": "pnpm@10.13.1")
 # ---------------------------------------------------------------------------
 css:
-    cd packages/web && npx @tailwind/css/cli -i tailwind.css -o assets/tailwind.css
+    cd packages/web && pnpm exec @tailwindcss/cli -i tailwind.css -o assets/tailwind.css
 
 css-watch:
-    cd packages/web && npx @tailwind/css/cli -i tailwind.css -o assets/tailwind.css --watch
+    cd packages/web && pnpm exec @tailwindcss/cli -i tailwind.css -o assets/tailwind.css --watch
 
 # ---------------------------------------------------------------------------
 # Serve / Dev
@@ -117,7 +119,7 @@ run-mobile: build-mobile
     cd packages/mobile && cargo run
 
 # ---------------------------------------------------------------------------
-# Watch (auto-rebuild CSS + restart dx on file change)
+# Watch (auto-rebuild CSS + restart dx serve on file change)
 # ---------------------------------------------------------------------------
 watch:
     watchexec -w "packages/web/tailwind.css" -w "packages/web/src/**/*.rs" -r "just css && just serve-no-css"
