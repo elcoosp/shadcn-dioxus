@@ -53,21 +53,26 @@ pub mod portal;
 pub use portal::*;
 pub mod sheet;
 pub use sheet::*;
-
+mod navbar;
+pub use navbar::*;
+mod hero;
+pub use hero::*;
 #[cfg(test)]
 mod tests {
     use tailwind_fuse::tw_merge;
     #[test]
     fn test_ring_arbitrary_value_merge() {
         let result = tw_merge!("ring-[3px]", "ring-0");
-        assert_eq!(result, "ring-0", "Arbitrary ring value should be overridden");
+        assert_eq!(
+            result, "ring-0",
+            "Arbitrary ring value should be overridden"
+        );
     }
     #[test]
     fn test_ring_arbitrary_value_with_variant() {
         let result = tw_merge!("focus-visible:ring-[3px]", "focus-visible:ring-0");
         assert_eq!(
-            result,
-            "focus-visible:ring-0",
+            result, "focus-visible:ring-0",
             "Variant with arbitrary ring should be overridden",
         );
     }
@@ -75,8 +80,7 @@ mod tests {
     fn test_ring_width_and_inset_separate() {
         let result = tw_merge!("ring-1", "ring-inset");
         assert_eq!(
-            result,
-            "ring-1 ring-inset",
+            result, "ring-1 ring-inset",
             "ring-width and ring-inset should not conflict",
         );
     }

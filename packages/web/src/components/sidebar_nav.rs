@@ -35,7 +35,7 @@ fn SidebarLink(
     is_active: bool,
     large_text: bool,
 ) -> Element {
-    let base_class = if large_text {
+    let _base_class = if large_text {
         "text-2xl font-medium py-1"
     } else {
         "text-sm py-1.5 px-2 rounded-md transition-colors"
@@ -66,7 +66,7 @@ pub fn SidebarLinkv2(
     large_text: bool,
     children: Element,
 ) -> Element {
-    let base_class = if large_text {
+    let _base_class = if large_text {
         "text-2xl font-medium py-1"
     } else {
         "text-sm py-1.5 px-2 rounded-md transition-colors"
