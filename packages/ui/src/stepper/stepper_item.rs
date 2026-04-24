@@ -1,4 +1,3 @@
-use crate::cn;
 use super::stepper::StepperContext;
 use dioxus::prelude::*;
 
@@ -26,7 +25,6 @@ pub fn StepperItem(props: StepperItemProps) -> Element {
 
     let is_active = use_memo(move || current_step() == step);
     let is_completed = use_memo(move || props.completed || current_step() > step);
-    let is_upcoming = use_memo(move || current_step() < step && !props.completed);
 
     let active = is_active();
     let completed = is_completed();

@@ -41,7 +41,7 @@ pub fn StepperPrevious(props: StepperPreviousProps) -> Element {
             },
             ..props.attributes,
             ChevronLeft { class: "h-4 w-4" }
-            if props.children.is_ok() { {props.children} else { span { "{props.label}" } }
+            if props.children.is_ok() { {props.children} } else { span { "{props.label}" } }
         }
     }
 }

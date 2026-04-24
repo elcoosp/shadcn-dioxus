@@ -26,7 +26,10 @@ pub fn StepperNext(props: StepperNextProps) -> Element {
     let current_step = ctx.current_step;
     let set_step = ctx.set_step;
     let total_steps = ctx.total_steps;
-    let is_last = use_memo(move || { let t = total_steps(); t == 0 || current_step() >= t - 1; });
+    let is_last = use_memo(move || {
+        let t = total_steps();
+        t == 0 || current_step() >= t - 1
+    });
     let is_disabled = props.disabled || is_last();
     let classes = cn(BUTTON_BASE, &props.class);
 
