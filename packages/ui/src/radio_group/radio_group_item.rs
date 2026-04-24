@@ -24,7 +24,7 @@ pub fn RadioGroupItem(props: RadioGroupItemProps) -> Element {
     let value = props.value.clone();
     let value_for_memo = props.value.clone();
 
-    let is_checked = use_memo(move || (current_value)() == Some(value_for_memo));
+    let is_checked = use_memo(move || (current_value)() == Some(value_for_memo.clone()));
 
     rsx! {
         div { class: "flex items-center space-x-2",

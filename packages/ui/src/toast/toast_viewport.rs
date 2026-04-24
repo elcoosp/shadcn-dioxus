@@ -1,4 +1,5 @@
 use dioxus::prelude::*;
+use super::toast::Toast;
 use super::toast_provider::get_toasts;
 
 #[component]

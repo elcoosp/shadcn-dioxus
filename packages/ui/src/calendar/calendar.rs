@@ -1,4 +1,5 @@
 use dioxus::prelude::*;
+use super::{calendar_header, calendar_grid};
 
 #[derive(Clone, PartialEq)]
 pub struct CalendarContext {
@@ -17,7 +18,7 @@ pub struct CalendarProps {
     #[props(default)]
     pub default_date: Option<(i32, u32, u32)>,
     #[props(default)]
-    pub on_change: Option<Callback<Option<(i32, u32, u32)>>>>,
+    pub on_change: Option<Callback<Option<(i32, u32, u32)>>>,
     #[props(into, default)]
     pub class: String,
     #[props(extends = GlobalAttributes)]

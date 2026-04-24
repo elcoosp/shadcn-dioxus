@@ -1,4 +1,5 @@
 use dioxus::prelude::*;
+use super::toast::{ToastData, ToastVariant};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 static TOAST_ID_COUNTER: AtomicUsize = AtomicUsize::new(0);
@@ -63,6 +64,6 @@ pub fn ToastProvider(props: ToastProviderProps) -> Element {
 
     rsx! {
         {props.children}
-        crate::toast_viewport::ToastViewport {}
+        super::toast_viewport::ToastViewport {}
     }
 }
