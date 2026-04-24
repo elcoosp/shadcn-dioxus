@@ -155,7 +155,7 @@ pub fn Showcase() -> Element {
                 }
                 AccordionItem { value: "item-2".to_string(),
                     AccordionTrigger { "Is it styled?" }
-                    CollapsibleContent { "Yes. It uses Tailwind CSS classes." }
+                    AccordionContent { "Yes. It uses Tailwind CSS classes." }
                 }
             }
             Collapsible { default_open: true,
