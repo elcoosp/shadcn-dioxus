@@ -105,6 +105,8 @@ mod calendar;
 pub use calendar::*;
 mod toast;
 pub use toast::{ToastProvider, add_toast, remove_toast, clear_toasts};
+mod command;
+pub use command::*;
 
 #[cfg(test)]
 mod tests {
