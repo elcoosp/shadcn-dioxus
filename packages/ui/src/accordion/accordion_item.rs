@@ -20,7 +20,8 @@ pub struct AccordionItemProps {
 #[component]
 pub fn AccordionItem(props: AccordionItemProps) -> Element {
     let ctx = use_context::<AccordionContext>();
-    let is_open = use_memo(move || ctx.open_items().contains(&props.value));
+    let value_for_memo = props.value.clone();
+    let is_open = use_memo(move || (ctx.open_items)().contains(&value_for_memo));
     let data_state = if is_open() { "open" } else { "closed" };
 
     use_context_provider(|| AccordionItemContext { value: props.value.clone() });

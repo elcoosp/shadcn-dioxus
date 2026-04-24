@@ -22,8 +22,9 @@ pub fn AccordionTrigger(props: AccordionTriggerProps) -> Element {
     let set_open_items = ctx.set_open_items;
     let multiple = ctx.multiple;
     let value = item_ctx.value.clone();
+    let value_for_memo = item_ctx.value.clone();
 
-    let is_open = use_memo(move || open_items().contains(&value));
+    let is_open = use_memo(move || (open_items)().contains(&value_for_memo));
     let data_state = if is_open() { "open" } else { "closed" };
     let classes = cn(TRIGGER_BASE, &props.class);
 
@@ -36,7 +37,7 @@ pub fn AccordionTrigger(props: AccordionTriggerProps) -> Element {
                 "aria-expanded": is_open(),
                 class: "{classes}",
                 onclick: move |_| {
-                    let current = open_items();
+                    let current = (open_items)();
                     let new_items = if is_open() {
                         current.into_iter().filter(|v| v != &value).collect()
                     } else if multiple {

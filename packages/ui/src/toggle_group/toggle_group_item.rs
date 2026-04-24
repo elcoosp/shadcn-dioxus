@@ -24,8 +24,9 @@ pub fn ToggleGroupItem(props: ToggleGroupItemProps) -> Element {
     let set_value = ctx.set_value;
     let group_type = ctx.group_type;
     let value = props.value.clone();
+    let value_for_memo = props.value.clone();
 
-    let is_pressed = use_memo(move || current_value().contains(&value));
+    let is_pressed = use_memo(move || (current_value)().contains(&value_for_memo));
     let data_state = if is_pressed() { "on" } else { "off" };
     let classes = cn(ITEM_BASE, &props.class);
 
@@ -39,7 +40,7 @@ pub fn ToggleGroupItem(props: ToggleGroupItemProps) -> Element {
             disabled: props.disabled,
             class: "{classes}",
             onclick: move |_| {
-                let current = current_value();
+                let current = (current_value)();
                 let new_value = if is_pressed() {
                     current.into_iter().filter(|v| v != &value).collect()
                 } else {
