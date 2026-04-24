@@ -4,7 +4,6 @@ use dioxus::prelude::*;
 pub struct DataTableColumn {
     pub id: String,
     pub header: String,
-    #[serde(default = "true")]
     pub sortable: bool,
 }
 
@@ -79,7 +78,6 @@ pub fn DataTable(props: DataTableProps) -> Element {
     let mut page = use_signal(|| 0usize);
     let page_size = use_signal(|| props.page_size);
 
-    let all_col_ids = props.columns.iter().map(|c| c.id.clone()).collect::<Vec<_>>();
     let initial_processed: Vec<(usize, Vec<String>)> = props
         .rows
         .iter()
@@ -87,26 +85,21 @@ pub fn DataTable(props: DataTableProps) -> Element {
         .map(|(i, r)| (i, r.clone()))
         .collect();
 
-    let mut visible_column_ids = use_signal(|| all_col_ids.clone());
+    let mut visible_column_ids = use_signal(|| {
+        props.columns.iter().map(|c| c.id.clone()).collect::<Vec<_>>()
+    });
     let mut processed_rows = use_signal(|| initial_processed);
     let mut total_filtered = use_signal(|| props.rows.len());
 
-    // Sync props → signals
-    use_effect(move || {
-        columns.set(props.columns.clone());
-    });
-    use_effect(move || {
-        rows.set(props.rows.clone());
-    });
+    use_effect(move || { columns.set(props.columns.clone()); });
+    use_effect(move || { rows.set(props.rows.clone()); });
 
-    // Fire selection change callback
     use_effect(move || {
         if let Some(cb) = &props.on_selection_change {
             cb.call(selected_rows());
         }
     });
 
-    // Recompute derived state
     use_effect(move || {
         let cols = columns();
         let vis = column_visibility();
@@ -149,7 +142,6 @@ pub fn DataTable(props: DataTableProps) -> Element {
         total_filtered.set(total);
         processed_rows.set(result);
 
-        // Clamp page
         let ps = page_size();
         if ps > 0 && total > 0 {
             let max_page = (total - 1) / ps;
@@ -159,7 +151,6 @@ pub fn DataTable(props: DataTableProps) -> Element {
         }
     });
 
-    // Reset page when filter or sort changes
     use_effect(move || {
         let _ = filter_text();
         let _ = sort_column();
@@ -188,16 +179,16 @@ pub fn DataTable(props: DataTableProps) -> Element {
             class: "flex flex-col gap-4 {props.class}",
             ..props.attributes,
             if props.show_toolbar {
-                crate::data_picker::DataTableToolbar {}
+                super::DataTableToolbar {}
             }
             div { class: "rounded-md border",
                 crate::Table {
-                    crate::data_picker::DataTableHeader {}
-                    crate::date_picker::DataTableBody {}
+                    super::DataTableHeader {}
+                    super::DataTableBody {}
                 }
             }
             if props.show_pagination {
-                crate::date_picker::DataTablePagination {}
+                super::DataTablePagination {}
             }
         }
     }
