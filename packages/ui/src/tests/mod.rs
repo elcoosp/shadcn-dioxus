@@ -17,7 +17,7 @@ mod carousel;
 mod sidebar;
 mod navigation_menu;
 mod field;
-// Phase 2: form controls
+// Phase 2
 mod switch;
 mod textarea;
 mod slider;
@@ -27,7 +27,7 @@ mod combobox;
 mod input_otp;
 mod color_picker;
 mod date_picker;
-// Phase 3: overlays and navigation
+// Phase 3
 mod dialog;
 mod alert_dialog;
 mod tooltip;
@@ -40,3 +40,18 @@ mod pagination;
 mod tabs;
 mod stepper;
 mod menubar;
+// Phase 4
+mod accordion;
+mod avatar;
+mod card;
+mod chart;
+mod collapsible;
+mod data_table;
+mod skeleton;
+mod spinner;
+mod table;
+mod aspect_ratio;
+mod field_set;
+mod scroll_area;
+mod separator;
+mod toast;
