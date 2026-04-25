@@ -34,3 +34,16 @@ fn test_get_progress_state_zero_max() {
     assert_eq!(get_progress_state(Some(0.0), 0.0), ProgressState::Loaded);
     assert_eq!(get_progress_state(None, 0.0), ProgressState::Indeterminate);
 }
+
+// Additional edge cases
+#[test]
+fn test_get_progress_state_negative_value() {
+    // Negative value should still be Loading
+    assert_eq!(get_progress_state(Some(-10.0), 100.0), ProgressState::Loading);
+}
+
+#[test]
+fn test_progress_state_equality() {
+    assert_ne!(ProgressState::Indeterminate, ProgressState::Loading);
+    assert_ne!(ProgressState::Loading, ProgressState::Loaded);
+}

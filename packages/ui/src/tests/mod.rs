@@ -17,4 +17,13 @@ mod carousel;
 mod sidebar;
 mod navigation_menu;
 mod field;
-// New primitives tests to be added later
+// Phase 2: form controls
+mod switch;
+mod textarea;
+mod slider;
+mod radio_group;
+mod select;
+mod combobox;
+mod input_otp;
+mod color_picker;
+mod date_picker;
