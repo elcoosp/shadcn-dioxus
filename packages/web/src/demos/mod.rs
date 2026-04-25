@@ -132,7 +132,7 @@ fn AccordionMultiple() -> Element {
 
 
 
-fn BreadcrumbDefault() -> Element {
+fn BreadcrumbDefaultDemo() -> Element {
     rsx! {
         Breadcrumb {
             BreadcrumbList {
@@ -152,7 +152,7 @@ fn BreadcrumbDefault() -> Element {
     }
 }
 
-fn BreadcrumbSeparator() -> Element {
+fn BreadcrumbSeparatorDemo() -> Element {
     rsx! {
         Breadcrumb {
             BreadcrumbList {
@@ -172,7 +172,7 @@ fn BreadcrumbSeparator() -> Element {
     }
 }
 
-fn BreadcrumbCollapsible() -> Element {
+fn BreadcrumbCollapsibleDemo() -> Element {
     rsx! {
         Breadcrumb {
             BreadcrumbList {
@@ -1917,9 +1917,9 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "alert-dialog-with-row" => Some(rsx! { AlertDialogWithRow {} }),
         "accordion-default" => Some(rsx! { AccordionDefault {} }),
         "accordion-multiple" => Some(rsx! { AccordionMultiple {} }),
-        "breadcrumb-default" => Some(rsx! { BreadcrumbDefault {} }),
-        "breadcrumb-separator" => Some(rsx! { BreadcrumbSeparator {} }),
-        "breadcrumb-collapsible" => Some(rsx! { BreadcrumbCollapsible {} }),
+        "breadcrumb-default" => Some(rsx! { BreadcrumbDefaultDemo {} }),
+        "breadcrumb-separator" => Some(rsx! { BreadcrumbSeparatorDemo {} }),
+        "breadcrumb-collapsible" => Some(rsx! { BreadcrumbCollapsibleDemo {} }),
         "calendar-default" => Some(rsx! { CalendarDefault {} }),
         "calendar-with-selected-date" => Some(rsx! { CalendarWithSelectedDate {} }),
         "carousel-default" => Some(rsx! { CarouselDefault {} }),
