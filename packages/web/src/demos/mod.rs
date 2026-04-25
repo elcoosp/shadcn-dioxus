@@ -58,7 +58,6 @@ demo_fn!(BreadcrumbDefaultDemo, BreadcrumbDefault);
 demo_fn!(BreadcrumbSeparatorDemo, BreadcrumbSeparator);
 demo_fn!(BreadcrumbCollapsibleDemo, BreadcrumbCollapsible);
 // Carousel orientation was already renamed
-demo_fn!(CarouselOrientationDemo, CarouselOrientation);
 // Sheet / Drawer / etc. already exist as separate functions; no further wrappers needed
 
 // ---------------------------------------------------------------------------
