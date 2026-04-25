@@ -6,6 +6,7 @@ use ui::Button;
 #[component]
 pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
     let mut mobile_open = use_signal(|| false);
+    let close_callback = use_callback(move |_| mobile_open.set(false));
 
     rsx! {
         // Mobile toggle button
@@ -26,27 +27,31 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
             }
         }
 
-        // Sidebar content with minimal padding
-        div { class: "flex flex-col h-full",
-            // Top sections (Sections / Components heading)
-            div { class: "px-4 pt-6",
-                div { class: "pb-4",
+        // Desktop sidebar (always visible on md+)
+        aside { class: "hidden md:block w-64 shrink-0 border-r border-border",
+            div { class: "sticky top-0 h-screen overflow-y-auto py-6 px-4 bg-background",
+                div {
+                    class: "pb-4",
                     h4 { class: "text-sm font-semibold", "Sections" }
                 }
-                div { class: "flex flex-col gap-1",
+                div {
+                    class: "flex flex-col gap-1",
                     SidebarLinkv2 {
                         to: Route::InstallationView {  }.into(),
                         is_active: active_slug == "installation",
+                        on_close: close_callback.clone(),
                         "Installation"
                     }
                     SidebarLinkv2 {
                         to: Route::ComponentView {  }.into(),
                         is_active: active_slug == "components",
+                        on_close: close_callback.clone(),
                         div { "Components" }
                     }
                     SidebarLinkv2 {
                         to: Route::ThemingView {  }.into(),
                         is_active: active_slug == "theming",
+                        on_close: close_callback.clone(),
                         div { "Theming" }
                     }
                 }
@@ -54,11 +59,7 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
                 div { class: "py-4",
                     h4 { class: "text-sm font-semibold", "Components" }
                 }
-            }
-
-            // Scrollable component list with minimal horizontal padding
-            div { class: "flex-1 overflow-y-auto px-4 pb-6",
-                SidebarNav { active_slug: active_slug.clone() }
+                SidebarNav { active_slug: active_slug.clone(), on_close: close_callback.clone() }
             }
         }
 
@@ -77,21 +78,24 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
                     SidebarLinkv2 {
                         to: Route::InstallationView {  }.into(),
                         is_active: active_slug == "installation",
+                        on_close: close_callback.clone(),
                         "Installation"
                     }
                     SidebarLinkv2 {
                         to: Route::ComponentView {  }.into(),
                         is_active: active_slug == "components",
+                        on_close: close_callback.clone(),
                         div { "Components" }
                     }
                     SidebarLinkv2 {
                         to: Route::ThemingView {  }.into(),
                         is_active: active_slug == "theming",
+                        on_close: close_callback.clone(),
                         div { "Theming" }
                     }
                 }
                 div { class: "py-4", h4 { class: "text-sm font-semibold", "Components" } }
-                SidebarNav { active_slug: active_slug.clone(), large_text: true }
+                SidebarNav { active_slug: active_slug.clone(), large_text: true, on_close: close_callback.clone() }
             }
         }
     }
