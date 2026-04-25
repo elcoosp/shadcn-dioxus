@@ -27,7 +27,7 @@ fn format_date(year: i32, month: u32, day: u32) -> String {
     format!("{} {}, {}", month_name, day, year)
 }
 
-const TRIGGER_BASE: &str = "border-input ring-offset-background shadow-xs flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-left text-sm outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30 md:text-sm";
+const TRIGGER_BASE: &str = "border-input ring-offset-background shadow-xs inline-flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-left text-sm items-center outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30 md:text-sm";
 
 #[derive(Clone, PartialEq, Props)]
 pub struct DatePickerTriggerProps {
