@@ -5,6 +5,7 @@ use crate::Route;
 #[component]
 pub fn WebNavbar() -> Element {
     let route = use_route::<Route>();
+    let route_key = format!("layout-{:?}", route);
 
     let is_docs = matches!(&route,
         Route::ComponentDoc { .. } |
@@ -28,13 +29,16 @@ pub fn WebNavbar() -> Element {
                 }
             }
             div { class: "grow",
-                if is_docs {
-                    SidebarLayout {
-                        Outlet::<Route> {}
-                    }
-                } else {
-                    FullLayout {
-                        Outlet::<Route> {}
+                // Key the entire layout subtree to force remount on route changes
+                div { key: "{route_key}",
+                    if is_docs {
+                        SidebarLayout {
+                            Outlet::<Route> {}
+                        }
+                    } else {
+                        FullLayout {
+                            Outlet::<Route> {}
+                        }
                     }
                 }
             }
@@ -52,7 +56,7 @@ pub fn NotFound(route: Vec<String>) -> Element {
             Link {
                 class: ui::button_variants(ui::ButtonVariant::Default, ui::ButtonSize::Default),
                 to: Route::Home {},
-                "Go to Home"
+                "Go Home"
             }
         }
     }

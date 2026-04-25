@@ -3,7 +3,7 @@ use crate::views::docs::utils::create_doc_components;
 use crate::Route;
 use dioxus::prelude::*;
 use dioxus_markdown::Markdown;
-use ui::{ButtonVariant, CodeCopyWrapper};
+use ui::ButtonVariant;
 
 #[component]
 pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
@@ -22,14 +22,36 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
                         p { class: "text-muted-foreground text-balance text-[1.05rem] sm:text-base",
                             "{parsed.frontmatter.description}"
                         }
-                        CodeCopyWrapper {
-                            div {
-                                class: "mt-12 space-y-4 [&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
-                                Markdown {
-                                    src: parsed.content.clone(),
-                                    components: custom_components,
-                                    theme: "base16-ocean.dark",
-                                }
+                        div {
+                            class: "doc-content mt-12 space-y-4 [&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
+                            onmounted: move |_| {
+                                // Add copy buttons to all <pre> elements once the content is in the DOM
+                                document::eval(
+                                    r#"
+                                    (function() {
+                                        document.querySelectorAll('.doc-content pre').forEach(function(pre) {
+                                            if (pre.querySelector('.copy-btn')) return;
+                                            var btn = document.createElement('button');
+                                            btn.className = 'copy-btn';
+                                            btn.textContent = 'Copy';
+                                            btn.addEventListener('click', function() {
+                                                var code = pre.querySelector('code') || pre;
+                                                navigator.clipboard.writeText(code.textContent).then(function() {
+                                                    btn.textContent = 'Copied!';
+                                                    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+                                                });
+                                            });
+                                            pre.style.position = 'relative';
+                                            pre.appendChild(btn);
+                                        });
+                                    })();
+                                    "#
+                                );
+                            },
+                            Markdown {
+                                src: parsed.content.clone(),
+                                components: custom_components,
+                                theme: "base16-ocean.dark",
                             }
                         }
                     }
