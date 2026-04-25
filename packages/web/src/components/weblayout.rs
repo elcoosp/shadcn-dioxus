@@ -2,13 +2,12 @@ use dioxus::prelude::*;
 use crate::components::{FullLayout, SidebarLayout, Navbar};
 use crate::Route;
 
-/// Ensure Tailwind CSS is loaded on every route
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css", CssAssetOptions::new());
 
 #[component]
 pub fn WebNavbar() -> Element {
     let route = use_route::<Route>();
-    let route_key = format!("layout-{:?}", route);
+    let route_key = format!("{:?}", route);
 
     let is_docs = matches!(&route,
         Route::ComponentDoc { .. } |
@@ -18,7 +17,6 @@ pub fn WebNavbar() -> Element {
     );
 
     rsx! {
-        // Inject the CSS link here so it's always present
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         div { class: "min-h-svh flex flex-col",
             Navbar {
@@ -34,15 +32,13 @@ pub fn WebNavbar() -> Element {
                 }
             }
             div { class: "grow",
-                div { key: "{route_key}",
-                    if is_docs {
-                        SidebarLayout {
-                            Outlet::<Route> {}
-                        }
-                    } else {
-                        FullLayout {
-                            Outlet::<Route> {}
-                        }
+                if is_docs {
+                    SidebarLayout {
+                        Outlet::<Route> { key: "{route_key}" }
+                    }
+                } else {
+                    FullLayout {
+                        Outlet::<Route> { key: "{route_key}" }
                     }
                 }
             }

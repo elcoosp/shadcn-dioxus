@@ -20,48 +20,5 @@
   </head>
   <body>
     <div id="main" class="min-h-screen bg-background" style="display: contents"></div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll("pre").forEach(function(pre) {
-        var button = document.createElement("button");
-        button.textContent = "Copy";
-        button.addEventListener("click", function() {
-          var code = pre.querySelector("code") || pre;
-          navigator.clipboard.writeText(code.textContent).then(function() {
-            button.classList.add("copied"); button.textContent = "Copy";
-            setTimeout(function() { button.classList.remove("copied"); }, 2000);
-          });
-        });
-        pre.style.position = "relative";
-        pre.appendChild(button);
-      });
-    });
-  </script>
-  <style>
-      position: absolute;
-      top: 0.3rem;
-      right: 0.3rem;
-      padding: 0.2rem 0.4rem;
-      font-size: 0.7rem;
-      opacity: 0.6;
-      transition: opacity 0.2s;
-      background: transparent;
-      color: inherit;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-
-  </style>
-
-  <script>
-    document.addEventListener("click", function(e) {
-        window.scrollTo(0, 0);
-      }
-    });
-  </script>
-
   </body>
 </html>
