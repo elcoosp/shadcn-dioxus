@@ -25,9 +25,9 @@ rsx! {
 
 ## Examples
 
-### Basic
+### Default
 
-<ComponentPreview name="carousel-basic"/>
+<ComponentPreview name="carousel-default"/>
 
 ### Autoplay
 

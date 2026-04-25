@@ -23,11 +23,9 @@ rsx! {
 
 ## Examples
 
-### Single
+### Default
 
-Allow only one item to open at a time.
-
-<ComponentPreview name="accordion-single"/>
+<ComponentPreview name="accordion-default"/>
 
 ### Multiple
 

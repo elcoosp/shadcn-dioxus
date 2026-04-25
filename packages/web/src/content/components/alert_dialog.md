@@ -30,9 +30,9 @@ rsx! {
 
 ## Examples
 
-### Basic
+### Default
 
-<ComponentPreview name="alert-dialog-basic"/>
+<ComponentPreview name="alert-dialog-default"/>
 
 ### With Row
 
