@@ -20,23 +20,3 @@ rsx! {
         }
     }
 }
-```
-
-## Examples
-
-### Default
-
-<ComponentPreview name="breadcrumb-default"/>
-
-### Separator
-
-Customize the separator between items.
-
-<ComponentPreview name="breadcrumb-separator"/>
-
-### Collapsible
-
-Collapse breadcrumb items when they overflow.
-
-<ComponentPreview name="breadcrumb-collapsible"/>
-
