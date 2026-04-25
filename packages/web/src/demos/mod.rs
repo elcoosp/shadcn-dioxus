@@ -1156,9 +1156,9 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "progress-demo" => Some(rsx! { Progress { value: 60.0, class: "w-[60%]" } }),
         "progress-indeterminate" => Some(rsx! { Progress { class: "w-[60%]" } }),
         "separator-demo" => Some(rsx! { Separator {} }),
-        "separator-vertical" => Some(
-            rsx! { Separator { orientation: use ui::separator::SeparatorOrientation::Vertical } },
-        ),
+        "separator-vertical" => {
+            Some(rsx! { Separator { orientation:  ui::separator::SeparatorOrientation::Vertical } })
+        }
         "skeleton-demo" => Some(rsx! { Skeleton { class: "w-[100px] h-[20px] rounded-full" } }),
         "spinner-demo" => Some(rsx! { Spinner {} }),
         "kbd-demo" => Some(rsx! { Kbd { "⌘" } }),
