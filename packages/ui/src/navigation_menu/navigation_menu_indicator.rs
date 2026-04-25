@@ -21,23 +21,30 @@ pub fn NavigationMenuIndicator(props: NavigationMenuIndicatorProps) -> Element {
     let ctx = use_context::<NavigationMenuContext>();
     let open_item = ctx.open_item;
 
-    let is_visible = open_item().is_some();
+    // Wrap in a closure so the signal is read INSIDE the rsx! macro
+    let is_visible = move || open_item().is_some();
 
-    if !props.force_mount && !is_visible {
-        return rsx! {};
-    }
-
-    let data_state = if is_visible { "visible" } else { "hidden" };
+    // Calculate outside rsx! so it updates reactively but doesn't break syntax
+    let data_state = move || {
+        if open_item().is_some() {
+            "visible"
+        } else {
+            "hidden"
+        }
+    };
 
     rsx! {
-        div {
-            "data-slot": "navigation-menu-indicator",
-            "data-state": data_state,
-            "aria-hidden": "true",
-            class: cn(INDICATOR_BASE, &props.class),
-            ..props.attributes,
+        // Conditional rendering MUST be inside rsx! for Dioxus to track the dependency
+        if props.force_mount || is_visible() {
             div {
-                class: ARROW_BASE,
+                "data-slot": "navigation-menu-indicator",
+                "data-state": data_state(),
+                "aria-hidden": "true",
+                class: cn(INDICATOR_BASE, &props.class),
+                ..props.attributes,
+                div {
+                    class: ARROW_BASE,
+                }
             }
         }
     }
