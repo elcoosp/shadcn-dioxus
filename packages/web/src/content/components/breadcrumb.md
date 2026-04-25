@@ -4,7 +4,7 @@ description: Displays the path to the current resource using a hierarchy of link
 component: true
 ---
 
-<ComponentPreview name="breadcrumb-demo"/>
+<ComponentPreview name="breadcrumb-default"/>
 
 ## Usage
 
