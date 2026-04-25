@@ -181,3 +181,20 @@
     white-space: nowrap;
   }
 }
+
+@layer utilities {
+  /* Code blocks should have a minimum width and proper padding */
+  .doc-content pre {
+    min-width: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  /* On larger screens, allow horizontal scroll instead of wrapping */
+  @media (min-width: 640px) {
+    .doc-content pre {
+      white-space: pre;
+      overflow-x: auto;
+    }
+  }
+}

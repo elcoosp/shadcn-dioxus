@@ -17,15 +17,15 @@ pub fn SidebarLayout(props: SidebarLayoutProps) -> Element {
 
     rsx! {
         div { class: "flex w-full min-h-screen",
-            // Sidebar container: sticky, full height, no right margin, border flush
+            // Sidebar: hidden on mobile, shown on md+
             div { class: "hidden md:block shrink-0 w-64",
                 div { class: "sticky top-0 h-screen overflow-y-auto border-r border-border bg-background",
                     Sidebar { active_slug }
                 }
             }
-            // Main content area
-            div { class: "flex-1 min-h-screen",
-                div { class: "w-full max-w-3xl mx-auto py-6 px-4 md:px-6 lg:py-8",
+            // Main content: full width on mobile, adjusted for sidebar on desktop
+            div { class: "flex-1 min-h-screen w-full overflow-x-hidden",
+                div { class: "w-full max-w-3xl mx-auto py-4 sm:py-6 px-4 sm:px-6 lg:py-8",
                     {props.children}
                 }
             }

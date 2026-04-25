@@ -12,18 +12,19 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
     match parsed_content {
         Some(parsed) => {
             rsx! {
-                div { class: "flex flex-col gap-8",
+                div { class: "flex flex-col gap-6 sm:gap-8",
+                    // Header section - prevent premature wrapping
                     div { class: "flex flex-col gap-2",
-                        div { class: "flex items-start justify-between",
-                            h1 { class: "scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl",
+                        div { class: "flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2",
+                            h1 { class: "scroll-m-20 text-3xl sm:text-4xl font-semibold tracking-tight lg:text-4xl break-words",
                                 "{parsed.frontmatter.title}"
                             }
                         }
-                        p { class: "text-muted-foreground text-balance text-[1.05rem] sm:text-base",
+                        p { class: "text-muted-foreground text-balance text-base sm:text-lg max-w-prose",
                             "{parsed.frontmatter.description}"
                         }
                         div {
-                            class: "doc-content mt-12 space-y-4 [&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
+                            class: "doc-content mt-8 sm:mt-12 space-y-4 [&>*>pre]:p-3 sm:[&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
                             Markdown {
                                 src: parsed.content.clone(),
                                 components: custom_components,
@@ -36,7 +37,7 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
         }
         None => {
             rsx! {
-                div { class: "container mx-auto flex-1 py-12 text-center",
+                div { class: "container mx-auto flex-1 py-12 text-center px-4",
                     h1 { class: "text-4xl font-bold mb-4", "404" }
                     p { class: "text-muted-foreground mb-6", "No documentation found at this path." }
                     Link {
