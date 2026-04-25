@@ -2,7 +2,7 @@ use crate::cn;
 use crate::tooltip::TooltipContext;
 use dioxus::prelude::*;
 
-const CONTENT_BASE: &str = "bg-primary text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 overflow-hidden rounded-md px-3 py-1.5 text-xs text-balance";
+const CONTENT_BASE: &str = "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 overflow-hidden rounded-md bg-primary text-primary-foreground px-3 py-1.5 text-xs text-balance max-w-xs";
 
 #[derive(Clone, PartialEq, Props)]
 pub struct TooltipContentProps {
@@ -36,7 +36,7 @@ pub fn TooltipContent(props: TooltipContentProps) -> Element {
 
     let base = cn(CONTENT_BASE, &side_class);
     let with_pos = cn(&base, position_class);
-    let classes = cn(&with_pos, "absolute z-50");
+    let classes = cn(&with_pos, "absolute");
     let final_classes = cn(&classes, &props.class);
 
     rsx! {

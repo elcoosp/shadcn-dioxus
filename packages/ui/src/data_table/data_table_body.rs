@@ -7,7 +7,6 @@ pub fn DataTableBody() -> Element {
     let ctx = use_context::<DataTableContext>();
     let visible_column_ids = ctx.visible_column_ids;
     let processed_rows = ctx.processed_rows;
-    // *** declared mut to allow set() ***
     let mut selected_rows = ctx.selected_rows;
     let columns = ctx.columns;
 
@@ -20,7 +19,7 @@ pub fn DataTableBody() -> Element {
                     crate::table::TableCell {
                         column_span: visible_column_ids().len() + 1,
                         class: "h-24 text-center",
-                        div { class: "text-muted-foreground", "No results." }
+                        div { class: "text-muted-foreground text-center", "No results." }
                     }
                 }
             }
@@ -40,7 +39,6 @@ pub fn DataTableBody() -> Element {
                         crate::table::TableRow {
                             key: "{idx}",
                             class: "data-[state=selected]:bg-muted/50",
-                            // selection checkbox
                             crate::table::TableCell { class: "w-[40px]",
                                 button {
                                     r#type: "button",

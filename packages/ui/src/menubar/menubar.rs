@@ -25,7 +25,7 @@ pub fn Menubar(props: MenubarProps) -> Element {
     rsx! {
         div {
             "data-slot": "menubar",
-            class: "flex h-9 items-center space-x-1 rounded-md border bg-background p-1 shadow-sm {props.class}",
+            class: "flex h-9 items-center space-x-0.5 rounded-md border bg-background p-0.5 shadow-sm {props.class}",
             ..props.attributes,
             {props.children}
         }

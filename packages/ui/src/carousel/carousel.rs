@@ -33,11 +33,11 @@ pub struct CarouselProps {
     pub auto_play: bool,
     #[props(default = 3000)]
     pub auto_play_interval_ms: u64,
-    /// Total number of slides
     pub total: usize,
-    /// Override default height for vertical orientation (default: 20rem)
     #[props(default = "20rem".to_string())]
     pub height: String,
+    #[props(default = "100%".to_string())]
+    pub width: String,
     #[props(into, default)]
     pub class: String,
     pub children: Element,
@@ -49,12 +49,14 @@ pub struct CarouselProps {
 pub fn Carousel(props: CarouselProps) -> Element {
     let mut current_index = use_signal(|| 0);
     let total = use_signal(|| props.total);
+
     let auto_play = props.auto_play;
     let auto_play_interval_ms = props.auto_play_interval_ms;
 
     let set_index = use_callback(move |idx: usize| {
-        if total() > 0 {
-            current_index.set(idx % total());
+        let t = total();
+        if t > 0 {
+            current_index.set(idx % t);
         }
     });
 
@@ -66,29 +68,28 @@ pub fn Carousel(props: CarouselProps) -> Element {
         auto_play,
     });
 
-    // Autoplay cleanup
-    let mut cancel_autoplay = use_signal(|| false);
-    use_drop(move || cancel_autoplay.set(true));
-
-    use_effect(move || {
-        if !auto_play { return; }
-        let cancel = cancel_autoplay.clone();
-        spawn(async move {
-            loop {
-                futures_timer::Delay::new(std::time::Duration::from_millis(auto_play_interval_ms)).await;
-                if cancel() { break; }
-                let t = total();
-                if t > 0 {
-                    let next = (current_index() + 1) % t;
-                    current_index.set(next);
-                }
+    // use_future automatically cancels on unmount
+    use_future(move || async move {
+        if !auto_play {
+            return;
+        }
+        loop {
+            futures_timer::Delay::new(std::time::Duration::from_millis(auto_play_interval_ms))
+                .await;
+            let t = total();
+            if t > 0 {
+                let curr = current_index();
+                let next = (curr + 1) % t;
+                current_index.set(next);
             }
-        });
+        }
     });
 
-    let orientation_class = match props.orientation {
-        CarouselOrientation::Horizontal => "relative overflow-hidden".to_string(),
-        CarouselOrientation::Vertical => format!("relative overflow-hidden flex flex-col h-[{}]", props.height),
+    let size_style = match props.orientation {
+        CarouselOrientation::Horizontal => format!("width: {};", props.width),
+        CarouselOrientation::Vertical => {
+            format!("width: {}; height: {};", props.width, props.height)
+        }
     };
 
     rsx! {
@@ -97,7 +98,8 @@ pub fn Carousel(props: CarouselProps) -> Element {
             "data-orientation": props.orientation.as_str(),
             role: "region",
             "aria-roledescription": "carousel",
-            class: "{orientation_class} {props.class}",
+            class: "relative overflow-hidden {props.class}",
+            style: "{size_style}",
             ..props.attributes,
             {props.children}
         }

@@ -26,6 +26,7 @@ const ITEM_CLASS: &str = "relative flex cursor-default select-none items-center 
 #[component]
 pub fn Combobox(props: ComboboxProps) -> Element {
     let mut search = use_signal(String::new);
+    let mut is_open = use_signal(|| false);
 
     let filtered = use_memo(move || {
         let s = search();
@@ -41,7 +42,8 @@ pub fn Combobox(props: ComboboxProps) -> Element {
     });
 
     let has_results = !filtered().is_empty();
-    let has_search = !search().is_empty();
+    let show_dropdown = is_open() && has_results;
+    let show_empty = is_open() && !search().is_empty() && !has_results;
 
     rsx! {
         div {
@@ -54,9 +56,11 @@ pub fn Combobox(props: ComboboxProps) -> Element {
                 placeholder: "{props.placeholder}",
                 disabled: props.disabled,
                 value: "{search}",
+                onfocus: move |_| is_open.set(true),
+                onblur: move |_| is_open.set(false),
                 oninput: move |e| search.set(e.value()),
             }
-            if has_results {
+            if show_dropdown {
                 div {
                     "data-slot": "combobox-content",
                     "role": "listbox",
@@ -76,7 +80,10 @@ pub fn Combobox(props: ComboboxProps) -> Element {
                                                 "data-value": "{opt.value}",
                                                 tabindex: "0",
                                                 class: ITEM_CLASS,
-                                                onclick: move |_| search.set(opt.value.clone()),
+                                                onmousedown: move |_| {
+                                                    search.set(opt.value.clone());
+                                                    is_open.set(false);
+                                                },
                                                 "{opt.label}"
                                             }
                                         }
@@ -87,7 +94,7 @@ pub fn Combobox(props: ComboboxProps) -> Element {
                     }
                 }
             }
-            if has_search && !has_results {
+            if show_empty {
                 div { class: "absolute left-0 top-full mt-1 w-full py-6 text-center text-sm text-muted-foreground border rounded-md bg-popover shadow-md z-50",
                     "No results found."
                 }

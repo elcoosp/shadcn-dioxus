@@ -1,4 +1,4 @@
-use crate::carousel::CarouselContext;
+use crate::carousel::{CarouselContext, CarouselOrientation};
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
@@ -16,26 +16,40 @@ pub fn CarouselContent(props: CarouselContentProps) -> Element {
     let orientation = ctx.orientation;
     let current_index = ctx.current_index;
 
-    let is_horizontal = orientation == crate::carousel::CarouselOrientation::Horizontal;
+    let is_horizontal = matches!(orientation, CarouselOrientation::Horizontal);
 
-    let translate = use_memo(move || {
-        if is_horizontal {
-            format!("translateX(-{}%)", current_index() * 100)
-        } else {
-            format!("translateY(-{}%)", current_index() * 100)
-        }
-    });
+    // Read signal to establish reactive dependency
+    let current = current_index();
 
-    let flex_class = if is_horizontal { "flex flex-row" } else { "flex flex-col h-full" };
+    let transform_style = if is_horizontal {
+        format!("transform: translateX(-{}%)", current * 100)
+    } else {
+        format!("transform: translateY(-{}%)", current * 100)
+    };
+
+    // For vertical: use absolute positioning to ensure proper height constraints
+    // For horizontal: use regular flex layout
+    let (wrapper_class, slider_class) = if is_horizontal {
+        (
+            "h-full".to_string(),
+            "flex transition-transform duration-500 ease-in-out".to_string(),
+        )
+    } else {
+        (
+            "h-full relative".to_string(),
+            "flex flex-col absolute inset-0 transition-transform duration-500 ease-in-out"
+                .to_string(),
+        )
+    };
 
     rsx! {
         div {
             "data-slot": "carousel-content",
-            class: "overflow-hidden {props.class}",
+            class: "{wrapper_class} {props.class}",
             ..props.attributes,
             div {
-                class: "{flex_class} transition-transform duration-500",
-                style: "transform: {translate};",
+                class: "{slider_class}",
+                style: "{transform_style}",
                 {props.children}
             }
         }

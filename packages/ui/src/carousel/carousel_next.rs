@@ -1,5 +1,5 @@
+use crate::carousel::{CarouselContext, CarouselOrientation};
 use crate::cn;
-use crate::carousel::CarouselContext;
 use dioxus::prelude::*;
 use lucide_dioxus::ChevronRight;
 
@@ -19,15 +19,12 @@ pub struct CarouselNextProps {
 pub fn CarouselNext(props: CarouselNextProps) -> Element {
     let ctx = use_context::<CarouselContext>();
     let current_index = ctx.current_index;
-    let set_index = ctx.set_index;
     let total = ctx.total;
-
-    let is_last = use_memo(move || current_index() >= total() - 1);
-    let is_disabled = props.disabled || is_last();
+    let set_index = ctx.set_index;
 
     let position = match ctx.orientation {
-        crate::carousel::CarouselOrientation::Horizontal => "right-2 top-1/2 -translate-y-1/2",
-        crate::carousel::CarouselOrientation::Vertical => "left-1/2 bottom-2 -translate-x-1/2 rotate-90",
+        CarouselOrientation::Horizontal => "right-2 top-1/2 -translate-y-1/2",
+        CarouselOrientation::Vertical => "left-1/2 bottom-2 -translate-x-1/2 rotate-90",
     };
 
     let classes = cn(&format!("{} {}", BUTTON_BASE, position), &props.class);
@@ -36,15 +33,26 @@ pub fn CarouselNext(props: CarouselNextProps) -> Element {
         button {
             r#type: "button",
             "data-slot": "carousel-next",
-            disabled: is_disabled,
+            disabled: "{should_disable_next(props.disabled, total(), current_index())}",
             class: "{classes}",
             onclick: move |_| {
                 let t = total();
-                if t > 0 { set_index.call((current_index() + 1) % t); }
+                let curr = current_index();
+                if t > 0 && curr < t.saturating_sub(1) {
+                    set_index.call(curr + 1);
+                }
             },
             ..props.attributes,
             ChevronRight { class: "h-4 w-4" }
             span { class: "sr-only", "Next slide" }
         }
+    }
+}
+
+fn should_disable_next(prop_disabled: bool, total: usize, current: usize) -> &'static str {
+    if prop_disabled || total == 0 || current >= total.saturating_sub(1) {
+        "true"
+    } else {
+        ""
     }
 }

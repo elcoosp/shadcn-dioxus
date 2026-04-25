@@ -1,4 +1,4 @@
-use crate::carousel::CarouselContext;
+use crate::carousel::{CarouselContext, CarouselOrientation};
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
@@ -17,36 +17,39 @@ pub fn CarouselIndicators(props: CarouselIndicatorsProps) -> Element {
     let set_index = ctx.set_index;
 
     let position_class = match ctx.orientation {
-        crate::carousel::CarouselOrientation::Horizontal => "bottom-2 left-1/2 -translate-x-1/2 flex",
-        crate::carousel::CarouselOrientation::Vertical => "right-2 top-1/2 -translate-y-1/2 flex-col",
+        CarouselOrientation::Horizontal => "bottom-2 left-1/2 -translate-x-1/2 flex",
+        CarouselOrientation::Vertical => "right-2 top-1/2 -translate-y-1/2 flex-col",
     };
+
+    // Read signals to establish reactive dependency
+    let t = total();
+    let curr = current_index();
 
     rsx! {
         div {
             "data-slot": "carousel-indicators",
             class: "absolute z-10 {position_class} gap-1 {props.class}",
             ..props.attributes,
-            {
-                let t = total();
-                let curr = current_index();
-                (0..t).map(move |i| {
-                    let si = set_index.clone();
+            for i in 0..t {
+                {
+                    let is_active = i == curr;
+                    let set_index = set_index.clone();
                     rsx! {
                         button {
                             key: "{i}",
                             r#type: "button",
                             role: "tab",
-                            "aria-selected": i == curr,
+                            "aria-selected": "{is_active}",
                             "aria-label": "Slide {i + 1}",
-                            class: if i == curr {
+                            class: if is_active {
                                 "inline-block h-2 w-2 rounded-full bg-primary"
                             } else {
                                 "inline-block h-2 w-2 rounded-full bg-primary/30"
                             },
-                            onclick: move |_| si.call(i),
+                            onclick: move |_| set_index.call(i),
                         }
                     }
-                })
+                }
             }
         }
     }
