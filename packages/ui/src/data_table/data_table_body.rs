@@ -19,7 +19,7 @@ pub fn DataTableBody() -> Element {
                     crate::table::TableCell {
                         column_span: visible_column_ids().len() + 1,
                         class: "h-24 text-center",
-                        div { class: "text-muted-foreground text-center", "No results." }
+                        div { class: "text-muted-foreground text-center w-full", "No results." }
                     }
                 }
             }

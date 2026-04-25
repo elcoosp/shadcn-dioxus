@@ -15,15 +15,11 @@ pub struct ResizableHandleProps {
 pub fn ResizableHandle(props: ResizableHandleProps) -> Element {
     let is_vertical = props.orientation == "vertical";
     let base_class = if is_vertical {
-        "relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2"
+        "relative flex w-px items-center justify-center bg-border cursor-col-resize"
     } else {
-        "relative flex h-px w-full items-center justify-center bg-border after:absolute after:inset-x-0 after:top-1/2 after:h-1 after:-translate-y-1/2"
+        "relative flex h-px w-full items-center justify-center bg-border cursor-row-resize"
     };
-    let classes = cn(
-        &format!("{} cursor-col-resize", base_class),
-        &props.class,
-    );
-
+    let classes = cn(base_class, &props.class);
     rsx! {
         div {
             "data-slot": "resizable-handle",

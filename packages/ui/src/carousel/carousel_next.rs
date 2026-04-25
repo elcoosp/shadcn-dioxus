@@ -28,12 +28,14 @@ pub fn CarouselNext(props: CarouselNextProps) -> Element {
     };
 
     let classes = cn(&format!("{} {}", BUTTON_BASE, position), &props.class);
+    let is_disabled =
+        props.disabled || total() == 0 || current_index() >= total().saturating_sub(1);
 
     rsx! {
         button {
             r#type: "button",
             "data-slot": "carousel-next",
-            disabled: "{should_disable_next(props.disabled, total(), current_index())}",
+            disabled: is_disabled,
             class: "{classes}",
             onclick: move |_| {
                 let t = total();
@@ -42,17 +44,8 @@ pub fn CarouselNext(props: CarouselNextProps) -> Element {
                     set_index.call(curr + 1);
                 }
             },
-            ..props.attributes,
             ChevronRight { class: "h-4 w-4" }
             span { class: "sr-only", "Next slide" }
         }
-    }
-}
-
-fn should_disable_next(prop_disabled: bool, total: usize, current: usize) -> &'static str {
-    if prop_disabled || total == 0 || current >= total.saturating_sub(1) {
-        "true"
-    } else {
-        ""
     }
 }

@@ -3,8 +3,8 @@ use crate::navigation_menu::NavigationMenuContext;
 use dioxus::prelude::*;
 use super::navigation_menu_item::NavigationMenuItemContext;
 
-const CONTENT_BASE: &str = "absolute left-0 top-full z-50 w-auto";
-const INNER_BASE: &str = "bg-popover text-popover-foreground relative z-50 w-64 origin-(--radix-navigation-menu-content-transform-origin) overflow-hidden rounded-md border p-1 shadow-lg md:w-[var(--radix-navigation-menu-viewport-width)]";
+const CONTENT_BASE: &str = "absolute left-0 top-full z-50";
+const INNER_BASE: &str = "bg-popover text-popover-foreground relative z-50 w-64 overflow-hidden rounded-md border p-1 shadow-lg md:w-auto";
 
 #[derive(Clone, PartialEq, Props)]
 pub struct NavigationMenuContentProps {

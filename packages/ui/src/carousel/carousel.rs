@@ -68,7 +68,6 @@ pub fn Carousel(props: CarouselProps) -> Element {
         auto_play,
     });
 
-    // use_future automatically cancels on unmount
     use_future(move || async move {
         if !auto_play {
             return;

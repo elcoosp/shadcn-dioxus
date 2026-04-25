@@ -38,7 +38,7 @@ pub fn NavigationMenuItem(props: NavigationMenuItemProps) -> Element {
     rsx! {
         li {
             "data-slot": "navigation-menu-item",
-            class: "{props.class}",
+            class: "relative {props.class}",
             ..props.attributes,
             {props.children}
         }

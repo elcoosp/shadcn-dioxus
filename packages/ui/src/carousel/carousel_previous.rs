@@ -28,12 +28,13 @@ pub fn CarouselPrevious(props: CarouselPreviousProps) -> Element {
     };
 
     let classes = cn(&format!("{} {}", BUTTON_BASE, position), &props.class);
+    let is_disabled = props.disabled || total() == 0 || current_index() == 0;
 
     rsx! {
         button {
             r#type: "button",
             "data-slot": "carousel-previous",
-            disabled: "{should_disable_prev(props.disabled, total(), current_index())}",
+            disabled: is_disabled,
             class: "{classes}",
             onclick: move |_| {
                 let t = total();
@@ -42,17 +43,8 @@ pub fn CarouselPrevious(props: CarouselPreviousProps) -> Element {
                     set_index.call(curr - 1);
                 }
             },
-            ..props.attributes,
             ChevronLeft { class: "h-4 w-4" }
             span { class: "sr-only", "Previous slide" }
         }
-    }
-}
-
-fn should_disable_prev(prop_disabled: bool, total: usize, current: usize) -> &'static str {
-    if prop_disabled || total == 0 || current == 0 {
-        "true"
-    } else {
-        ""
     }
 }

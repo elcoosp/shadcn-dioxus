@@ -694,6 +694,9 @@
   .max-h-screen {
     max-height: 100vh;
   }
+  .min-h-0 {
+    min-height: calc(var(--spacing) * 0);
+  }
   .min-h-4 {
     min-height: calc(var(--spacing) * 4);
   }
@@ -945,11 +948,17 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .cursor-row-resize {
+    cursor: row-resize;
+  }
   .cursor-text {
     cursor: text;
   }
   .touch-none {
     touch-action: none;
+  }
+  .resize {
+    resize: both;
   }
   .resize-none {
     resize: none;
@@ -3190,6 +3199,11 @@
       width: var(--radix-navigation-menu-viewport-width);
     }
   }
+  .md\:w-auto {
+    @media (width >= 48rem) {
+      width: auto;
+    }
+  }
   .md\:max-w-\[420px\] {
     @media (width >= 48rem) {
       max-width: 420px;
@@ -3593,6 +3607,11 @@
   .\[\&\:\:-webkit-scrollbar\]\:w-2 {
     &::-webkit-scrollbar {
       width: calc(var(--spacing) * 2);
+    }
+  }
+  .\[\&\:\:-webkit-scrollbar-thumb\]\:rounded-full {
+    &::-webkit-scrollbar-thumb {
+      border-radius: calc(infinity * 1px);
     }
   }
   .\[\&\:\:-webkit-scrollbar-thumb\]\:bg-border {

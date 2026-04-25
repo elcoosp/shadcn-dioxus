@@ -21,7 +21,6 @@ pub fn CarouselIndicators(props: CarouselIndicatorsProps) -> Element {
         CarouselOrientation::Vertical => "right-2 top-1/2 -translate-y-1/2 flex-col",
     };
 
-    // Read signals to establish reactive dependency
     let t = total();
     let curr = current_index();
 
@@ -39,7 +38,7 @@ pub fn CarouselIndicators(props: CarouselIndicatorsProps) -> Element {
                             key: "{i}",
                             r#type: "button",
                             role: "tab",
-                            "aria-selected": "{is_active}",
+                            "aria-selected": is_active,
                             "aria-label": "Slide {i + 1}",
                             class: if is_active {
                                 "inline-block h-2 w-2 rounded-full bg-primary"

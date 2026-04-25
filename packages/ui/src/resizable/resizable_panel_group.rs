@@ -23,6 +23,11 @@ impl Direction {
     }
 }
 
+#[derive(Clone, PartialEq)]
+pub struct ResizeState {
+    pub sizes: Signal<Vec<f64>>,
+}
+
 #[derive(Clone, PartialEq, Props)]
 pub struct ResizablePanelGroupProps {
     #[props(default)]
@@ -36,6 +41,10 @@ pub struct ResizablePanelGroupProps {
 
 #[component]
 pub fn ResizablePanelGroup(props: ResizablePanelGroupProps) -> Element {
+    // Assume two panels; sizes[0] = left/top, sizes[1] = right/bottom
+    let sizes = use_signal(|| vec![50.0, 50.0]); // percent
+    use_context_provider(|| ResizeState { sizes: sizes.clone() });
+
     rsx! {
         div {
             "data-slot": "resizable-panel-group",

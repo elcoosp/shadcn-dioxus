@@ -27,8 +27,6 @@ pub fn CarouselContent(props: CarouselContentProps) -> Element {
         format!("transform: translateY(-{}%)", current * 100)
     };
 
-    // For vertical: use absolute positioning to ensure proper height constraints
-    // For horizontal: use regular flex layout
     let (wrapper_class, slider_class) = if is_horizontal {
         (
             "h-full".to_string(),
