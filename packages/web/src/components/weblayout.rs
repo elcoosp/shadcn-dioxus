@@ -17,7 +17,7 @@ pub fn WebNavbar() -> Element {
 
     rsx! {
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-        div { class: "min-h-svh flex flex-col",
+        div { class: "min-h-screen flex flex-col",
             Navbar {
                 Link {
                     class: ui::button_variants(ui::ButtonVariant::Ghost, ui::ButtonSize::Default),
@@ -30,7 +30,7 @@ pub fn WebNavbar() -> Element {
                     "Components"
                 }
             }
-            div { class: "grow",
+            div { class: "flex-1",
                 if is_docs {
                     SidebarLayout {
                         Outlet::<Route> {}
