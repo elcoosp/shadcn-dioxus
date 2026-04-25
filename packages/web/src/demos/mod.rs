@@ -58,6 +58,33 @@ demo_fn!(BreadcrumbDefaultDemo, BreadcrumbDefault);
 demo_fn!(BreadcrumbSeparatorDemo, BreadcrumbSeparator);
 demo_fn!(BreadcrumbCollapsibleDemo, BreadcrumbCollapsible);
 // Carousel orientation was already renamed
+
+fn CarouselOrientationDemo() -> Element {
+    rsx! {
+        Carousel { orientation: CarouselOrientation::Vertical, total: 3, height: "16rem".to_string(), class: "w-48",
+            CarouselContent {
+                CarouselItem { index: 0,
+                    div { class: "flex h-full items-center justify-center rounded-md bg-muted",
+                        span { class: "text-xl font-semibold", "1" }
+                    }
+                }
+                CarouselItem { index: 1,
+                    div { class: "flex h-full items-center justify-center rounded-md bg-muted",
+                        span { class: "text-xl font-semibold", "2" }
+                    }
+                }
+                CarouselItem { index: 2,
+                    div { class: "flex h-full items-center justify-center rounded-md bg-muted",
+                        span { class: "text-xl font-semibold", "3" }
+                    }
+                }
+            }
+            CarouselPrevious {}
+            CarouselNext {}
+        }
+    }
+}
+
 // Sheet / Drawer / etc. already exist as separate functions; no further wrappers needed
 
 // ---------------------------------------------------------------------------
