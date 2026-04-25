@@ -1,5 +1,11 @@
-// RadioGroup is context-based, placeholder for future tests.
+use dioxus::prelude::*;
+
 #[test]
-fn test_radio_group_placeholder() {
+fn test_radio_group_renders() {
+    let _: Element = rsx! {
+        crate::RadioGroup {
+            crate::RadioGroupItem { value: "one" }
+        }
+    };
     assert!(true);
 }

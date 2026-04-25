@@ -1,13 +1,7 @@
-#[test]
-fn test_skeleton_placeholder() { assert!(true); }
-
-use crate::SkeletonProps;
+use dioxus::prelude::*;
 
 #[test]
-fn test_skeleton_props_exist() {
-    let _ = SkeletonProps {
-        class: "h-4 w-4".into(),
-        attributes: Vec::new(),
-    };
+fn test_skeleton_renders() {
+    let _: Element = rsx! { crate::Skeleton { class: "h-4 w-4" } };
     assert!(true);
 }

@@ -1,5 +1,7 @@
-// DatePicker relies on Popover and Calendar; placeholder for future tests.
+use dioxus::prelude::*;
+
 #[test]
-fn test_date_picker_placeholder() {
+fn test_date_picker_renders() {
+    let _: Element = rsx! { crate::DatePicker {} };
     assert!(true);
 }
