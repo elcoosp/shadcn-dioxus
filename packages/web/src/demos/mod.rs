@@ -779,10 +779,6 @@ fn RadioGroupDefault() -> Element {
         }
     }
 }
-
-
-
-
 fn ScrollAreaHorizontal() -> Element {
     rsx! {
         ScrollArea { class: "w-96 whitespace-nowrap rounded-md border",
@@ -1084,52 +1080,12 @@ fn TooltipWithArrow() -> Element {
 // -- Updated Resizable demos (use index prop) --
 // -- Updated Resizable demos (use index prop) --
 
-fn ResizableHorizontal() -> Element {
-    rsx! {
-        ResizablePanelGroup { direction: Direction::Horizontal, class: "h-32 w-full rounded-md border",
-            ResizablePanel { index: 0,
-                div { class: "flex h-full items-center justify-center", "Left" }
-            }
-            ResizableHandle {}
-            ResizablePanel { index: 1,
-                div { class: "flex h-full items-center justify-center", "Right" }
-            }
-        }
-    }
-}
 
-fn ResizableVertical() -> Element {
-    rsx! {
-        ResizablePanelGroup { direction: Direction::Vertical, class: "h-64 w-full rounded-md border",
-            ResizablePanel { index: 0,
-                div { class: "flex h-full items-center justify-center", "Top" }
-            }
-            ResizableHandle {}
-            ResizablePanel { index: 1,
-                div { class: "flex h-full items-center justify-center", "Middle" }
-            }
-            ResizableHandle {}
-            ResizablePanel { index: 2,
-                div { class: "flex h-full items-center justify-center", "Bottom" }
-            }
-        }
-    }
-}
 
-fn ResizableWithHandle() -> Element {
-    rsx! {
-        ResizablePanelGroup { direction: Direction::Horizontal, class: "h-32 w-full rounded-md border",
-            ResizablePanel { index: 0,
-                div { class: "flex h-full items-center justify-center", "Panel 1" }
-            }
-            ResizableHandle {}
-            ResizablePanel { index: 1,
-                div { class: "flex h-full items-center justify-center", "Panel 2" }
-            }
-        }
-    }
-}
 
+
+
+// -- Updated Resizable demos (use index prop) --
 
 fn ResizableHorizontal() -> Element {
     rsx! {
