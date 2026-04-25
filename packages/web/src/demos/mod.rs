@@ -6,10 +6,9 @@ use lucide_dioxus::{
 use ui::*;
 
 // ---------------------------------------------------------------------------
-// Wrapper functions (Replacing the broken demo_fn! macro)
-// We directly call and return the Element instead of wrapping in rsx!
+// Wrapper functions (Directly returning the Elements)
+// Renamed to avoid shadowing UI Components (e.g. BreadcrumbSeparator)
 // ---------------------------------------------------------------------------
-
 fn AccordionDemo() -> Element {
     AccordionDefault()
 }
@@ -113,12 +112,12 @@ fn TooltipDemo() -> Element {
     TooltipDefault()
 }
 
-// Breadcrumb wrappers (renamed to avoid collision with components)
+// Breadcrumb wrappers (Renamed to Demo suffix to avoid collision with components)
 fn BreadcrumbDefaultDemo() -> Element {
     BreadcrumbDefault()
 }
 fn BreadcrumbSeparatorDemo() -> Element {
-    BreadcrumbSeparator()
+    BreadcrumbSeparatorContent()
 }
 fn BreadcrumbCollapsibleDemo() -> Element {
     BreadcrumbCollapsible()
@@ -292,7 +291,8 @@ fn BreadcrumbDefault() -> Element {
     }
 }
 
-fn BreadcrumbSeparator() -> Element {
+// Renamed from BreadcrumbSeparator to avoid shadowing the component inside rsx!
+fn BreadcrumbSeparatorContent() -> Element {
     rsx! {
         Breadcrumb {
             BreadcrumbList {
@@ -1259,7 +1259,7 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "accordion-demo" | "accordion-default" => Some(AccordionDefault()),
         "accordion-multiple" => Some(AccordionMultiple()),
         "breadcrumb-demo" | "breadcrumb-default" => Some(BreadcrumbDefault()),
-        "breadcrumb-separator" => Some(BreadcrumbSeparator()),
+        "breadcrumb-separator" => Some(BreadcrumbSeparatorContent()),
         "breadcrumb-collapsible" => Some(BreadcrumbCollapsible()),
         "calendar-demo" | "calendar-default" => Some(CalendarDefault()),
         "calendar-with-selected-date" => Some(CalendarWithSelectedDate()),
