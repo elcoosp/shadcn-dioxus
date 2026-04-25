@@ -768,6 +768,9 @@
   .w-\[450px\] {
     width: 450px;
   }
+  .w-\[500px\] {
+    width: 500px;
+  }
   .w-fit {
     width: fit-content;
   }

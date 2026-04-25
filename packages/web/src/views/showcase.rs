@@ -14,24 +14,66 @@ pub fn Showcase() -> Element {
             Calendar { default_year: 2025, default_month: 5 }
 
             {section_heading("Command")}
-            Command { class: "w-[400px]",
+            Command { class: "w-[500px] rounded-lg border shadow-md",
                 CommandInput { placeholder: "Type a command or search..." }
-                CommandList { max_height: 200,
+                CommandList { max_height: 300,
                     CommandGroup { heading: "Suggestions",
                         CommandItem { value: "calendar".to_string(),
                             "Calendar"
-                            CommandShortcut { "Ctrl+K" }
+                            CommandShortcut { "⌘K" }
                         }
-                        CommandItem { value: "search".to_string(),
+                        CommandItem { value: "search-files".to_string(),
                             "Search Files"
-                            CommandShortcut { "Ctrl+P" }
+                            CommandShortcut { "⌘P" }
                         }
                         CommandItem { value: "settings".to_string(),
                             "Settings"
+                            CommandShortcut { "⌘," }
                         }
                     }
                     CommandSeparator {}
-                    CommandEmpty { "No results found." }
+                    CommandGroup { heading: "Actions",
+                        CommandItem { value: "new-file".to_string(),
+                            "New File"
+                            CommandShortcut { "⌘N" }
+                        }
+                        CommandItem { value: "new-team".to_string(),
+                            "New Team"
+                        }
+                        CommandItem { value: "new-project".to_string(),
+                            "New Project"
+                        }
+                    }
+                    CommandSeparator {}
+                    CommandGroup { heading: "Navigation",
+                        CommandItem { value: "go-home".to_string(),
+                            "Go to Home"
+                            CommandShortcut { "⌘H" }
+                        }
+                        CommandItem { value: "go-inbox".to_string(),
+                            "Go to Inbox"
+                            CommandShortcut { "⌘I" }
+                        }
+                        CommandItem { value: "go-notifications".to_string(),
+                            "Go to Notifications"
+                            CommandShortcut { "⌘N" }
+                        }
+                    }
+                    CommandSeparator {}
+                    CommandGroup { heading: "Help",
+                        CommandItem { value: "documentation".to_string(),
+                            "Documentation"
+                            CommandShortcut { "F1" }
+                        }
+                        CommandItem { value: "api-reference".to_string(),
+                            "API Reference"
+                        }
+                        CommandItem { value: "support".to_string(),
+                            disabled: true,
+                            "Support"
+                        }
+                    }
+                    CommandEmpty { "No commands found." }
                 }
             }
 
