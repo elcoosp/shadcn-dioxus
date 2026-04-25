@@ -6,9 +6,10 @@ use lucide_dioxus::{
 use ui::*;
 
 // ---------------------------------------------------------------------------
-// Wrapper functions (Directly returning the Elements)
-// Renamed to avoid shadowing UI Components (e.g. BreadcrumbSeparator)
+// Wrapper functions (Replacing the broken demo_fn! macro)
+// We directly call and return the Element instead of wrapping in rsx!
 // ---------------------------------------------------------------------------
+
 fn AccordionDemo() -> Element {
     AccordionDefault()
 }
@@ -112,7 +113,7 @@ fn TooltipDemo() -> Element {
     TooltipDefault()
 }
 
-// Breadcrumb wrappers (Renamed to Demo suffix to avoid collision with components)
+// Breadcrumb wrappers (renamed to avoid collision with components)
 fn BreadcrumbDefaultDemo() -> Element {
     BreadcrumbDefault()
 }
@@ -148,6 +149,8 @@ fn CarouselOrientationDemo() -> Element {
         }
     }
 }
+
+// Sheet / Drawer / etc. already exist as separate functions; no further wrappers needed
 
 // ---------------------------------------------------------------------------
 // Original full demo implementations (with new names where needed)
@@ -291,7 +294,7 @@ fn BreadcrumbDefault() -> Element {
     }
 }
 
-// Renamed from BreadcrumbSeparator to avoid shadowing the component inside rsx!
+// Renamed from BreadcrumbSeparator to BreadcrumbSeparatorContent to avoid shadowing the UI component
 fn BreadcrumbSeparatorContent() -> Element {
     rsx! {
         Breadcrumb {
@@ -1115,7 +1118,7 @@ fn ResizableWithHandle() -> Element {
 }
 
 // ---------------------------------------------------------------------------
-// Dispatcher (Deduplicated)
+// Dispatcher
 // ---------------------------------------------------------------------------
 pub fn get_demo(name: &str) -> Option<Element> {
     match name {
@@ -1152,14 +1155,18 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "label-demo" => Some(rsx! { Label { "Label" } }),
         "progress-demo" => Some(rsx! { Progress { value: 60.0, class: "w-[60%]" } }),
         "progress-indeterminate" => Some(rsx! { Progress { class: "w-[60%]" } }),
-        "separator-demo" => Some(rsx! { /* original separator */ }),
-        "separator-vertical" => Some(rsx! { /* original */ }),
-        "skeleton-demo" => Some(rsx! { /* original */ }),
+        "separator-demo" => Some(rsx! { Separator {} }),
+        "separator-vertical" => Some(
+            rsx! { Separator { orientation: use ui::separator::SeparatorOrientation::Vertical } },
+        ),
+        "skeleton-demo" => Some(rsx! { Skeleton { class: "w-[100px] h-[20px] rounded-full" } }),
         "spinner-demo" => Some(rsx! { Spinner {} }),
-        "kbd-demo" => Some(rsx! { /* original */ }),
-        "kbd-group" => Some(rsx! { /* original */ }),
-        "kbd-button" => Some(rsx! { /* original */ }),
-        "item-demo" => Some(rsx! { /* original */ }),
+        "kbd-demo" => Some(rsx! { Kbd { "⌘" } }),
+        "kbd-group" => {
+            Some(rsx! { div { class: "flex items-center gap-2", Kbd { "⌘" } Kbd { "C" } } })
+        }
+        "kbd-button" => Some(rsx! { Button { "⌘K" } }),
+        "item-demo" => Some(rsx! { Item { "Item" } }),
         "empty-demo" => Some(
             rsx! { Empty { EmptyHeader { EmptyTitle { "No results found" } EmptyDescription { "Try adjusting your search or filters." } } } },
         ),
@@ -1236,19 +1243,69 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "native-select-invalid" => Some(
             rsx! { NativeSelect { aria_invalid: "true", NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } } },
         ),
-        "input-group-demo" => Some(rsx! { /* ... */ }),
-        "input-group-icon" => Some(rsx! { /* ... */ }),
-        "input-group-text" => Some(rsx! { /* ... */ }),
-        "input-group-button" => Some(rsx! { /* ... */ }),
-        "input-group-textarea" => Some(rsx! { /* ... */ }),
-        "input-group-spinner" => Some(rsx! { /* ... */ }),
-        "input-group-label" => Some(rsx! { /* ... */ }),
-        "input-group-button-group" => Some(rsx! { /* ... */ }),
-        "input-group-custom-input" => Some(rsx! { /* ... */ }),
-        "dialog-demo" => Some(rsx! { /* ... */ }),
-        "dialog-form" => Some(rsx! { /* ... */ }),
-        "sheet-demo" => Some(rsx! { /* ... */ }),
-        "sheet-side" => Some(rsx! { /* ... */ }),
+        "input-group-demo" => Some(rsx! { InputGroup { Input { placeholder: "Search..." } } }),
+        "input-group-icon" => Some(
+            rsx! { InputGroup { InputGroupAddon { Search {} } Input { placeholder: "Search..." } } },
+        ),
+        "input-group-text" => Some(
+            rsx! { InputGroup { InputGroupAddon { "https://" } Input { placeholder: "website.com" } } },
+        ),
+        "input-group-button" => Some(
+            rsx! { InputGroup { Input { placeholder: "Search..." } InputGroupButton { Button { variant: ButtonVariant::Outline, "Search" } } } },
+        ),
+        "input-group-textarea" => Some(
+            rsx! { InputGroup { Textarea { placeholder: "Type your message here." } InputGroupButton { Button { "Send" } } } },
+        ),
+        "input-group-spinner" => Some(
+            rsx! { InputGroup { InputGroupAddon { Spinner {} } Input { placeholder: "Loading...", disabled: true } } },
+        ),
+        "input-group-label" => Some(
+            rsx! { InputGroup { InputGroupAddon { "Email" } Input { placeholder: "name@example.com" } } },
+        ),
+        "input-group-button-group" => Some(
+            rsx! { InputGroup { Input { placeholder: "Search..." } InputGroupButton { Button { variant: ButtonVariant::Outline, "A" } Button { variant: ButtonVariant::Outline, "B" } } } },
+        ),
+        "input-group-custom-input" => Some(
+            rsx! { InputGroup { InputGroupAddon { CreditCard {} } Input { placeholder: "Card number" } InputGroupAddon { "USD" } } },
+        ),
+        "dialog-demo" => Some(rsx! {
+            Dialog {
+                DialogTrigger { Button { variant: ButtonVariant::Outline, "Open Dialog" } }
+                DialogContent {
+                    DialogHeader { DialogTitle { "Dialog Title" } DialogDescription { "This is a description of the dialog." } }
+                    DialogFooter { Button { "Save" } }
+                }
+            }
+        }),
+        "dialog-form" => Some(rsx! {
+            Dialog {
+                DialogTrigger { Button { variant: ButtonVariant::Outline, "Edit Profile" } }
+                DialogContent {
+                    DialogHeader { DialogTitle { "Edit profile" } DialogDescription { "Make changes to your profile here. Click save when you're done." } }
+                    div { class: "grid gap-4 py-4",
+                        div { class: "grid grid-cols-4 items-center gap-4", Label { "for": "name", class: "text-right", "Name" } Input { id: "name", value: "Pedro Duarte", class: "col-span-3" } }
+                        div { class: "grid grid-cols-4 items-center gap-4", Label { "for": "username", class: "text-right", "Username" } Input { id: "username", value: "@peduarte", class: "col-span-3" } }
+                    }
+                    DialogFooter { Button { "Save changes" } }
+                }
+            }
+        }),
+        "sheet-demo" => Some(rsx! {
+            Sheet {
+                SheetTrigger { Button { variant: ButtonVariant::Outline, "Open" } }
+                SheetContent {
+                    SheetHeader { SheetTitle { "Edit Profile" } SheetDescription { "Make changes to your profile here." } }
+                }
+            }
+        }),
+        "sheet-side" => Some(rsx! {
+            Sheet {
+                SheetTrigger { Button { variant: ButtonVariant::Outline, "Open Left" } }
+                SheetContent { side: Side::Left,
+                    SheetHeader { SheetTitle { "Left Sheet" } SheetDescription { "Description goes here." } }
+                }
+            }
+        }),
 
         // New Demo mappings resolved directly to avoid infinite component loops
         "alert-demo" | "alert-default" => Some(AlertDemo()),
