@@ -27,3 +27,16 @@ mod combobox;
 mod input_otp;
 mod color_picker;
 mod date_picker;
+// Phase 3: overlays and navigation
+mod dialog;
+mod alert_dialog;
+mod tooltip;
+mod dropdown_menu;
+mod context_menu;
+mod hover_card;
+mod popover;
+mod breadcrumb;
+mod pagination;
+mod tabs;
+mod stepper;
+mod menubar;

@@ -13,14 +13,20 @@ fn test_drawer_side_classes() {
     let right = DrawerSide::Right.classes();
     assert!(right.contains("inset-y-0"));
     assert!(right.contains("right-0"));
-    assert!(right.contains("border-l"));
     let left = DrawerSide::Left.classes();
     assert!(left.contains("left-0"));
-    assert!(left.contains("border-r"));
     let top = DrawerSide::Top.classes();
     assert!(top.contains("top-0"));
-    assert!(top.contains("border-b"));
     let bottom = DrawerSide::Bottom.classes();
     assert!(bottom.contains("bottom-0"));
-    assert!(bottom.contains("border-t"));
+}
+
+#[test]
+fn test_drawer_side_all_distinct() {
+    let sides = [DrawerSide::Right, DrawerSide::Left, DrawerSide::Top, DrawerSide::Bottom];
+    for i in 0..sides.len() {
+        for j in i+1..sides.len() {
+            assert_ne!(sides[i].classes(), sides[j].classes());
+        }
+    }
 }

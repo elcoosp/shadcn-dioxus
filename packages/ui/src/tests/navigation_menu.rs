@@ -13,3 +13,8 @@ fn test_navigation_menu_trigger_style() {
     assert!(style.contains("rounded-md"));
     assert!(style.contains("bg-background"));
 }
+
+#[test]
+fn test_orientation_distinct() {
+    assert_ne!(NavigationMenuOrientation::Horizontal.as_str(), NavigationMenuOrientation::Vertical.as_str());
+}
