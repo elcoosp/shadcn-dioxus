@@ -18,7 +18,6 @@ pub fn CarouselContent(props: CarouselContentProps) -> Element {
 
     let is_horizontal = orientation == crate::carousel::CarouselOrientation::Horizontal;
 
-    // Compute translate percentage
     let translate = use_memo(move || {
         if is_horizontal {
             format!("translateX(-{}%)", current_index() * 100)
@@ -27,7 +26,7 @@ pub fn CarouselContent(props: CarouselContentProps) -> Element {
         }
     });
 
-    let flex_class = if is_horizontal { "flex flex-row" } else { "flex flex-col" };
+    let flex_class = if is_horizontal { "flex flex-row" } else { "flex flex-col h-full" };
 
     rsx! {
         div {

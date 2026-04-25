@@ -29,23 +29,21 @@ pub fn CarouselIndicators(props: CarouselIndicatorsProps) -> Element {
             {
                 let t = total();
                 let curr = current_index();
-                let si = set_index.clone();
                 (0..t).map(move |i| {
-                    let is_active = i == curr;
-                    let si_inner = si.clone();
+                    let si = set_index.clone();
                     rsx! {
                         button {
                             key: "{i}",
                             r#type: "button",
                             role: "tab",
-                            "aria-selected": is_active,
+                            "aria-selected": i == curr,
                             "aria-label": "Slide {i + 1}",
-                            class: if is_active {
+                            class: if i == curr {
                                 "inline-block h-2 w-2 rounded-full bg-primary"
                             } else {
                                 "inline-block h-2 w-2 rounded-full bg-primary/30"
                             },
-                            onclick: move |_| si_inner.call(i),
+                            onclick: move |_| si.call(i),
                         }
                     }
                 })

@@ -23,14 +23,14 @@ pub fn CarouselPrevious(props: CarouselPreviousProps) -> Element {
     let total = ctx.total;
 
     let is_first = use_memo(move || current_index() == 0);
-    let is_disabled = props.disabled || is_first() || total() == 0;
+    let is_disabled = props.disabled || is_first();
 
-    let position_class = match ctx.orientation {
+    let position = match ctx.orientation {
         crate::carousel::CarouselOrientation::Horizontal => "left-2 top-1/2 -translate-y-1/2",
         crate::carousel::CarouselOrientation::Vertical => "left-1/2 top-2 -translate-x-1/2 rotate-90",
     };
 
-    let classes = cn(&format!("{} {}", BUTTON_BASE, position_class), &props.class);
+    let classes = cn(&format!("{} {}", BUTTON_BASE, position), &props.class);
 
     rsx! {
         button {
@@ -40,10 +40,9 @@ pub fn CarouselPrevious(props: CarouselPreviousProps) -> Element {
             class: "{classes}",
             onclick: move |_| {
                 let t = total();
-                if t > 0 {
-                    let prev = if current_index() == 0 { t - 1 } else { current_index() - 1 };
-                    set_index.call(prev);
-                }
+                if t == 0 { return; }
+                let prev = if current_index() == 0 { t - 1 } else { current_index() - 1 };
+                set_index.call(prev);
             },
             ..props.attributes,
             ChevronLeft { class: "h-4 w-4" }

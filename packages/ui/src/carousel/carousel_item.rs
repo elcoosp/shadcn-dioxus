@@ -12,16 +12,14 @@ pub struct CarouselItemProps {
 
 #[component]
 pub fn CarouselItem(props: CarouselItemProps) -> Element {
-    let flex_basis = "0 0 100%"; // Ensure full-width/height slide
-    let min_class = "min-w-0 shrink-0";
-
+    // Ensure item fills full width/height, with minimum size 0 to prevent overflow
     rsx! {
         div {
             "data-slot": "carousel-item",
             role: "group",
             "aria-roledescription": "slide",
-            class: "{min_class} {props.class}",
-            style: "flex: {flex_basis};",
+            class: "min-w-0 min-h-0 shrink-0 {props.class}",
+            style: "flex: 0 0 100%;",
             ..props.attributes,
             {props.children}
         }

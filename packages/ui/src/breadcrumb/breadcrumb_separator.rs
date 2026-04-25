@@ -14,7 +14,6 @@ pub fn BreadcrumbSeparator(props: BreadcrumbSeparatorProps) -> Element {
             role: "presentation",
             "aria-hidden": "true",
             "data-slot": "breadcrumb-separator",
-            // simple text separator instead of SVG icon
             "/"
         }
     }

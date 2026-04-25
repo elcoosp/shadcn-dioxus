@@ -22,18 +22,15 @@ pub fn CarouselNext(props: CarouselNextProps) -> Element {
     let set_index = ctx.set_index;
     let total = ctx.total;
 
-    let is_last = use_memo(move || {
-        let t = total();
-        t == 0 || current_index() >= t - 1
-    });
+    let is_last = use_memo(move || current_index() >= total() - 1);
     let is_disabled = props.disabled || is_last();
 
-    let position_class = match ctx.orientation {
+    let position = match ctx.orientation {
         crate::carousel::CarouselOrientation::Horizontal => "right-2 top-1/2 -translate-y-1/2",
         crate::carousel::CarouselOrientation::Vertical => "left-1/2 bottom-2 -translate-x-1/2 rotate-90",
     };
 
-    let classes = cn(&format!("{} {}", BUTTON_BASE, position_class), &props.class);
+    let classes = cn(&format!("{} {}", BUTTON_BASE, position), &props.class);
 
     rsx! {
         button {
@@ -43,10 +40,7 @@ pub fn CarouselNext(props: CarouselNextProps) -> Element {
             class: "{classes}",
             onclick: move |_| {
                 let t = total();
-                if t > 0 {
-                    let next = (current_index() + 1) % t;
-                    set_index.call(next);
-                }
+                if t > 0 { set_index.call((current_index() + 1) % t); }
             },
             ..props.attributes,
             ChevronRight { class: "h-4 w-4" }

@@ -33,7 +33,11 @@ pub struct CarouselProps {
     pub auto_play: bool,
     #[props(default = 3000)]
     pub auto_play_interval_ms: u64,
+    /// Total number of slides
     pub total: usize,
+    /// Override default height for vertical orientation (default: 20rem)
+    #[props(default = "20rem".to_string())]
+    pub height: String,
     #[props(into, default)]
     pub class: String,
     pub children: Element,
@@ -49,9 +53,8 @@ pub fn Carousel(props: CarouselProps) -> Element {
     let auto_play_interval_ms = props.auto_play_interval_ms;
 
     let set_index = use_callback(move |idx: usize| {
-        let t = total();
-        if t > 0 {
-            current_index.set(idx % t);
+        if total() > 0 {
+            current_index.set(idx % total());
         }
     });
 
@@ -63,23 +66,17 @@ pub fn Carousel(props: CarouselProps) -> Element {
         auto_play,
     });
 
-    // Autoplay with proper cancellation
+    // Autoplay cleanup
     let mut cancel_autoplay = use_signal(|| false);
-    use_drop(move || {
-        cancel_autoplay.set(true);
-    });
+    use_drop(move || cancel_autoplay.set(true));
 
     use_effect(move || {
-        if !auto_play {
-            return;
-        }
+        if !auto_play { return; }
         let cancel = cancel_autoplay.clone();
         spawn(async move {
             loop {
                 futures_timer::Delay::new(std::time::Duration::from_millis(auto_play_interval_ms)).await;
-                if cancel() {
-                    break;
-                }
+                if cancel() { break; }
                 let t = total();
                 if t > 0 {
                     let next = (current_index() + 1) % t;
@@ -89,9 +86,9 @@ pub fn Carousel(props: CarouselProps) -> Element {
         });
     });
 
-    let base_class = match props.orientation {
-        CarouselOrientation::Horizontal => "relative overflow-hidden",
-        CarouselOrientation::Vertical => "relative overflow-hidden flex flex-col",
+    let orientation_class = match props.orientation {
+        CarouselOrientation::Horizontal => "relative overflow-hidden".to_string(),
+        CarouselOrientation::Vertical => format!("relative overflow-hidden flex flex-col h-[{}]", props.height),
     };
 
     rsx! {
@@ -100,7 +97,7 @@ pub fn Carousel(props: CarouselProps) -> Element {
             "data-orientation": props.orientation.as_str(),
             role: "region",
             "aria-roledescription": "carousel",
-            class: "{base_class} {props.class}",
+            class: "{orientation_class} {props.class}",
             ..props.attributes,
             {props.children}
         }
