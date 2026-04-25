@@ -971,7 +971,7 @@ fn TableDefault() -> Element {
             }
             TableFooter {
                 TableRow {
-                    TableCell { colspan: 3, "Total" }
+                    TableCell { column_span: 3, "Total" }
                     TableCell { class: "text-right", "$400.00" }
                 }
             }
