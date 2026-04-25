@@ -6,6 +6,7 @@ pub struct CommandContext {
     pub set_value: Callback<String>,
     pub selected_id: Signal<Option<String>>,
     pub set_selected_id: Callback<Option<String>>,
+    pub visible_count: Signal<usize>,
 }
 
 #[derive(Clone, PartialEq, Props)]
@@ -25,6 +26,7 @@ pub struct CommandProps {
 pub fn Command(props: CommandProps) -> Element {
     let mut value = use_signal(|| props.default_value);
     let mut selected_id = use_signal(|| None);
+    let visible_count = use_signal(|| 0usize);
 
     let set_value = use_callback(move |val: String| value.set(val));
     let set_selected_id = use_callback(move |id: Option<String>| {
@@ -41,6 +43,7 @@ pub fn Command(props: CommandProps) -> Element {
         set_value,
         selected_id,
         set_selected_id,
+        visible_count,
     });
 
     rsx! {

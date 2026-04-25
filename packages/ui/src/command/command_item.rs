@@ -22,13 +22,35 @@ pub struct CommandItemProps {
 #[component]
 pub fn CommandItem(props: CommandItemProps) -> Element {
     let ctx = use_context::<CommandContext>();
+    let search = ctx.value;
     let selected_id = ctx.selected_id;
     let set_selected_id = ctx.set_selected_id;
     let value = props.value.clone();
-    let value_for_memo = props.value.clone();
+    // Separate clones for the two memos to avoid move conflicts
+    let value_for_matches = props.value.clone();
+    let value_for_selected = props.value.clone();
+    let mut visible_count = ctx.visible_count;
+
+    // Determine if this item matches the current search
+    let matches = use_memo(move || {
+        let s = search();
+        s.is_empty() || value_for_matches.to_lowercase().contains(&s.to_lowercase())
+    });
+
+    // Update visible count when this item is rendered
+    use_effect(move || {
+        if matches() {
+            visible_count.set(visible_count() + 1);
+        }
+    });
+
+    // Don't render if not matching
+    if !matches() {
+        return rsx! {};
+    }
 
     let is_selected = use_memo(move || {
-        selected_id().as_deref() == Some(&value_for_memo)
+        selected_id().as_deref() == Some(&value_for_selected)
     });
 
     let classes = cn(ITEM_BASE, &props.class);
