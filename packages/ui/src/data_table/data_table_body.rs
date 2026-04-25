@@ -9,23 +9,24 @@ pub fn DataTableBody() -> Element {
     let mut selected_rows = ctx.selected_rows;
     let columns = ctx.columns;
 
-    // Reactively read the memo to know if empty
-    let rows = (ctx.processed_rows)();
-    let is_empty = rows.is_empty();
+    // Use total filtered count to decide emptiness reactively.
+    let total = (ctx.total_filtered)();
 
-    if is_empty {
+    if total == 0 {
         return rsx! {
             crate::table::TableBody {
                 crate::table::TableRow {
                     crate::table::TableCell {
                         column_span: (visible_column_ids().len() + 1) as u32,
                         class: "h-24 text-center",
-                        div { class: "text-muted-foreground text-center w-full", "No results." }
+                        div { class: "text-muted-foreground text-center", "No results." }
                     }
                 }
             }
         };
     }
+
+    let rows = (ctx.processed_rows)();
 
     rsx! {
         crate::table::TableBody {
