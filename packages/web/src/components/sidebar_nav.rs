@@ -22,6 +22,7 @@ pub fn SidebarNav(
                     slug: component.slug,
                     title: component.title,
                     is_active: component.slug == active_slug,
+                    is_new: component.new,
                     large_text,
                 }
             }
@@ -33,6 +34,7 @@ fn SidebarLink(
     slug: &'static str,
     title: &'static str,
     is_active: bool,
+    is_new: bool,
     large_text: bool,
 ) -> Element {
     let _base_class = if large_text {
@@ -52,6 +54,9 @@ fn SidebarLink(
             },
             class: cn(&button_variants(ButtonVariant::Ghost, ButtonSize::Sm), state_class),
             "{title}"
+            if is_new {
+                span { class: "ml-2 inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground", "New" }
+            }
         }
     }
 }
