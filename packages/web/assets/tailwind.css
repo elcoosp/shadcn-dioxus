@@ -687,6 +687,9 @@
   .min-h-svh {
     min-height: 100svh;
   }
+  .\!w-auto {
+    width: auto !important;
+  }
   .w-2 {
     width: calc(var(--spacing) * 2);
   }
