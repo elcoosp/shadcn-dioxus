@@ -14,7 +14,7 @@ pub fn Showcase() -> Element {
             Calendar { default_year: 2025, default_month: 5 }
 
             {section_heading("Command")}
-            Command { class: "w-[500px] rounded-lg border shadow-md",
+            Command { class: "w-full max-w-[500px] rounded-lg border shadow-md",
                 CommandInput { placeholder: "Type a command or search..." }
                 CommandList { max_height: 300,
                     CommandGroup { heading: "Suggestions",

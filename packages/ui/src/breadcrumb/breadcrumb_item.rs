@@ -1,4 +1,3 @@
-use crate::cn;
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
@@ -12,8 +11,8 @@ pub struct BreadcrumbItemProps {
 pub fn BreadcrumbItem(props: BreadcrumbItemProps) -> Element {
     rsx! {
         li {
+            class: "inline-flex items-center gap-1.5 {props.class}",
             "data-slot": "breadcrumb-item",
-            class: cn("inline-flex items-center gap-1.5", &props.class),
             {props.children}
         }
     }

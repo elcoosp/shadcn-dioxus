@@ -14,18 +14,31 @@ pub struct CarouselContentProps {
 pub fn CarouselContent(props: CarouselContentProps) -> Element {
     let ctx = use_context::<CarouselContext>();
     let orientation = ctx.orientation;
+    let current_index = ctx.current_index;
 
-    let overflow_class = match orientation {
-        crate::carousel::CarouselOrientation::Horizontal => "overflow-x",
-        crate::carousel::CarouselOrientation::Vertical => "overflow-y",
-    };
+    let is_horizontal = orientation == crate::carousel::CarouselOrientation::Horizontal;
+
+    // Compute translate percentage
+    let translate = use_memo(move || {
+        if is_horizontal {
+            format!("translateX(-{}%)", current_index() * 100)
+        } else {
+            format!("translateY(-{}%)", current_index() * 100)
+        }
+    });
+
+    let flex_class = if is_horizontal { "flex flex-row" } else { "flex flex-col" };
 
     rsx! {
         div {
             "data-slot": "carousel-content",
-            class: "flex {overflow_class}-hidden {props.class}",
+            class: "overflow-hidden {props.class}",
             ..props.attributes,
-            {props.children}
+            div {
+                class: "{flex_class} transition-transform duration-500",
+                style: "transform: {translate};",
+                {props.children}
+            }
         }
     }
 }

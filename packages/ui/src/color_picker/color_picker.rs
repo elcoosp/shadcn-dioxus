@@ -27,7 +27,7 @@ pub fn ColorPicker(props: ColorPickerProps) -> Element {
     rsx! {
         div {
             "data-slot": "color-picker",
-            class: cn("flex flex-col gap-4 p-4 border rounded-md w-[280px]", &props.class),
+            class: cn("flex flex-col gap-4 p-4 border rounded-md w-full max-w-[280px]", &props.class),
             ..props.attributes,
             div { class: "space-y-2",
                 div { class: "flex items-center gap-2",

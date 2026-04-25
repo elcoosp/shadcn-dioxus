@@ -1,6 +1,4 @@
-use crate::cn;
 use dioxus::prelude::*;
-use lucide_dioxus::ChevronRight;
 
 #[derive(Clone, PartialEq, Props)]
 pub struct BreadcrumbSeparatorProps {
@@ -12,11 +10,12 @@ pub struct BreadcrumbSeparatorProps {
 pub fn BreadcrumbSeparator(props: BreadcrumbSeparatorProps) -> Element {
     rsx! {
         span {
-            "data-slot": "breadcrumb-separator",
+            class: "text-muted-foreground mx-1 {props.class}",
             role: "presentation",
             "aria-hidden": "true",
-            class: cn("[&>svg]:size-3.5", &props.class),
-            ChevronRight {}
+            "data-slot": "breadcrumb-separator",
+            // simple text separator instead of SVG icon
+            "/"
         }
     }
 }

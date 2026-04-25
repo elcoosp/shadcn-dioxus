@@ -1,9 +1,7 @@
-use crate::carousel::CarouselContext;
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
 pub struct CarouselItemProps {
-    /// Slide index (0‑based)
     pub index: usize,
     #[props(into, default)]
     pub class: String,
@@ -14,24 +12,16 @@ pub struct CarouselItemProps {
 
 #[component]
 pub fn CarouselItem(props: CarouselItemProps) -> Element {
-    let ctx = use_context::<CarouselContext>();
-    let current_index = ctx.current_index;
-    let index = props.index;
-
-    let is_active = use_memo(move || current_index() == index);
-
-    let min_class = match ctx.orientation {
-        crate::carousel::CarouselOrientation::Horizontal => "min-w-0 shrink-0",
-        crate::carousel::CarouselOrientation::Vertical => "min-h-0 shrink-0",
-    };
+    let flex_basis = "0 0 100%"; // Ensure full-width/height slide
+    let min_class = "min-w-0 shrink-0";
 
     rsx! {
         div {
             "data-slot": "carousel-item",
             role: "group",
             "aria-roledescription": "slide",
-            "data-active": is_active(),
             class: "{min_class} {props.class}",
+            style: "flex: {flex_basis};",
             ..props.attributes,
             {props.children}
         }

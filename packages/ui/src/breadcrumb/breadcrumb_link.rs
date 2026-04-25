@@ -1,4 +1,3 @@
-use crate::cn;
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
@@ -16,9 +15,9 @@ pub struct BreadcrumbLinkProps {
 pub fn BreadcrumbLink(props: BreadcrumbLinkProps) -> Element {
     rsx! {
         a {
-            "data-slot": "breadcrumb-link",
-            class: cn("transition-colors hover:text-foreground", &props.class),
+            class: "transition-colors hover:text-foreground {props.class}",
             href: props.href.as_deref().unwrap_or("#"),
+            "data-slot": "breadcrumb-link",
             ..props.attributes,
             {props.children}
         }

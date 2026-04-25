@@ -1,4 +1,3 @@
-use crate::cn;
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
@@ -12,10 +11,10 @@ pub struct BreadcrumbPageProps {
 pub fn BreadcrumbPage(props: BreadcrumbPageProps) -> Element {
     rsx! {
         span {
-            "data-slot": "breadcrumb-page",
+            class: "font-normal text-foreground {props.class}",
             role: "link",
             "aria-current": "page",
-            class: cn("font-normal text-foreground", &props.class),
+            "data-slot": "breadcrumb-page",
             {props.children}
         }
     }

@@ -31,9 +31,8 @@ pub struct CarouselProps {
     pub orientation: CarouselOrientation,
     #[props(default = false)]
     pub auto_play: bool,
-    #[props(default = 5000)]
+    #[props(default = 3000)]
     pub auto_play_interval_ms: u64,
-    /// Total number of slides (required for internal logic)
     pub total: usize,
     #[props(into, default)]
     pub class: String,
@@ -64,14 +63,23 @@ pub fn Carousel(props: CarouselProps) -> Element {
         auto_play,
     });
 
-    // Auto‑play timer
+    // Autoplay with proper cancellation
+    let mut cancel_autoplay = use_signal(|| false);
+    use_drop(move || {
+        cancel_autoplay.set(true);
+    });
+
     use_effect(move || {
         if !auto_play {
             return;
         }
+        let cancel = cancel_autoplay.clone();
         spawn(async move {
             loop {
                 futures_timer::Delay::new(std::time::Duration::from_millis(auto_play_interval_ms)).await;
+                if cancel() {
+                    break;
+                }
                 let t = total();
                 if t > 0 {
                     let next = (current_index() + 1) % t;
@@ -82,8 +90,8 @@ pub fn Carousel(props: CarouselProps) -> Element {
     });
 
     let base_class = match props.orientation {
-        CarouselOrientation::Horizontal => "flex flex-row",
-        CarouselOrientation::Vertical => "flex flex-col",
+        CarouselOrientation::Horizontal => "relative overflow-hidden",
+        CarouselOrientation::Vertical => "relative overflow-hidden flex flex-col",
     };
 
     rsx! {
@@ -92,7 +100,7 @@ pub fn Carousel(props: CarouselProps) -> Element {
             "data-orientation": props.orientation.as_str(),
             role: "region",
             "aria-roledescription": "carousel",
-            class: "relative {base_class} {props.class}",
+            class: "{base_class} {props.class}",
             ..props.attributes,
             {props.children}
         }
