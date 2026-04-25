@@ -16,7 +16,7 @@ pub fn Table(props: TableProps) -> Element {
         div { class: "relative w-full overflow-auto",
             table {
                 "data-slot": "table",
-                class: cn("w-full caption-bottom text-sm", &props.class),
+                class: cn("w-full table-fixed caption-bottom text-sm", &props.class),
                 ..props.attributes,
                 {props.children}
             }

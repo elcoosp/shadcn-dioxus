@@ -21,13 +21,13 @@ pub fn NavigationMenuIndicator(props: NavigationMenuIndicatorProps) -> Element {
     let ctx = use_context::<NavigationMenuContext>();
     let open_item = ctx.open_item;
 
-    let is_visible = use_memo(move || open_item().is_some());
+    let is_visible = open_item().is_some();
 
-    if !props.force_mount && !is_visible() {
+    if !props.force_mount && !is_visible {
         return rsx! {};
     }
 
-    let data_state = if is_visible() { "visible" } else { "hidden" };
+    let data_state = if is_visible { "visible" } else { "hidden" };
 
     rsx! {
         div {

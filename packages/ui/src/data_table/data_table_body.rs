@@ -6,20 +6,21 @@ use lucide_dioxus::Check;
 pub fn DataTableBody() -> Element {
     let ctx = use_context::<DataTableContext>();
     let visible_column_ids = ctx.visible_column_ids;
-    let processed_rows = ctx.processed_rows;
     let mut selected_rows = ctx.selected_rows;
     let columns = ctx.columns;
 
-    let rows = processed_rows.read().clone();
+    // Reactively read the memo to know if empty
+    let rows = (ctx.processed_rows)();
+    let is_empty = rows.is_empty();
 
-    if rows.is_empty() {
+    if is_empty {
         return rsx! {
             crate::table::TableBody {
                 crate::table::TableRow {
                     crate::table::TableCell {
                         column_span: (visible_column_ids().len() + 1) as u32,
                         class: "h-24 text-center",
-                        div { class: "text-muted-foreground text-center", "No results." }
+                        div { class: "text-muted-foreground text-center w-full", "No results." }
                     }
                 }
             }

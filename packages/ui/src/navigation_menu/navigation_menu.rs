@@ -53,14 +53,12 @@ pub fn NavigationMenu(props: NavigationMenuProps) -> Element {
     let indicator_ref = use_signal(|| None);
     let id = use_hook(generate_nav_id);
 
-    let set_open_item = use_callback(move |new_val: Option<usize>| {
-        open_item.set(new_val);
-    });
-
     use_context_provider(|| NavigationMenuContext {
         id,
         open_item,
-        set_open_item,
+        set_open_item: Callback::new(move |new_val: Option<usize>| {
+            open_item.set(new_val);
+        }),
         viewport_ref,
         indicator_ref,
         orientation: props.orientation,

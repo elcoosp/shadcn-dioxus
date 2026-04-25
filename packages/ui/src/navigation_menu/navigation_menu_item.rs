@@ -1,3 +1,4 @@
+use crate::navigation_menu::NavigationMenuContext;
 use dioxus::prelude::*;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -25,6 +26,9 @@ pub struct NavigationMenuItemProps {
 
 #[component]
 pub fn NavigationMenuItem(props: NavigationMenuItemProps) -> Element {
+    let ctx = use_context::<NavigationMenuContext>();
+    let set_open_item = ctx.set_open_item;
+
     let id = use_hook(generate_item_id);
     let content_id = use_hook(|| format!("nav-menu-content-{}", id));
     let trigger_id = use_hook(|| format!("nav-menu-trigger-{}", id));
@@ -39,6 +43,7 @@ pub fn NavigationMenuItem(props: NavigationMenuItemProps) -> Element {
         li {
             "data-slot": "navigation-menu-item",
             class: "relative {props.class}",
+            onmouseleave: move |_| set_open_item.call(None),
             ..props.attributes,
             {props.children}
         }

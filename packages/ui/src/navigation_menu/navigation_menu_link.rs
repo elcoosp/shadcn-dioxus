@@ -20,7 +20,11 @@ pub struct NavigationMenuLinkProps {
 
 #[component]
 pub fn NavigationMenuLink(props: NavigationMenuLinkProps) -> Element {
-    let active_class = if props.active { "bg-accent text-accent-foreground" } else { "" };
+    let active_class = if props.active {
+        "bg-accent text-accent-foreground"
+    } else {
+        ""
+    };
     let base_classes = cn(LINK_BASE, active_class);
     let classes = cn(&base_classes, &props.class);
 

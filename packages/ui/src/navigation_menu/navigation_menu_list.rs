@@ -1,6 +1,6 @@
 use crate::cn;
-use dioxus::prelude::*;
 use crate::navigation_menu::NavigationMenuContext;
+use dioxus::prelude::*;
 
 const LIST_BASE: &str = "group flex flex-1 list-none items-center justify-center space-x-1";
 
