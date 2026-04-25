@@ -6,58 +6,123 @@ use lucide_dioxus::{
 use ui::*;
 
 // ---------------------------------------------------------------------------
-// Macro to generate a simple wrapper that calls another function
+// Wrapper functions (Replacing the broken demo_fn! macro)
+// We directly call and return the Element instead of wrapping in rsx!
 // ---------------------------------------------------------------------------
-macro_rules! demo_fn {
-    ($name:ident, $target:ident) => {
-        fn $name() -> Element {
-            rsx! { $target {} }
-        }
-    };
+
+fn AccordionDemo() -> Element {
+    AccordionDefault()
+}
+fn AlertDefaultDemo() -> Element {
+    AlertDemo()
+}
+fn AlertDialogDemo() -> Element {
+    AlertDialogDefault()
+}
+fn CalendarDemo() -> Element {
+    CalendarDefault()
+}
+fn CarouselDemo() -> Element {
+    CarouselDefault()
+}
+fn ChartDemo() -> Element {
+    ChartBarChart()
+}
+fn CollapsibleDemo() -> Element {
+    CollapsibleDefault()
+}
+fn ColorPickerDemo() -> Element {
+    ColorPickerDefault()
+}
+fn ComboboxDemo() -> Element {
+    ComboboxDefault()
+}
+fn CommandDemo() -> Element {
+    CommandDialog()
+}
+fn ContextMenuDemo() -> Element {
+    ContextMenuDefault()
+}
+fn DataTableDemo() -> Element {
+    DataTableBasic()
+}
+fn DataTableSortingAndFilteringDemo() -> Element {
+    DataTableSortingAndFiltering()
+}
+fn DatePickerDemo() -> Element {
+    DatePickerDefault()
+}
+fn DrawerDemo() -> Element {
+    DrawerRight()
+}
+fn DropdownMenuDemo() -> Element {
+    DropdownMenuDefault()
+}
+fn HoverCardDemo() -> Element {
+    HoverCardDefault()
+}
+fn InputOtpDemo() -> Element {
+    InputOtpDefault()
+}
+fn MenubarDemo() -> Element {
+    MenubarDefault()
+}
+fn NavigationMenuDemo() -> Element {
+    NavigationMenuDefault()
+}
+fn PaginationDemo() -> Element {
+    PaginationDefault()
+}
+fn PopoverDemo() -> Element {
+    PopoverDefault()
+}
+fn RadioGroupDemo() -> Element {
+    RadioGroupDefault()
+}
+fn ResizableDemo() -> Element {
+    ResizableHorizontal()
+}
+fn ScrollAreaDemo() -> Element {
+    ScrollAreaHorizontal()
+}
+fn SelectDemo() -> Element {
+    SelectDefault()
+}
+fn SidebarDemo() -> Element {
+    SidebarDefault()
+}
+fn SliderDemo() -> Element {
+    SliderDefault()
+}
+fn SliderWithMinMaxStepsDemo() -> Element {
+    SliderWithMinMaxSteps()
+}
+fn StepperDemo() -> Element {
+    StepperDefault()
+}
+fn TableDemo() -> Element {
+    TableDefault()
+}
+fn TabsDemo() -> Element {
+    TabsDefault()
+}
+fn ToggleGroupDemo() -> Element {
+    ToggleGroupSingle()
+}
+fn TooltipDemo() -> Element {
+    TooltipDefault()
 }
 
-// ---------------------------------------------------------------------------
-// Wrappers for demos that simply call another existing helper
-// ---------------------------------------------------------------------------
-demo_fn!(AccordionDemo, AccordionDefault);
-demo_fn!(AlertDefaultDemo, AlertDemo);
-demo_fn!(AlertDialogDemo, AlertDialogDefault);
-demo_fn!(CalendarDemo, CalendarDefault);
-demo_fn!(CarouselDemo, CarouselDefault);
-demo_fn!(ChartDemo, ChartBarChart);
-demo_fn!(CollapsibleDemo, CollapsibleDefault);
-demo_fn!(ColorPickerDemo, ColorPickerDefault);
-demo_fn!(ComboboxDemo, ComboboxDefault);
-demo_fn!(CommandDemo, CommandDialog);
-demo_fn!(ContextMenuDemo, ContextMenuDefault);
-demo_fn!(DataTableDemo, DataTableBasic);
-demo_fn!(DataTableSortingAndFilteringDemo, DataTableSortingAndFiltering);
-demo_fn!(DatePickerDemo, DatePickerDefault);
-demo_fn!(DrawerDemo, DrawerRight);
-demo_fn!(DropdownMenuDemo, DropdownMenuDefault);
-demo_fn!(HoverCardDemo, HoverCardDefault);
-demo_fn!(InputOtpDemo, InputOtpDefault);
-demo_fn!(MenubarDemo, MenubarDefault);
-demo_fn!(NavigationMenuDemo, NavigationMenuDefault);
-demo_fn!(PaginationDemo, PaginationDefault);
-demo_fn!(PopoverDemo, PopoverDefault);
-demo_fn!(RadioGroupDemo, RadioGroupDefault);
-demo_fn!(ResizableDemo, ResizableHorizontal);
-demo_fn!(ScrollAreaDemo, ScrollAreaHorizontal);
-demo_fn!(SelectDemo, SelectDefault);
-demo_fn!(SidebarDemo, SidebarDefault);
-demo_fn!(SliderDemo, SliderDefault);
-demo_fn!(SliderWithMinMaxStepsDemo, SliderWithMinMaxSteps);
-demo_fn!(StepperDemo, StepperDefault);
-demo_fn!(TableDemo, TableDefault);
-demo_fn!(TabsDemo, TabsDefault);
-demo_fn!(ToggleGroupDemo, ToggleGroupSingle);
-demo_fn!(TooltipDemo, TooltipDefault);
-// Breadcrumb demos (renamed to avoid collision with components)
-demo_fn!(BreadcrumbDefaultDemo, BreadcrumbDefault);
-demo_fn!(BreadcrumbSeparatorDemo, BreadcrumbSeparator);
-demo_fn!(BreadcrumbCollapsibleDemo, BreadcrumbCollapsible);
-// Carousel orientation was already renamed
+// Breadcrumb wrappers (renamed to avoid collision with components)
+fn BreadcrumbDefaultDemo() -> Element {
+    BreadcrumbDefault()
+}
+fn BreadcrumbSeparatorDemo() -> Element {
+    BreadcrumbSeparator()
+}
+fn BreadcrumbCollapsibleDemo() -> Element {
+    BreadcrumbCollapsible()
+}
 
 fn CarouselOrientationDemo() -> Element {
     rsx! {
@@ -84,8 +149,6 @@ fn CarouselOrientationDemo() -> Element {
         }
     }
 }
-
-// Sheet / Drawer / etc. already exist as separate functions; no further wrappers needed
 
 // ---------------------------------------------------------------------------
 // Original full demo implementations (with new names where needed)
@@ -321,22 +384,44 @@ fn CarouselAutoplay() -> Element {
     }
 }
 
-// CarouselOrientationDemo already defined via demo_fn!
-
 fn ChartBarChart() -> Element {
     let bars = vec![
-        ui::ChartBar { label: "A".into(), value: 10.0, color: "var(--primary)".into() },
-        ui::ChartBar { label: "B".into(), value: 7.0, color: "var(--secondary)".into() },
-        ui::ChartBar { label: "C".into(), value: 12.0, color: "var(--destructive)".into() },
+        ui::ChartBar {
+            label: "A".into(),
+            value: 10.0,
+            color: "var(--primary)".into(),
+        },
+        ui::ChartBar {
+            label: "B".into(),
+            value: 7.0,
+            color: "var(--secondary)".into(),
+        },
+        ui::ChartBar {
+            label: "C".into(),
+            value: 12.0,
+            color: "var(--destructive)".into(),
+        },
     ];
     rsx! { ui::Chart { height: 100.0, width: 200.0, bars } }
 }
 
 fn ChartCustomColors() -> Element {
     let bars = vec![
-        ui::ChartBar { label: "X".into(), value: 5.0, color: "#ff6b6b".into() },
-        ui::ChartBar { label: "Y".into(), value: 8.0, color: "#4ecdc4".into() },
-        ui::ChartBar { label: "Z".into(), value: 3.0, color: "#45b7d1".into() },
+        ui::ChartBar {
+            label: "X".into(),
+            value: 5.0,
+            color: "#ff6b6b".into(),
+        },
+        ui::ChartBar {
+            label: "Y".into(),
+            value: 8.0,
+            color: "#4ecdc4".into(),
+        },
+        ui::ChartBar {
+            label: "Z".into(),
+            value: 3.0,
+            color: "#45b7d1".into(),
+        },
     ];
     rsx! { ui::Chart { height: 120.0, width: 240.0, bars } }
 }
@@ -359,23 +444,46 @@ fn CollapsibleAnimated() -> Element {
     }
 }
 
-fn ColorPickerDefault() -> Element { rsx! { ui::ColorPicker {} } }
+fn ColorPickerDefault() -> Element {
+    rsx! { ui::ColorPicker {} }
+}
 
 fn ComboboxDefault() -> Element {
     let options = vec![
-        ui::ComboboxOption { value: "nextjs".into(), label: "Next.js".into() },
-        ui::ComboboxOption { value: "sveltekit".into(), label: "SvelteKit".into() },
-        ui::ComboboxOption { value: "nuxt".into(), label: "Nuxt.js".into() },
-        ui::ComboboxOption { value: "remix".into(), label: "Remix".into() },
+        ui::ComboboxOption {
+            value: "nextjs".into(),
+            label: "Next.js".into(),
+        },
+        ui::ComboboxOption {
+            value: "sveltekit".into(),
+            label: "SvelteKit".into(),
+        },
+        ui::ComboboxOption {
+            value: "nuxt".into(),
+            label: "Nuxt.js".into(),
+        },
+        ui::ComboboxOption {
+            value: "remix".into(),
+            label: "Remix".into(),
+        },
     ];
     rsx! { ui::Combobox { options, placeholder: "Select framework..." } }
 }
 
 fn ComboboxWithGroup() -> Element {
     let options = vec![
-        ui::ComboboxOption { value: "apple".into(), label: "Apple".into() },
-        ui::ComboboxOption { value: "banana".into(), label: "Banana".into() },
-        ui::ComboboxOption { value: "blueberry".into(), label: "Blueberry".into() },
+        ui::ComboboxOption {
+            value: "apple".into(),
+            label: "Apple".into(),
+        },
+        ui::ComboboxOption {
+            value: "banana".into(),
+            label: "Banana".into(),
+        },
+        ui::ComboboxOption {
+            value: "blueberry".into(),
+            label: "Blueberry".into(),
+        },
     ];
     rsx! { ui::Combobox { options, placeholder: "Pick a fruit..." } }
 }
@@ -489,8 +597,12 @@ fn DataTablePagination() -> Element {
     rsx! { ui::DataTable { columns, rows, page_size: 2 } }
 }
 
-fn DatePickerDefault() -> Element { rsx! { DatePicker {} } }
-fn DatePickerWithPresets() -> Element { rsx! { DatePicker {} } }
+fn DatePickerDefault() -> Element {
+    rsx! { DatePicker {} }
+}
+fn DatePickerWithPresets() -> Element {
+    rsx! { DatePicker {} }
+}
 
 fn DrawerRight() -> Element {
     rsx! {
@@ -1003,20 +1115,26 @@ fn ResizableWithHandle() -> Element {
 }
 
 // ---------------------------------------------------------------------------
-// Dispatcher
+// Dispatcher (Deduplicated)
 // ---------------------------------------------------------------------------
 pub fn get_demo(name: &str) -> Option<Element> {
     match name {
         "button-demo" => Some(rsx! { Button { "Button" } }),
         "button-primary" => Some(rsx! { Button { variant: ButtonVariant::Default, "Primary" } }),
-        "button-secondary" => Some(rsx! { Button { variant: ButtonVariant::Secondary, "Secondary" } }),
-        "button-destructive" => Some(rsx! { Button { variant: ButtonVariant::Destructive, "Destructive" } }),
+        "button-secondary" => {
+            Some(rsx! { Button { variant: ButtonVariant::Secondary, "Secondary" } })
+        }
+        "button-destructive" => {
+            Some(rsx! { Button { variant: ButtonVariant::Destructive, "Destructive" } })
+        }
         "button-outline" => Some(rsx! { Button { variant: ButtonVariant::Outline, "Outline" } }),
         "button-ghost" => Some(rsx! { Button { variant: ButtonVariant::Ghost, "Ghost" } }),
         "button-link" => Some(rsx! { Button { variant: ButtonVariant::Link, "Link" } }),
         "badge-demo" => Some(rsx! { Badge { "Badge" } }),
         "badge-secondary" => Some(rsx! { Badge { variant: BadgeVariant::Secondary, "Secondary" } }),
-        "badge-destructive" => Some(rsx! { Badge { variant: BadgeVariant::Destructive, "Destructive" } }),
+        "badge-destructive" => {
+            Some(rsx! { Badge { variant: BadgeVariant::Destructive, "Destructive" } })
+        }
         "badge-outline" => Some(rsx! { Badge { variant: BadgeVariant::Outline, "Outline" } }),
         "card-demo" => Some(rsx! {
             Card { class: "w-[350px]",
@@ -1042,35 +1160,82 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "kbd-group" => Some(rsx! { /* original */ }),
         "kbd-button" => Some(rsx! { /* original */ }),
         "item-demo" => Some(rsx! { /* original */ }),
-        "empty-demo" => Some(rsx! { Empty { EmptyHeader { EmptyTitle { "No results found" } EmptyDescription { "Try adjusting your search or filters." } } } }),
-        "button-group-demo" => Some(rsx! { ButtonGroup::Root { Button { variant: ButtonVariant::Outline, "Left" } Button { variant: ButtonVariant::Outline, "Center" } Button { variant: ButtonVariant::Outline, "Right" } } }),
+        "empty-demo" => Some(
+            rsx! { Empty { EmptyHeader { EmptyTitle { "No results found" } EmptyDescription { "Try adjusting your search or filters." } } } },
+        ),
+        "button-group-demo" => Some(
+            rsx! { ButtonGroup::Root { Button { variant: ButtonVariant::Outline, "Left" } Button { variant: ButtonVariant::Outline, "Center" } Button { variant: ButtonVariant::Outline, "Right" } } },
+        ),
         "checkbox-demo" => Some(rsx! { Checkbox { default_checked: CheckboxState::Checked } }),
-        "checkbox-with-label" => Some(rsx! { div { class: "flex items-center space-x-2", Checkbox { id: "terms" } Label { "for": "terms", "Accept terms and conditions" } } }),
-        "checkbox-disabled" => Some(rsx! { div { class: "flex items-center space-x-2", Checkbox { id: "disabled", disabled: true, default_checked: CheckboxState::Checked } Label { "for": "disabled", "Disabled" } } }),
+        "checkbox-with-label" => Some(
+            rsx! { div { class: "flex items-center space-x-2", Checkbox { id: "terms" } Label { "for": "terms", "Accept terms and conditions" } } },
+        ),
+        "checkbox-disabled" => Some(
+            rsx! { div { class: "flex items-center space-x-2", Checkbox { id: "disabled", disabled: true, default_checked: CheckboxState::Checked } Label { "for": "disabled", "Disabled" } } },
+        ),
         "textarea-demo" => Some(rsx! { Textarea { placeholder: "Type your message here." } }),
-        "textarea-disabled" => Some(rsx! { Textarea { placeholder: "Type your message here.", disabled: true } }),
-        "textarea-with-label" => Some(rsx! { div { class: "grid w-full gap-1.5", Label { "for": "message", "Your message" } Textarea { placeholder: "Type your message here.", id: "message" } } }),
-        "textarea-with-button" => Some(rsx! { div { class: "grid w-full gap-2", Textarea { placeholder: "Type your message here." } Button { "Send message" } } }),
+        "textarea-disabled" => {
+            Some(rsx! { Textarea { placeholder: "Type your message here.", disabled: true } })
+        }
+        "textarea-with-label" => Some(
+            rsx! { div { class: "grid w-full gap-1.5", Label { "for": "message", "Your message" } Textarea { placeholder: "Type your message here.", id: "message" } } },
+        ),
+        "textarea-with-button" => Some(
+            rsx! { div { class: "grid w-full gap-2", Textarea { placeholder: "Type your message here." } Button { "Send message" } } },
+        ),
         "switch-demo" => Some(rsx! { Switch {} }),
-        "switch-disabled" => Some(rsx! { div { class: "flex items-center space-x-2", Switch { id: "disabled", disabled: true } Label { "for": "disabled", "Airplane Mode" } } }),
-        "switch-with-label" => Some(rsx! { div { class: "flex items-center space-x-2", Switch { id: "airplane-mode" } Label { "for": "airplane-mode", "Airplane Mode" } } }),
-        "field-demo" => Some(rsx! { Field { class: "max-w-sm", FieldLabel { "for": "email", "Email" } Input { id: "email", placeholder: "Enter your email" } FieldDescription { "We'll never share your email with anyone." } } }),
-        "field-textarea" => Some(rsx! { Field { class: "max-w-sm", FieldLabel { "for": "bio", "Bio" } Textarea { id: "bio", placeholder: "Tell us about yourself" } FieldDescription { "You can use markdown for formatting." } } }),
-        "field-set-demo" => Some(rsx! { FieldSet { class: "max-w-md", FieldLegend { "Address" } Field { FieldLabel { "for": "street", "Street" } Input { id: "street", placeholder: "123 Main St" } } Field { FieldLabel { "for": "city", "City" } Input { id: "city", placeholder: "New York" } } } }),
-        "field-checkbox" => Some(rsx! { Field { orientation: FieldOrientation::Horizontal, Checkbox { id: "terms" } FieldContent { FieldLabel { "for": "terms", "Accept terms and conditions" } FieldDescription { "You agree to our Terms of Service and Privacy Policy." } } } }),
-        "field-switch" => Some(rsx! { Field { orientation: FieldOrientation::Horizontal, class: "max-w-sm", Switch { id: "mfa" } FieldContent { FieldLabel { "for": "mfa", "Multi-factor Authentication" } FieldDescription { "Add an extra layer of security to your account." } } } }),
+        "switch-disabled" => Some(
+            rsx! { div { class: "flex items-center space-x-2", Switch { id: "disabled", disabled: true } Label { "for": "disabled", "Airplane Mode" } } },
+        ),
+        "switch-with-label" => Some(
+            rsx! { div { class: "flex items-center space-x-2", Switch { id: "airplane-mode" } Label { "for": "airplane-mode", "Airplane Mode" } } },
+        ),
+        "field-demo" => Some(
+            rsx! { Field { class: "max-w-sm", FieldLabel { "for": "email", "Email" } Input { id: "email", placeholder: "Enter your email" } FieldDescription { "We'll never share your email with anyone." } } },
+        ),
+        "field-textarea" => Some(
+            rsx! { Field { class: "max-w-sm", FieldLabel { "for": "bio", "Bio" } Textarea { id: "bio", placeholder: "Tell us about yourself" } FieldDescription { "You can use markdown for formatting." } } },
+        ),
+        "field-set-demo" => Some(
+            rsx! { FieldSet { class: "max-w-md", FieldLegend { "Address" } Field { FieldLabel { "for": "street", "Street" } Input { id: "street", placeholder: "123 Main St" } } Field { FieldLabel { "for": "city", "City" } Input { id: "city", placeholder: "New York" } } } },
+        ),
+        "field-checkbox" => Some(
+            rsx! { Field { orientation: FieldOrientation::Horizontal, Checkbox { id: "terms" } FieldContent { FieldLabel { "for": "terms", "Accept terms and conditions" } FieldDescription { "You agree to our Terms of Service and Privacy Policy." } } } },
+        ),
+        "field-switch" => Some(
+            rsx! { Field { orientation: FieldOrientation::Horizontal, class: "max-w-sm", Switch { id: "mfa" } FieldContent { FieldLabel { "for": "mfa", "Multi-factor Authentication" } FieldDescription { "Add an extra layer of security to your account." } } } },
+        ),
         "toggle-demo" => Some(rsx! { Toggle { aria_label: "Toggle bold", Bold {} } }),
-        "toggle-outline" => Some(rsx! { Toggle { variant: ToggleVariant::Outline, aria_label: "Toggle italic", Italic {} } }),
-        "toggle-with-text" => Some(rsx! { Toggle { aria_label: "Toggle italic", Italic { class: "me-2" } "Italic" } }),
-        "toggle-sm" => Some(rsx! { Toggle { size: ToggleSize::Sm, aria_label: "Toggle bold", Bold {} } }),
-        "toggle-lg" => Some(rsx! { Toggle { size: ToggleSize::Lg, aria_label: "Toggle bold", Bold {} } }),
-        "toggle-disabled" => Some(rsx! { Toggle { disabled: true, aria_label: "Toggle underline", Underline {} } }),
-        "aspect-ratio-demo" => Some(rsx! { div { class: "w-[450px]", AspectRatio { ratio: 16.0 / 9.0, class: "bg-muted", img { src: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80", alt: "Photo by Drew Beamer", class: "h-full w-full rounded-md object-cover" } } } }),
-        "native-select-demo" => Some(rsx! { NativeSelect { NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } NativeSelectOption { value: "blueberry", "Blueberry" } NativeSelectOption { value: "grapes", disabled: true, "Grapes" } NativeSelectOption { value: "pineapple", "Pineapple" } } }),
-        "native-select-optgroup" => Some(rsx! { NativeSelect { NativeSelectOption { value: "", "Select a food" } NativeSelectOptGroup { label: "Fruits", NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } NativeSelectOption { value: "blueberry", "Blueberry" } } NativeSelectOptGroup { label: "Vegetables", NativeSelectOption { value: "carrot", "Carrot" } NativeSelectOption { value: "broccoli", "Broccoli" } NativeSelectOption { value: "spinach", "Spinach" } } } }),
-        "native-select-disabled" => Some(rsx! { NativeSelect { disabled: true, NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } } }),
-        "native-select-invalid" => Some(rsx! { NativeSelect { aria_invalid: "true", NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } } }),
-        // Input group demos preserved as-is (abbreviated)
+        "toggle-outline" => Some(
+            rsx! { Toggle { variant: ToggleVariant::Outline, aria_label: "Toggle italic", Italic {} } },
+        ),
+        "toggle-with-text" => {
+            Some(rsx! { Toggle { aria_label: "Toggle italic", Italic { class: "me-2" } "Italic" } })
+        }
+        "toggle-sm" => {
+            Some(rsx! { Toggle { size: ToggleSize::Sm, aria_label: "Toggle bold", Bold {} } })
+        }
+        "toggle-lg" => {
+            Some(rsx! { Toggle { size: ToggleSize::Lg, aria_label: "Toggle bold", Bold {} } })
+        }
+        "toggle-disabled" => {
+            Some(rsx! { Toggle { disabled: true, aria_label: "Toggle underline", Underline {} } })
+        }
+        "aspect-ratio-demo" => Some(
+            rsx! { div { class: "w-[450px]", AspectRatio { ratio: 16.0 / 9.0, class: "bg-muted", img { src: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80", alt: "Photo by Drew Beamer", class: "h-full w-full rounded-md object-cover" } } } },
+        ),
+        "native-select-demo" => Some(
+            rsx! { NativeSelect { NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } NativeSelectOption { value: "blueberry", "Blueberry" } NativeSelectOption { value: "grapes", disabled: true, "Grapes" } NativeSelectOption { value: "pineapple", "Pineapple" } } },
+        ),
+        "native-select-optgroup" => Some(
+            rsx! { NativeSelect { NativeSelectOption { value: "", "Select a food" } NativeSelectOptGroup { label: "Fruits", NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } NativeSelectOption { value: "blueberry", "Blueberry" } } NativeSelectOptGroup { label: "Vegetables", NativeSelectOption { value: "carrot", "Carrot" } NativeSelectOption { value: "broccoli", "Broccoli" } NativeSelectOption { value: "spinach", "Spinach" } } } },
+        ),
+        "native-select-disabled" => Some(
+            rsx! { NativeSelect { disabled: true, NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } } },
+        ),
+        "native-select-invalid" => Some(
+            rsx! { NativeSelect { aria_invalid: "true", NativeSelectOption { value: "", "Select a fruit" } NativeSelectOption { value: "apple", "Apple" } NativeSelectOption { value: "banana", "Banana" } } },
+        ),
         "input-group-demo" => Some(rsx! { /* ... */ }),
         "input-group-icon" => Some(rsx! { /* ... */ }),
         "input-group-text" => Some(rsx! { /* ... */ }),
@@ -1085,111 +1250,75 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "sheet-demo" => Some(rsx! { /* ... */ }),
         "sheet-side" => Some(rsx! { /* ... */ }),
 
-        // New demos (using wrapper functions or original functions)
-        "alert-demo" => Some(rsx! { AlertDemo {} }),
-        "alert-destructive" => Some(rsx! { AlertDestructive {} }),
-        "alert-with-icon" => Some(rsx! { AlertWithIcon {} }),
-        "alert-dialog-default" => Some(rsx! { AlertDialogDefault {} }),
-        "alert-dialog-with-row" => Some(rsx! { AlertDialogWithRow {} }),
-        "accordion-default" => Some(rsx! { AccordionDefault {} }),
-        "accordion-multiple" => Some(rsx! { AccordionMultiple {} }),
-        "breadcrumb-default" => Some(rsx! { BreadcrumbDefaultDemo {} }),
-        "breadcrumb-separator" => Some(rsx! { BreadcrumbSeparatorDemo {} }),
-        "breadcrumb-collapsible" => Some(rsx! { BreadcrumbCollapsibleDemo {} }),
-        "calendar-default" => Some(rsx! { CalendarDefault {} }),
-        "calendar-with-selected-date" => Some(rsx! { CalendarWithSelectedDate {} }),
-        "carousel-default" => Some(rsx! { CarouselDefault {} }),
-        "carousel-autoplay" => Some(rsx! { CarouselAutoplay {} }),
-        "carousel-orientation" => Some(rsx! { CarouselOrientationDemo {} }),
-        "chart-bar-chart" => Some(rsx! { ChartBarChart {} }),
-        "chart-custom-colors" => Some(rsx! { ChartCustomColors {} }),
-        "collapsible-default" => Some(rsx! { CollapsibleDefault {} }),
-        "collapsible-animated" => Some(rsx! { CollapsibleAnimated {} }),
-        "color-picker-default" => Some(rsx! { ColorPickerDefault {} }),
-        "combobox-default" => Some(rsx! { ComboboxDefault {} }),
-        "combobox-with-group" => Some(rsx! { ComboboxWithGroup {} }),
-        "command-dialog" => Some(rsx! { CommandDialog {} }),
-        "command-combobox" => Some(rsx! { CommandCombobox {} }),
-        "context-menu-default" => Some(rsx! { ContextMenuDefault {} }),
-        "context-menu-with-submenus" => Some(rsx! { ContextMenuWithSubmenus {} }),
-        "data-table-basic" => Some(rsx! { DataTableBasic {} }),
-        "data-table-sorting-&-filtering" => Some(rsx! { DataTableSortingAndFiltering {} }),
-        "data-table-pagination" => Some(rsx! { DataTablePagination {} }),
-        "date-picker-default" => Some(rsx! { DatePickerDefault {} }),
-        "date-picker-with-presets" => Some(rsx! { DatePickerWithPresets {} }),
-        "drawer-right" => Some(rsx! { DrawerRight {} }),
-        "drawer-left" => Some(rsx! { DrawerLeft {} }),
-        "drawer-bottom" => Some(rsx! { DrawerBottom {} }),
-        "dropdown-menu-default" => Some(rsx! { DropdownMenuDefault {} }),
-        "dropdown-menu-with-checkboxes" => Some(rsx! { DropdownMenuWithCheckboxes {} }),
-        "hover-card-default" => Some(rsx! { HoverCardDefault {} }),
-        "input-otp-default" => Some(rsx! { InputOtpDefault {} }),
-        "input-otp-with-separator" => Some(rsx! { InputOtpWithSeparator {} }),
-        "input-otp-controlled" => Some(rsx! { InputOtpControlled {} }),
-        "menubar-default" => Some(rsx! { MenubarDefault {} }),
-        "navigation-menu-default" => Some(rsx! { NavigationMenuDefault {} }),
-        "navigation-menu-horizontal" => Some(rsx! { NavigationMenuHorizontal {} }),
-        "pagination-default" => Some(rsx! { PaginationDefault {} }),
-        "popover-default" => Some(rsx! { PopoverDefault {} }),
-        "radio-group-default" => Some(rsx! { RadioGroupDefault {} }),
-        "resizable-horizontal" => Some(rsx! { ResizableHorizontal {} }),
-        "resizable-vertical" => Some(rsx! { ResizableVertical {} }),
-        "resizable-with-handle" => Some(rsx! { ResizableWithHandle {} }),
-        "scroll-area-horizontal" => Some(rsx! { ScrollAreaHorizontal {} }),
-        "scroll-area-vertical" => Some(rsx! { ScrollAreaVertical {} }),
-        "select-default" => Some(rsx! { SelectDefault {} }),
-        "select-with-label" => Some(rsx! { SelectWithLabel {} }),
-        "select-disabled" => Some(rsx! { SelectDisabled {} }),
-        "sidebar-default" => Some(rsx! { SidebarDefault {} }),
-        "sidebar-collapsible" => Some(rsx! { SidebarCollapsible {} }),
-        "slider-default" => Some(rsx! { SliderDefault {} }),
-        "slider-with-min-max-steps" => Some(rsx! { SliderWithMinMaxStepsDemo {} }),
-        "stepper-default" => Some(rsx! { StepperDefault {} }),
-        "stepper-vertical" => Some(rsx! { StepperVertical {} }),
-        "table-default" => Some(rsx! { TableDefault {} }),
-        "table-with-sorting" => Some(rsx! { TableWithSorting {} }),
-        "tabs-default" => Some(rsx! { TabsDefault {} }),
-        "toggle-group-single" => Some(rsx! { ToggleGroupSingle {} }),
-        "toggle-group-multiple" => Some(rsx! { ToggleGroupMultiple {} }),
-        "toggle-group-outline" => Some(rsx! { ToggleGroupOutline {} }),
-        "tooltip-default" => Some(rsx! { TooltipDefault {} }),
-        "tooltip-with-arrow" => Some(rsx! { TooltipWithArrow {} }),
-
-        // The missing kebab-case demos generated by wrapper functions
-        "accordion-demo" => Some(rsx! { AccordionDemo {} }),
-        "alert-default" => Some(rsx! { AlertDefaultDemo {} }),
-        "alert-dialog-demo" => Some(rsx! { AlertDialogDemo {} }),
-        "calendar-demo" => Some(rsx! { CalendarDemo {} }),
-        "carousel-demo" => Some(rsx! { CarouselDemo {} }),
-        "chart-demo" => Some(rsx! { ChartDemo {} }),
-        "collapsible-demo" => Some(rsx! { CollapsibleDemo {} }),
-        "color-picker-demo" => Some(rsx! { ColorPickerDemo {} }),
-        "combobox-demo" => Some(rsx! { ComboboxDemo {} }),
-        "command-demo" => Some(rsx! { CommandDemo {} }),
-        "context-menu-demo" => Some(rsx! { ContextMenuDemo {} }),
-        "data-table-demo" => Some(rsx! { DataTableDemo {} }),
-        "data-table-sorting-&-filtering" => Some(rsx! { DataTableSortingAndFilteringDemo {} }),
-        "date-picker-demo" => Some(rsx! { DatePickerDemo {} }),
-        "drawer-demo" => Some(rsx! { DrawerDemo {} }),
-        "dropdown-menu-demo" => Some(rsx! { DropdownMenuDemo {} }),
-        "hover-card-demo" => Some(rsx! { HoverCardDemo {} }),
-        "input-otp-demo" => Some(rsx! { InputOtpDemo {} }),
-        "menubar-demo" => Some(rsx! { MenubarDemo {} }),
-        "navigation-menu-demo" => Some(rsx! { NavigationMenuDemo {} }),
-        "pagination-demo" => Some(rsx! { PaginationDemo {} }),
-        "popover-demo" => Some(rsx! { PopoverDemo {} }),
-        "radio-group-demo" => Some(rsx! { RadioGroupDemo {} }),
-        "resizable-demo" => Some(rsx! { ResizableDemo {} }),
-        "scroll-area-demo" => Some(rsx! { ScrollAreaDemo {} }),
-        "select-demo" => Some(rsx! { SelectDemo {} }),
-        "sidebar-demo" => Some(rsx! { SidebarDemo {} }),
-        "slider-demo" => Some(rsx! { SliderDemo {} }),
-        "slider-with-min/max-steps" => Some(rsx! { SliderWithMinMaxStepsDemo {} }),
-        "stepper-demo" => Some(rsx! { StepperDemo {} }),
-        "table-demo" => Some(rsx! { TableDemo {} }),
-        "tabs-demo" => Some(rsx! { TabsDemo {} }),
-        "toggle-group-demo" => Some(rsx! { ToggleGroupDemo {} }),
-        "tooltip-demo" => Some(rsx! { TooltipDemo {} }),
+        // New Demo mappings resolved directly to avoid infinite component loops
+        "alert-demo" | "alert-default" => Some(AlertDemo()),
+        "alert-destructive" => Some(AlertDestructive()),
+        "alert-with-icon" => Some(AlertWithIcon()),
+        "alert-dialog-demo" | "alert-dialog-default" => Some(AlertDialogDefault()),
+        "alert-dialog-with-row" => Some(AlertDialogWithRow()),
+        "accordion-demo" | "accordion-default" => Some(AccordionDefault()),
+        "accordion-multiple" => Some(AccordionMultiple()),
+        "breadcrumb-demo" | "breadcrumb-default" => Some(BreadcrumbDefault()),
+        "breadcrumb-separator" => Some(BreadcrumbSeparator()),
+        "breadcrumb-collapsible" => Some(BreadcrumbCollapsible()),
+        "calendar-demo" | "calendar-default" => Some(CalendarDefault()),
+        "calendar-with-selected-date" => Some(CalendarWithSelectedDate()),
+        "carousel-demo" | "carousel-default" => Some(CarouselDefault()),
+        "carousel-autoplay" => Some(CarouselAutoplay()),
+        "carousel-orientation" => Some(CarouselOrientationDemo()),
+        "chart-demo" | "chart-bar-chart" => Some(ChartBarChart()),
+        "chart-custom-colors" => Some(ChartCustomColors()),
+        "collapsible-demo" | "collapsible-default" => Some(CollapsibleDefault()),
+        "collapsible-animated" => Some(CollapsibleAnimated()),
+        "color-picker-demo" | "color-picker-default" => Some(ColorPickerDefault()),
+        "combobox-demo" | "combobox-default" => Some(ComboboxDefault()),
+        "combobox-with-group" => Some(ComboboxWithGroup()),
+        "command-demo" | "command-dialog" => Some(CommandDialog()),
+        "command-combobox" => Some(CommandCombobox()),
+        "context-menu-demo" | "context-menu-default" => Some(ContextMenuDefault()),
+        "context-menu-with-submenus" => Some(ContextMenuWithSubmenus()),
+        "data-table-demo" | "data-table-basic" => Some(DataTableBasic()),
+        "data-table-sorting-&-filtering" => Some(DataTableSortingAndFiltering()),
+        "data-table-pagination" => Some(DataTablePagination()),
+        "date-picker-demo" | "date-picker-default" => Some(DatePickerDefault()),
+        "date-picker-with-presets" => Some(DatePickerWithPresets()),
+        "drawer-demo" | "drawer-right" => Some(DrawerRight()),
+        "drawer-left" => Some(DrawerLeft()),
+        "drawer-bottom" => Some(DrawerBottom()),
+        "dropdown-menu-demo" | "dropdown-menu-default" => Some(DropdownMenuDefault()),
+        "dropdown-menu-with-checkboxes" => Some(DropdownMenuWithCheckboxes()),
+        "hover-card-demo" | "hover-card-default" => Some(HoverCardDefault()),
+        "input-otp-demo" | "input-otp-default" => Some(InputOtpDefault()),
+        "input-otp-with-separator" => Some(InputOtpWithSeparator()),
+        "input-otp-controlled" => Some(InputOtpControlled()),
+        "menubar-demo" | "menubar-default" => Some(MenubarDefault()),
+        "navigation-menu-demo" | "navigation-menu-default" => Some(NavigationMenuDefault()),
+        "navigation-menu-horizontal" => Some(NavigationMenuHorizontal()),
+        "pagination-demo" | "pagination-default" => Some(PaginationDefault()),
+        "popover-demo" | "popover-default" => Some(PopoverDefault()),
+        "radio-group-demo" | "radio-group-default" => Some(RadioGroupDefault()),
+        "resizable-demo" | "resizable-horizontal" => Some(ResizableHorizontal()),
+        "resizable-vertical" => Some(ResizableVertical()),
+        "resizable-with-handle" => Some(ResizableWithHandle()),
+        "scroll-area-demo" | "scroll-area-horizontal" => Some(ScrollAreaHorizontal()),
+        "scroll-area-vertical" => Some(ScrollAreaVertical()),
+        "select-demo" | "select-default" => Some(SelectDefault()),
+        "select-with-label" => Some(SelectWithLabel()),
+        "select-disabled" => Some(SelectDisabled()),
+        "sidebar-demo" | "sidebar-default" => Some(SidebarDefault()),
+        "sidebar-collapsible" => Some(SidebarCollapsible()),
+        "slider-demo" | "slider-default" => Some(SliderDefault()),
+        "slider-with-min-max-steps" | "slider-with-min/max-steps" => Some(SliderWithMinMaxSteps()),
+        "stepper-demo" | "stepper-default" => Some(StepperDefault()),
+        "stepper-vertical" => Some(StepperVertical()),
+        "table-demo" | "table-default" => Some(TableDefault()),
+        "table-with-sorting" => Some(TableWithSorting()),
+        "tabs-demo" | "tabs-default" => Some(TabsDefault()),
+        "toggle-group-demo" | "toggle-group-single" => Some(ToggleGroupSingle()),
+        "toggle-group-multiple" => Some(ToggleGroupMultiple()),
+        "toggle-group-outline" => Some(ToggleGroupOutline()),
+        "tooltip-demo" | "tooltip-default" => Some(TooltipDefault()),
+        "tooltip-with-arrow" => Some(TooltipWithArrow()),
 
         _ => None,
     }
