@@ -78,6 +78,9 @@ fn App() -> Element {
 }
 #[component]
 fn WebNavbar() -> Element {
+    let route = use_route::<Route>();
+    let route_key = format!("navbar-{:?}", route);
+
     rsx! {
         div { class: "min-h-svh flex flex-col",
             components::Navbar {
@@ -97,7 +100,9 @@ fn WebNavbar() -> Element {
                     "Showcase"
                 }
             }
-            div { class: "grow", Outlet::<Route> {} }
+            div { class: "grow",
+                Outlet::<Route> { key: "{route_key}" }
+            }
         }
     }
 }
