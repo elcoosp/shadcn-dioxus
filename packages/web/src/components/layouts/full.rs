@@ -1,15 +1,16 @@
 use crate::components::Hero;
-use crate::Route;
 use dioxus::prelude::*;
 use ui::{Button, ButtonVariant};
 
-#[component]
-pub fn FullLayout() -> Element {
-    let route = use_route::<Route>();
-    let route_key = format!("full-{:?}", route);
+#[derive(Props, Clone, PartialEq)]
+pub struct FullLayoutProps {
+    children: Element,
+}
 
+#[component]
+pub fn FullLayout(props: FullLayoutProps) -> Element {
     rsx! {
-        Hero {},
+        Hero {}
         div {
             class: "container-wrapper scroll-mt-24",
             id: "examples",
@@ -50,7 +51,7 @@ pub fn FullLayout() -> Element {
                     }
                 }
             }
-        },
-        Outlet::<Route> { key: "{route_key}" }
+        }
+        {props.children}
     }
 }

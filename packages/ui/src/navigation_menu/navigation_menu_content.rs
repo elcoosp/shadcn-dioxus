@@ -23,25 +23,24 @@ pub fn NavigationMenuContent(props: NavigationMenuContentProps) -> Element {
     let item_ctx = use_context::<NavigationMenuItemContext>();
     let open_item = ctx.open_item;
 
-    // Read signal directly to ensure bulletproof reactivity
-    let is_open = open_item() == Some(item_ctx.id);
-
-    if !props.force_mount && !is_open {
-        return rsx! {};
-    }
+    // Wrap in a closure so the signal is read INSIDE the rsx! macro
+    let is_open = move || open_item() == Some(item_ctx.id);
 
     rsx! {
-        div {
-            "data-slot": "navigation-menu-content",
-            "data-state": "open",
-            id: "{item_ctx.content_id}",
-            "aria-labelledby": "{item_ctx.trigger_id}",
-            role: "menu",
-            class: cn(CONTENT_BASE, &props.class),
-            ..props.attributes,
+        // Conditional rendering MUST be inside rsx! for Dioxus to track the dependency
+        if props.force_mount || is_open() {
             div {
-                class: INNER_BASE,
-                {props.children}
+                "data-slot": "navigation-menu-content",
+                "data-state": "open",
+                id: "{item_ctx.content_id}",
+                "aria-labelledby": "{item_ctx.trigger_id}",
+                role: "menu",
+                class: cn(CONTENT_BASE, &props.class),
+                ..props.attributes,
+                div {
+                    class: INNER_BASE,
+                    {props.children}
+                }
             }
         }
     }
