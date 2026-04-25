@@ -21,7 +21,7 @@ pub fn CalendarDay(props: CalendarDayProps) -> Element {
     });
 
     let classes = cn(
-        "inline-flex h-8 w-8 items-center justify-center rounded-md text-sm",
+        "inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium",
         if is_selected() { "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground" } else { "hover:bg-accent hover:text-accent-foreground" },
     );
 

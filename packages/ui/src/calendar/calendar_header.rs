@@ -41,7 +41,7 @@ pub fn CalendarHeader() -> Element {
         div {
             class: "flex items-center justify-between pt-1 relative",
             div { class: "space-y-1",
-                h2 { class: "text-sm font-medium", "{month_name} {year}()" }
+                h2 { class: "text-sm font-medium", "{month_name} {year}" }
             }
             div { class: "flex items-center space-x-1",
                 button {
