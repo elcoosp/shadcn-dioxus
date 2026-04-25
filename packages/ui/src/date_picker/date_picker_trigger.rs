@@ -70,7 +70,7 @@ pub fn DatePickerTrigger(props: DatePickerTriggerProps) -> Element {
                 class: if is_placeholder { "text-muted-foreground" } else { "" },
                 "{display_text}"
             }
-            CalendarIcon { class: "ml-auto h-4 w-4 opacity-50" }
+            CalendarIcon { class: "ml-2 h-4 w-4 opacity-50" }
         }
     }
 }
