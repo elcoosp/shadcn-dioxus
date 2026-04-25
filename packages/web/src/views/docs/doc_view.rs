@@ -13,7 +13,6 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
         Some(parsed) => {
             rsx! {
                 div { class: "flex flex-col gap-6 sm:gap-8",
-                    // Header section - prevent premature wrapping
                     div { class: "flex flex-col gap-2",
                         div { class: "flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2",
                             h1 { class: "scroll-m-20 text-3xl sm:text-4xl font-semibold tracking-tight lg:text-4xl break-words",
@@ -25,6 +24,35 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
                         }
                         div {
                             class: "doc-content mt-8 sm:mt-12 space-y-4 [&>*>pre]:p-3 sm:[&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
+                            onmounted: move |_| {
+                                document::eval(
+                                    r#"
+                                    (function() {
+                                        var preElements = document.querySelectorAll('.doc-content pre');
+                                        preElements.forEach(function(pre) {
+                                            if (pre.querySelector('.copy-btn')) return;
+                                            var btn = document.createElement('button');
+                                            btn.className = 'copy-btn';
+                                            btn.textContent = 'Copy';
+                                            btn.addEventListener('click', function() {
+                                                var code = pre.querySelector('code') || pre;
+                                                var text = code.textContent || code.innerText || '';
+                                                navigator.clipboard.writeText(text).then(function() {
+                                                    btn.textContent = 'Copied!';
+                                                    setTimeout(function() {
+                                                        btn.textContent = 'Copy';
+                                                    }, 2000);
+                                                }).catch(function() {
+                                                    btn.textContent = 'Error';
+                                                });
+                                            });
+                                            pre.style.position = 'relative';
+                                            pre.appendChild(btn);
+                                        });
+                                    })();
+                                    "#
+                                );
+                            },
                             Markdown {
                                 src: parsed.content.clone(),
                                 components: custom_components,
