@@ -1,54 +1,42 @@
 ---
 title: Breadcrumb
-description: Displays the path to the current page using a horizontal trail of links, providing spatial context in navigation.
+description: Displays the path to the current resource using a hierarchy of links.
 component: true
 ---
 
+<ComponentPreview name="breadcrumb-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator};
 
-<BreadcrumbList>
-    <BreadcrumbItem>
-        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-        <BreadcrumbLink href="/docs">Documentation</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-        <BreadcrumbPage>Components</BreadcrumbPage>
-    </BreadcrumbItem>
-</BreadcrumbList>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Breadcrumb {
+        BreadcrumbList {
+            BreadcrumbItem { BreadcrumbLink { href: "/", "Home" } }
+            BreadcrumbSeparator {}
+            BreadcrumbItem { BreadcrumbPage { "Components" } }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator};
+### Default
 
-<BreadcrumbList>
-    <BreadcrumbItem>
-        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-        <BreadcrumbLink href="/docs">Documentation</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-        <BreadcrumbPage>Components</BreadcrumbPage>
-    </BreadcrumbItem>
-</BreadcrumbList>
+<ComponentPreview name="breadcrumb-default"/>
 
-```
+### Separator
+
+Customize the separator between items.
+
+<ComponentPreview name="breadcrumb-separator"/>
+
+### Collapsible
+
+Collapse breadcrumb items when they overflow.
+
+<ComponentPreview name="breadcrumb-collapsible"/>
+

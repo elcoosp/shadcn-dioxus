@@ -1,42 +1,28 @@
 ---
 title: Radio Group
-description: A group of radio buttons where only one can be selected at a time. Provides accessible labels for each option.
+description: A set of checkable buttons where only one can be selected at a time.
 component: true
 ---
 
+<ComponentPreview name="radio-group-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{RadioGroup, RadioGroupItem, RadioGroupLabel};
 
-<RadioGroup name="plan" default_value={Some("free".to_string())}>
-    <RadioGroupItem value="free">Free</RadioGroupItem>
-    <RadioGroupItem value="pro">Pro</RadioGroupItem>
-    <RadioGroupLabel>"Choose your plan:"</RadioGroupLabel>
-</RadioGroup>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| default_value | Option<String> | None | Pre-selected value. |
-| name | String | radiogroup | Accessible group name. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    RadioGroup {
+        RadioGroupItem { value: "default", "Default" }
+        RadioGroupItem { value: "comfortable", "Comfortable" }
+        RadioGroupItem { value: "compact", "Compact" }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{RadioGroup, RadioGroupItem, RadioGroupLabel};
+### Default
 
-<RadioGroup name="plan" default_value={Some("free".to_string())}>
-    <RadioGroupItem value="free">Free</RadioGroupItem>
-    <RadioGroupItem value="pro">Pro</RadioGroupItem>
-    <RadioGroupLabel>"Choose your plan:"</RadioGroupLabel>
-</RadioGroup>
+<ComponentPreview name="radio-group-default"/>
 
-```

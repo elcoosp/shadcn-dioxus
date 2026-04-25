@@ -1,48 +1,34 @@
 ---
 title: Popover
-description: A floating panel anchored to a trigger element. Supports four sides and optional force-mount rendering.
+description: A floating panel anchored to a target element, activated by click.
 component: true
 ---
 
+<ComponentPreview name="popover-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{Popover, PopoverTrigger, PopoverContent};
 
-<Popover>
-    <PopoverTrigger>Hover me</PopoverTrigger>
-    <PopoverContent side="top">
-        <div class="p-4 border rounded-md bg-background shadow-md">
-            <p>This popover appears above the trigger.</p>
-        </div>
-    </PopoverContent>
-</Popover>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| side | String | "bottom" | Position relative to the trigger. |
-| force_mount | bool | false | Render even when hidden. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Popover {
+        PopoverTrigger { rsx! { button { "Open" } } }
+        PopoverContent {
+            div { class: "grid gap-4",
+                div { class: "space-y-2",
+                    h4 { class: "font-medium", "Dimensions" }
+                    p { class: "text-sm text-muted-foreground", "Set the dimensions for the layer." }
+                }
+            }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Popover, PopoverTrigger, PopoverContent};
+### Default
 
-<Popover>
-    <PopoverTrigger>Hover me</PopoverTrigger>
-    <PopoverContent side="top">
-        <div class="p-4 border rounded-md bg-background shadow-md">
-            <p>This popover appears above the trigger.</p>
-        </div>
-    </PopoverContent>
-</Popover>
+<ComponentPreview name="popover-default"/>
 
-```

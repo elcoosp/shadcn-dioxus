@@ -1,46 +1,36 @@
 ---
 title: Scroll Area
-description: A scrollable container with styled scrollbars for content that overflows.
+description: Enhances native scrollbars with custom styling for overflowing content.
 component: true
 ---
 
+<ComponentPreview name="scroll-area-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::ScrollArea;
 
-<ScrollArea class="h-48 w-64 overflow-y-auto rounded-md border">
-    <div class="p-4">
-        <p>Scroll down for more content...</p>
-        <p>More content...</p>
-        <p>Even more content...</p>
-    </div>
-</ScrollArea>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| scrollbar_width | String | "5px" | Scrollbar width. |
-| scrollbar_height | String | "5px" | Scrollbar height. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    ScrollArea {
+        div { class: "h-[200px] w-[350px] rounded-md border p-4",
+            (0..50).map(|i| rsx! { p { "Item {i}" } })
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::ScrollArea;
+### Horizontal
 
-<ScrollArea class="h-48 w-64 overflow-y-auto rounded-md border">
-    <div class="p-4">
-        <p>Scroll down for more content...</p>
-        <p>More content...</p>
-        <p>Even more content...</p>
-    </div>
-</ScrollArea>
+Enable horizontal scrolling.
 
-```
+<ComponentPreview name="scroll-area-horizontal"/>
+
+### Vertical
+
+Standard vertical scrolling with styled scrollbars.
+
+<ComponentPreview name="scroll-area-vertical"/>
+

@@ -1,55 +1,30 @@
 ---
 title: Combobox
-description: A searchable dropdown that filters options as the user types. Displays matching items in a list below the input.
+description: A combination of a text input and a dropdown list for filtering options.
 component: true
 ---
 
+<ComponentPreview name="combobox-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::Combobox;
-use ui::combobox::ComboboxOption;
 
-fn Example() -> Element {
-    let options = vec![
-        ComboboxOption { value: "apple".into(), label: "Apple".into() },
-        ComboboxOption { value: "banana".into(), label: "Banana".into() },
-        ComboboxOption { value: "cherry".into(), label: "Cherry".into() },
-    ];
-    rsx! {
-        ComboBox options={options} placeholder="Select a fruit..." />
-    }
+rsx! {
+    Combobox { placeholder: "Select a framework...".to_string() }
 }
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| options | Vec<ComboboxOption> |  | The list of selectable options. |
-| placeholder | String | Select an option... | Placeholder text shown when the input is empty. |
-| disabled | bool | false | Disable the combobox. |
-| class | String |  | Additional CSS classes to apply to the root element. |
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::Combobox;
-use ui::combobox::ComboboxOption;
+### Default
 
-fn Example() -> Element {
-    let options = vec![
-        ComboboxOption { value: "apple".into(), label: "Apple".into() },
-        ComboboxOption { value: "banana".into(), label: "Banana".into() },
-        ComboboxOption { value: "cherry".into(), label: "Cherry".into() },
-    ];
-    rsx! {
-        ComboBox options={options} placeholder="Select a fruit..." />
-    }
-}
+<ComponentPreview name="combobox-default"/>
 
-```
+### With Group
+
+Group related options together in the dropdown list.
+
+<ComponentPreview name="combobox-with-group"/>
+

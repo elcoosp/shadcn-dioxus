@@ -220,6 +220,9 @@
   .pointer-events-none {
     pointer-events: none;
   }
+  .collapse {
+    visibility: collapse;
+  }
   .visible {
     visibility: visible;
   }
@@ -660,6 +663,9 @@
   }
   .h-\[20px\] {
     height: 20px;
+  }
+  .h-\[200px\] {
+    height: 200px;
   }
   .h-\[calc\(100\%-1px\)\] {
     height: calc(100% - 1px);

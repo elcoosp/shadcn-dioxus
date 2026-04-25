@@ -1,54 +1,37 @@
 ---
 title: Context Menu
-description: A menu that appears near the cursor on right-click. Supports items, separators, and dismissal via Escape or outside click.
+description: A floating menu that appears on right-click, providing contextual actions.
 component: true
 ---
 
+<ComponentPreview name="context-menu-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator};
+```rust
+use ui::{ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem};
 
-<ContextMenu>
-    <ContextMenuTrigger>
-        <div class="p-4 border rounded-md bg-background shadow-md">Right-click me</div>
-    </ContextMenuTrigger>
-    <ContextMenuContent>
-        <ContextMenuItem onclick={|| tracing.info("Copy")} >Copy</ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem onclick={|| tracing.info("Paste")} >Paste</ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem onclick={|| tracing.info("Delete")} >Delete</ContextMenuItem>
-    </ContextMenuContent>
-</ContextMenu>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    ContextMenu {
+        ContextMenuTrigger { rsx! { div { class: "p-4 border", "Right Click Me" } } }
+        ContextMenuContent {
+            ContextMenuItem { "Back" }
+            ContextMenuItem { "Forward" }
+            ContextMenuItem { "Reload" }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator};
+### Default
 
-<ContextMenu>
-    <ContextMenuTrigger>
-        <div class="p-4 border rounded-md bg-background shadow-md">Right-click me</div>
-    </ContextMenuTrigger>
-    <ContextMenuContent>
-        <ContextMenuItem onclick={|| tracing.info("Copy")} >Copy</ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem onclick={|| tracing.info("Paste")} >Paste</ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem onclick={|| tracing.info("Delete")} >Delete</ContextMenuItem>
-    </ContextMenuContent>
-</ContextMenu>
+<ComponentPreview name="context-menu-default"/>
 
-```
+### With Submenus
+
+Nest context menus to create hierarchical actions.
+
+<ComponentPreview name="context-menu-with-submenus"/>
+

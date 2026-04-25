@@ -1,35 +1,36 @@
 ---
 title: Input OTP
-description: A one-time password input that automatically advances focus to the next slot. Commonly used for verification codes.
+description: A specialized input for One-Time Passwords, separating characters into distinct slots.
 component: true
 ---
 
+<ComponentPreview name="input-otp-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::InputOtp;
 
-<InputOtp max_length={6} placeholder="Enter OTP" />
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| max_length | usize | 6 | Maximum number of characters. |
-| value | String |  | Current OTP string. |
-| on_change | Option<Callback<String>> | None | Callback when the OTP changes. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    InputOtp { length: 6 }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::InputOtp;
+### Default
 
-<InputOtp max_length={6} placeholder="Enter OTP" />
+<ComponentPreview name="input-otp-default"/>
 
-```
+### With Separator
+
+Add a visual separator between groups of characters.
+
+<ComponentPreview name="input-otp-with-separator"/>
+
+### Controlled
+
+Manage the OTP state programmatically.
+
+<ComponentPreview name="input-otp-controlled"/>
+

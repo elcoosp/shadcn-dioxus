@@ -1,42 +1,39 @@
 ---
 title: Alert
-description: Displays a callout for important messages to the user. Built with composable sub-components for title, description, and actions.
+description: Displays a callout for important messages to the user.
 component: true
 ---
 
+<ComponentPreview name="alert-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{Alert, AlertTitle, AlertDescription};
 
-<Alert>
-    <AlertTitle>Heads up!</AlertTitle>
-    <AlertDescription>
-        Your session will expire in 5 minutes.
-    </AlertDescription>
-</Alert>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Alert {
+        AlertTitle { "Heads up!" }
+        AlertDescription { "You can add components to your app using the cli." }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Alert, AlertTitle, AlertDescription};
+### Default
 
-<Alert>
-    <AlertTitle>Heads up!</AlertTitle>
-    <AlertDescription>
-        Your session will expire in 5 minutes.
-    </AlertDescription>
-</Alert>
+<ComponentPreview name="alert-default"/>
 
-```
+### Destructive
+
+Alerts with a destructive variant for dangerous actions.
+
+<ComponentPreview name="alert-destructive"/>
+
+### With Icon
+
+Include an icon alongside your alert text.
+
+<ComponentPreview name="alert-with-icon"/>
+

@@ -1,62 +1,42 @@
 ---
 title: Alert Dialog
-description: A modal dialog that interrupts the user with an important message and requires explicit acknowledgement. It blocks interaction with the rest of the page until resolved.
+description: A modal dialog that interrupts the user with important content and expects a response.
 component: true
 ---
 
+<ComponentPreview name="alert-dialog-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel};
 
-<AlertDialog>
-    <AlertDialogTrigger>Open</AlertDialogTrigger>
-    <AlertDialogContent>
-        <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account
-                and remove your data from our servers.
-            </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-    </AlertDialogContent>
-</AlertDialog>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| - | - | - | No props for this component. |
+rsx! {
+    AlertDialog {
+        AlertDialogTrigger { rsx! { button { "Open" } } }
+        AlertDialogContent {
+            AlertDialogHeader {
+                AlertDialogTitle { "Are you sure?" }
+                AlertDialogDescription { "This action cannot be undone." }
+            }
+            AlertDialogFooter {
+                AlertDialogCancel { "Cancel" }
+                AlertDialogAction { "Continue" }
+            }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel};
+### Basic
 
-<AlertDialog>
-    <AlertDialogTrigger>Open</AlertDialogTrigger>
-    <AlertDialogContent>
-        <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account
-                and remove your data from our servers.
-            </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-    </AlertDialogContent>
-</AlertDialog>
+<ComponentPreview name="alert-dialog-basic"/>
 
-```
+### With Row
+
+Place actions in a row inside the footer.
+
+<ComponentPreview name="alert-dialog-with-row"/>
+

@@ -1,47 +1,30 @@
 ---
 title: Pagination
-description: Navigation controls for browsing through pages of data. Includes previous/next buttons and a page indicator.
+description: Navigation controls for splitting content across multiple pages.
 component: true
 ---
 
+<ComponentPreview name="pagination-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext};
+```rust
+use ui::{Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext, PaginationLink};
 
-<Pagination page={1} total_pages={5}>
-    <PaginationContent>
-        <PaginationPrevious />
-        <PaginationItem>{1}</PaginationItem>
-        <PaginationNext />
-    </PaginationContent>
-</Pagination>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| page | usize | 1 | Current page number. |
-| total_pages | usize | 5 | Total number of pages. |
-| on_change | Option<Callback<usize>> | None | Callback when the page changes. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Pagination {
+        PaginationContent {
+            PaginationPrevious {}
+            PaginationItem { PaginationLink { href: "#", "1" } }
+            PaginationNext {}
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext};
+### Default
 
-<Pagination page={1} total_pages={5}>
-    <PaginationContent>
-        <PaginationPrevious />
-        <PaginationItem>{1}</PaginationItem>
-        <PaginationNext />
-    </PaginationContent>
-</Pagination>
+<ComponentPreview name="pagination-default"/>
 
-```

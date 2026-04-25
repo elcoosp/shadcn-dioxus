@@ -1,34 +1,24 @@
 ---
 title: Color Picker
-description: An HSL-based color picker with hue, saturation, and lightness range sliders and a live preview swatch.
+description: A component that allows users to select a color from a visual picker.
 component: true
 ---
 
+<ComponentPreview name="color-picker-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::ColorPicker;
 
-<ColorPicker />
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| default_hue | String | 0.0 | Initial hue value (0-360). |
-| disabled | bool | false | Disable all controls. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    ColorPicker {}
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::ColorPicker;
+### Default
 
-<ColorPicker />
+<ComponentPreview name="color-picker-default"/>
 
-```

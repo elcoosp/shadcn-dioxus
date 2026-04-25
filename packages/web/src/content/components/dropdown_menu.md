@@ -1,52 +1,38 @@
 ---
 title: Dropdown Menu
-description: A dropdown that appears below a trigger button. Supports labels, separators, and shortcut labels.
+description: Displays a menu triggered by a button, offering a list of actions.
 component: true
 ---
 
+<ComponentPreview name="dropdown-menu-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut};
+```rust
+use ui::{DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator};
 
-<DropdownMenu>
-    <DropdownMenuTrigger>
-        <button>Open Menu</button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem onclick={|| tracing.info("Edit")}>Edit</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onclick={|| tracing.info("Delete")}>Delete</DropdownMenuItem>
-    </DropdownMenuContent>
-</DropdownMenu>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    DropdownMenu {
+        DropdownMenuTrigger { rsx! { button { "Open" } } }
+        DropdownMenuContent {
+            DropdownMenuLabel { "Actions" }
+            DropdownMenuItem { "Edit" }
+            DropdownMenuSeparator {}
+            DropdownMenuItem { "Delete" }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut};
+### Default
 
-<DropdownMenu>
-    <DropdownMenuTrigger>
-        <button>Open Menu</button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem onclick={|| tracing.info("Edit")}>Edit</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onclick={|| tracing.info("Delete")}>Delete</DropdownMenuItem>
-    </DropdownMenuContent>
-</DropdownMenu>
+<ComponentPreview name="dropdown-menu-default"/>
 
-```
+### With Checkboxes
+
+Allow multiple items to be checked within the menu.
+
+<ComponentPreview name="dropdown-menu-with-checkboxes"/>
+

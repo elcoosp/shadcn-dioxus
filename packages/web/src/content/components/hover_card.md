@@ -1,49 +1,31 @@
 ---
 title: Hover Card
-description: A floating card with rich content that appears when hovering over a trigger element.
+description: A floating card anchored to a trigger element, revealed on hover.
 component: true
 ---
 
+<ComponentPreview name="hover-card-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{HoverCard, HoverCardContent, HoverCardTrigger};
+```rust
+use ui::{HoverCard, HoverCardTrigger, HoverCardContent};
 
-<HoverCard>
-    <HoverCardTrigger>
-        <span class="font-semibold underline">Hover me</span>
-    </HoverCardTrigger>
-    <HoverCardContent side="top" class="w-64">
-        <p class="font-medium">This card appeared on hover.</p>
-        <p class="text-sm text-muted-foreground">It stays in view while hovered.</p>
-    </HoverCardContent>
-</HoverCard>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| delay_duration | u64 | 0 | Hover delay in milliseconds. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    HoverCard {
+        HoverCardTrigger { rsx! { span { "@shadcn" } } }
+        HoverCardContent {
+            div { class: "flex gap-4",
+                div { class: "font-bold", "Shadcn UI" }
+            }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{HoverCard, HoverCardContent, HoverCardTrigger};
+### Default
 
-<HoverCard>
-    <HoverCardTrigger>
-        <span class="font-semibold underline">Hover me</span>
-    </HoverCardTrigger>
-    <HoverCardContent side="top" class="w-64">
-        <p class="font-medium">This card appeared on hover.</p>
-        <p class="text-sm text-muted-foreground">It stays in view while hovered.</p>
-    </HoverCardContent>
-</HoverCard>
+<ComponentPreview name="hover-card-default"/>
 
-```

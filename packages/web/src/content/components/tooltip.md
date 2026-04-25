@@ -1,47 +1,37 @@
 ---
 title: Tooltip
-description: A small informational overlay that appears on hover or focus near a trigger element.
+description: A small popup box that appears when hovering over an element, providing extra context.
 component: true
 ---
 
+<ComponentPreview name="tooltip-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{Tooltip, TooltipTrigger, TooltipContent};
+```rust
+use ui::{Tooltip, TooltipTrigger, TooltipContent, TooltipProvider};
 
-<Tooltip>
-    <TooltipTrigger>
-        <button>Hover me</button>
-    </TooltipTrigger>
-    <TooltipContent side="top">
-        <p>This is a tooltip.</p>
-    </TooltipContent>
-</Tooltip>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| delay_duration | u64 | 0 | Delay before showing the tooltip. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    TooltipProvider {
+        Tooltip {
+            TooltipTrigger { rsx! { button { "Hover" } } }
+            TooltipContent {
+                p { "This is a tooltip" }
+            }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Tooltip, TooltipTrigger, TooltipContent};
+### Default
 
-<Tooltip>
-    <TooltipTrigger>
-        <button>Hover me</button>
-    </TooltipTrigger>
-    <TooltipContent side="top">
-        <p>This is a tooltip.</p>
-    </TooltipContent>
-</Tooltip>
+<ComponentPreview name="tooltip-default"/>
 
-```
+### With Arrow
+
+Display a pointing arrow indicating the trigger element.
+
+<ComponentPreview name="tooltip-with-arrow"/>
+

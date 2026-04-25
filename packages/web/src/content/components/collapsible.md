@@ -1,47 +1,35 @@
 ---
 title: Collapsible
-description: A container whose content can be shown or hidden with a trigger. Supports animated expand/collapse transitions.
+description: An interactive component which expands/collapses a content panel.
 component: true
 ---
 
+<ComponentPreview name="collapsible-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{Collapsible, CollapsibleTrigger, CollapsibleContent};
 
-<Collapsible>
-    <CollapsibleTrigger>Click me</CollapsibleTrigger>
-    <CollapsibleContent>
-        <div class="p-4 border rounded-md bg-muted">
-            This content is collapsible and animates smoothly.
-        </div>
-    </CollapsibleContent>
-</Collapsible>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| default_open | bool | false | Whether the content is visible on mount. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Collapsible {
+        CollapsibleTrigger { "Open Panel" }
+        CollapsibleContent {
+            div { class: "p-4", "This content is collapsible." }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Collapsible, CollapsibleTrigger, CollapsibleContent};
+### Default
 
-<Collapsible>
-    <CollapsibleTrigger>Click me</CollapsibleTrigger>
-    <CollapsibleContent>
-        <div class="p-4 border rounded-md bg-muted">
-            This content is collapsible and animates smoothly.
-        </div>
-    </CollapsibleContent>
-</Collapsible>
+<ComponentPreview name="collapsible-default"/>
 
-```
+### Animated
+
+Collapsible panels with smooth height transitions.
+
+<ComponentPreview name="collapsible-animated"/>
+

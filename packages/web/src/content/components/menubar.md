@@ -1,50 +1,33 @@
 ---
 title: Menubar
-description: A horizontal menu bar at the top of the page for grouping related actions under dropdown sub-menus.
+description: A horizontal bar displaying menus and their associated actions, akin to desktop apps.
 component: true
 ---
 
+<ComponentPreview name="menubar-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::Menubar;
+```rust
+use ui::{Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator};
 
-<Menubar class="w-full">
-    <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
-        <MenubarContent>
-            <MenubarItem>Edit</MenubarItem>
-            <MenubarSeparator />
-            <MenubarItem>Save</MenubarItem>
-        </MenubarContent>
-    </MenubarMenu>
-</Menubar>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Menubar {
+        MenubarMenu {
+            MenubarTrigger { "File" }
+            MenubarContent {
+                MenubarItem { "New Tab" }
+                MenubarSeparator {}
+                MenubarItem { "Save" }
+            }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::Menubar;
+### Default
 
-<Menubar class="w-full">
-    <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
-        <MenubarContent>
-            <MenubarItem>Edit</MenubarItem>
-            <MenubarSeparator />
-            <MenubarItem>Save</MenubarItem>
-        </MenubarContent>
-    </MenubarMenu>
-</Menubar>
+<ComponentPreview name="menubar-default"/>
 
-```

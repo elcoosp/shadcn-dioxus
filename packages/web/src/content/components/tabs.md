@@ -1,55 +1,32 @@
 ---
 title: Tabs
-description: Tabbed interface with selectable triggers that reveal different content panels.
+description: A set of layered sections of content, known as tab panels, displayed one at a time.
 component: true
 ---
 
+<ComponentPreview name="tabs-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{Tabs, TabsList, TabsTrigger, TabsContent};
 
-<Tabs default_value="tab1">
-    <TabsList>
-        <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-        <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-    </TabsList>
-    <TabsContent value="tab1">
-        <div class="p-4">Tab 1 content here.</div>
-    </TabsContent>
-    <TabsContent value="tab2">
-        <div class="p-4">Tab 2 content here.</div>
-    </TabsContent>
-</Tabs>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| default_value | String |  | Active tab ID. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Tabs { default_value: "account",
+        TabsList {
+            TabsTrigger { value: "account", "Account" }
+            TabsTrigger { value: "password", "Password" }
+        }
+        TabsContent { value: "account",
+            p { "Make changes to your account here." }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Tabs, TabsList, TabsTrigger, TabsContent};
+### Default
 
-<Tabs default_value="tab1">
-    <TabsList>
-        <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-        <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-    </TabsList>
-    <TabsContent value="tab1">
-        <div class="p-4">Tab 1 content here.</div>
-    </TabsContent>
-    <TabsContent value="tab2">
-        <div class="p-4">Tab 2 content here.</div>
-    </TabsContent>
-</Tabs>
+<ComponentPreview name="tabs-default"/>
 
-```

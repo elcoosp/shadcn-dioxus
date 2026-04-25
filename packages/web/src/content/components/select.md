@@ -1,57 +1,44 @@
 ---
 title: Select
-description: A dropdown for selecting one value from a list. Supports labels, separators, and disabled items.
+description: A dropdown control for picking a single value from a list of predefined options.
 component: true
 ---
 
+<ComponentPreview name="select-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{Select, SelectTrigger, SelectValue, SelectItem, SelectLabel, SelectSeparator};
+```rust
+use ui::{Select, SelectTrigger, SelectValue, SelectContent, SelectItem};
 
-<Select>
-    <SelectTrigger>
-        <SelectValue placeholder="Select..." />
-    </SelectTrigger>
-    <SelectContent>
-        <SelectLabel>Fruit</SelectLabel>
-        <SelectItem value="apple">Apple</SelectItem>
-        <SelectSeparator />
-        <SelectLabel>Vegetables</SelectLabel>
-        <SelectItem value="banana">Banana</SelectItem>
-        <SelectItem value="cherry" disabled>Cherry (unavailable)</SelectItem>
-    </SelectContent>
-</Select>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| default_value | String |  | Currently selected value. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Select {
+        SelectTrigger {
+            SelectValue { placeholder: "Select a fruit" }
+        }
+        SelectContent {
+            SelectItem { value: "apple", "Apple" }
+            SelectItem { value: "banana", "Banana" }
+        }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Select, SelectTrigger, SelectValue, SelectItem, SelectLabel, SelectSeparator};
+### Default
 
-<Select>
-    <SelectTrigger>
-        <SelectValue placeholder="Select..." />
-    </SelectTrigger>
-    <SelectContent>
-        <SelectLabel>Fruit</SelectLabel>
-        <SelectItem value="apple">Apple</SelectItem>
-        <SelectSeparator />
-        <SelectLabel>Vegetables</SelectLabel>
-        <SelectItem value="banana">Banana</SelectItem>
-        <SelectItem value="cherry" disabled>Cherry (unavailable)</SelectItem>
-    </SelectContent>
-</Select>
+<ComponentPreview name="select-default"/>
 
-```
+### With Label
+
+Add an accessible label to the select trigger.
+
+<ComponentPreview name="select-with-label"/>
+
+### Disabled
+
+Prevent interaction with specific items or the whole select.
+
+<ComponentPreview name="select-disabled"/>
+

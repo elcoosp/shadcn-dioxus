@@ -1,66 +1,42 @@
 ---
 title: Sidebar
-description: A collapsible side panel for app navigation with groups, labels, search input, and a rail toggle.
+description: A collapsible side navigation component commonly used in application layouts.
 component: true
 ---
 
+<ComponentPreview name="sidebar-demo"/>
+
 ## Usage
 
-```bash
-rust
-use ui::{Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarInput, SidebarTrigger, SidebarRail, SidebarSeparator, SidebarInset};
-use ui::sidebar_context::SidebarVariant;
+```rust
+use ui::{Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarInset, SidebarProvider, SidebarTrigger};
 
-fn App() -> Element {
-    rsx! {
-        <SidebarProvider variant={SidebarVariant::Sidebar}>
-            <div class="flex h-screen">
-                <Sidebar collapsible={true}>
-                    <SidebarHeader>Title</SidebarHeader>
-                    <SidebarContent>...</SidebarContent>
-                    <SidebarFooter>...</SidebarFooter>
-                </Sidebar>
-                <main class="flex-1">
-                    <SidebarInset />
-                </main>
-            </div>
-        </SidebarProvider>
+rsx! {
+    SidebarProvider {
+        Sidebar {
+            SidebarHeader { "Sidebar Title" }
+            SidebarContent {
+                SidebarGroup {
+                    SidebarGroupLabel { "Navigation" }
+                    SidebarGroupContent {}
+                }
+            }
+            SidebarFooter {}
+        }
+        SidebarInset {}
     }
 }
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| collapsible | bool | true | Whether the sidebar can collapse. |
-| variant | SidebarVariant | SidebarVariant::Sidebar | Visual variant. |
-| class | String |  | Additional CSS classes to apply to the root element. |
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarInput, SidebarTrigger, SidebarRail, SidebarSeparator, SidebarInset};
-use ui::sidebar_context::SidebarVariant;
+### Default
 
-fn App() -> Element {
-    rsx! {
-        <SidebarProvider variant={SidebarVariant::Sidebar}>
-            <div class="flex h-screen">
-                <Sidebar collapsible={true}>
-                    <SidebarHeader>Title</SidebarHeader>
-                    <SidebarContent>...</SidebarContent>
-                    <SidebarFooter>...</SidebarFooter>
-                </Sidebar>
-                <main class="flex-1">
-                    <SidebarInset />
-                </main>
-            </div>
-        </SidebarProvider>
-    }
-}
+<ComponentPreview name="sidebar-default"/>
 
-```
+### Collapsible
+
+Allow the sidebar to collapse into a slim rail.
+
+<ComponentPreview name="sidebar-collapsible"/>
+

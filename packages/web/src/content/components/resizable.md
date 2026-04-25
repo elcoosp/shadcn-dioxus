@@ -1,41 +1,42 @@
 ---
 title: Resizable
-description: Resizable panels with draggable divider handles for adjusting their relative sizes.
+description: Interactive container panels that can be resized by dragging the divider.
 component: true
 ---
 
+<ComponentPreview name="resizable-demo"/>
+
 ## Usage
 
-```bash
-rust
+```rust
 use ui::{Resizable, ResizablePanel, ResizableHandle};
 
-<Resizable direction={Direction::Horizontal}>
-    <ResizablePanel default_size={0.5} />
-    <ResizableHandle />
-    <ResizablePanel default_size={0.5} />
-</Resizable>
-
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| direction | Direction | Direction::Horizontal | Resize direction. |
-| class | String |  | Additional CSS classes to apply to the root element. |
+rsx! {
+    Resizable {
+        ResizablePanel { default_size: 50 }
+        ResizableHandle {}
+        ResizablePanel { default_size: 50 }
+    }
+}
 ```
 
 ## Examples
 
-```bash
-rust
-use ui::{Resizable, ResizablePanel, ResizableHandle};
+### Horizontal
 
-<Resizable direction={Direction::Horizontal}>
-    <ResizablePanel default_size={0.5} />
-    <ResizableHandle />
-    <ResizablePanel default_size={0.5} />
-</Resizable>
+Resize horizontally side-by-side.
 
-```
+<ComponentPreview name="resizable-horizontal"/>
+
+### Vertical
+
+Resize vertically stacked panels.
+
+<ComponentPreview name="resizable-vertical"/>
+
+### With Handle
+
+Customize the appearance of the drag handle.
+
+<ComponentPreview name="resizable-with-handle"/>
+
