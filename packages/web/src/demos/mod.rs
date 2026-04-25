@@ -10,244 +10,144 @@ use ui::*;
 // -----------------------------------------------------------------------------
 
 
-// Auto-generated placeholder demos
+fn AccordionDemo() -> Element { rsx! { AccordionDefault {} } }
+fn AlertDefault() -> Element { rsx! { AlertDemo {} } }
+fn AlertDialogDemo() -> Element { rsx! { AlertDialogDefault {} } }
+fn CalendarDemo() -> Element { rsx! { CalendarDefault {} } }
+fn CarouselDemo() -> Element { rsx! { CarouselDefault {} } }
+fn ChartDemo() -> Element { rsx! { ChartBarChart {} } }
+fn CollapsibleDemo() -> Element { rsx! { CollapsibleDefault {} } }
+fn ColorPickerDemo() -> Element { rsx! { ColorPickerDefault {} } }
+fn ComboboxDemo() -> Element { rsx! { ComboboxDefault {} } }
+fn CommandDemo() -> Element { rsx! { CommandDialog {} } }
+fn ContextMenuDemo() -> Element { rsx! { ContextMenuDefault {} } }
+fn DataTableDemo() -> Element { rsx! { DataTableBasic {} } }
+fn DataTableSortingAndFilteringDemo() -> Element { rsx! { DataTableSortingAndFiltering {} } }
+fn DatePickerDemo() -> Element { rsx! { DatePickerDefault {} } }
+fn DrawerDemo() -> Element { rsx! { DrawerRight {} } }
+fn DropdownMenuDemo() -> Element { rsx! { DropdownMenuDefault {} } }
+fn HoverCardDemo() -> Element { rsx! { HoverCardDefault {} } }
+fn InputOtpDemo() -> Element { rsx! { InputOtpDefault {} } }
+fn MenubarDemo() -> Element { rsx! { MenubarDefault {} } }
+fn NavigationMenuDemo() -> Element { rsx! { NavigationMenuDefault {} } }
+fn PaginationDemo() -> Element { rsx! { PaginationDefault {} } }
+fn PopoverDemo() -> Element { rsx! { PopoverDefault {} } }
+fn RadioGroupDemo() -> Element { rsx! { RadioGroupDefault {} } }
+fn ResizableDemo() -> Element { rsx! { ResizableHorizontal {} } }
+fn ScrollAreaDemo() -> Element { rsx! { ScrollAreaHorizontal {} } }
+fn SelectDemo() -> Element { rsx! { SelectDefault {} } }
+fn SidebarDemo() -> Element { rsx! { SidebarDefault {} } }
+fn SliderDemo() -> Element { rsx! { SliderDefault {} } }
+fn SliderWithMinMaxSteps() -> Element { rsx! { SliderWithMinMaxSteps {} } }
+fn StepperDemo() -> Element { rsx! { StepperDefault {} } }
+fn TableDemo() -> Element { rsx! { TableDefault {} } }
+fn TabsDemo() -> Element { rsx! { TabsDefault {} } }
+fn ToggleGroupDemo() -> Element { rsx! { ToggleGroupSingle {} } }
+fn TooltipDemo() -> Element { rsx! { TooltipDefault {} } }
+
+
+// Real demo wrappers (auto-generated)
 fn UaccordionUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for accordion-demo"
-        }
-    }
+    rsx! { AccordionDefault {} }
 }
 fn UalertUdefaultDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for alert-default"
-        }
-    }
+    rsx! { AlertDemo {} }
 }
 fn UalertUdialogUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for alert-dialog-demo"
-        }
-    }
+    rsx! { AlertDialogDefault {} }
 }
 fn UcalendarUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for calendar-demo"
-        }
-    }
+    rsx! { CalendarDefault {} }
 }
 fn UcarouselUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for carousel-demo"
-        }
-    }
+    rsx! { CarouselDefault {} }
 }
 fn UchartUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for chart-demo"
-        }
-    }
+    rsx! { ChartBarChart {} }
 }
 fn UcollapsibleUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for collapsible-demo"
-        }
-    }
+    rsx! { CollapsibleDefault {} }
 }
 fn UcolorUpickerUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for color-picker-demo"
-        }
-    }
+    rsx! { ColorPickerDefault {} }
 }
 fn UcomboboxUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for combobox-demo"
-        }
-    }
+    rsx! { ComboboxDefault {} }
 }
 fn UcommandUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for command-demo"
-        }
-    }
+    rsx! { CommandDialog {} }
 }
 fn UcontextUmenuUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for context-menu-demo"
-        }
-    }
+    rsx! { ContextMenuDefault {} }
 }
 fn UdataUtableUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for data-table-demo"
-        }
-    }
+    rsx! { DataTableBasic {} }
 }
-fn UdataUtableUsorting_&UfilteringDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for data-table-sorting-&-filtering"
-        }
-    }
+fn UdataUtableUsorting&UfilteringDemo() -> Element {
+    rsx! { DataTableSortingAndFiltering {} }
 }
 fn UdateUpickerUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for date-picker-demo"
-        }
-    }
+    rsx! { DatePickerDefault {} }
 }
 fn UdrawerUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for drawer-demo"
-        }
-    }
+    rsx! { DrawerRight {} }
 }
 fn UdropdownUmenuUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for dropdown-menu-demo"
-        }
-    }
+    rsx! { DropdownMenuDefault {} }
 }
 fn UhoverUcardUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for hover-card-demo"
-        }
-    }
+    rsx! { HoverCardDefault {} }
 }
 fn UinputUotpUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for input-otp-demo"
-        }
-    }
+    rsx! { InputOtpDefault {} }
 }
 fn UmenubarUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for menubar-demo"
-        }
-    }
+    rsx! { MenubarDefault {} }
 }
 fn UnavigationUmenuUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for navigation-menu-demo"
-        }
-    }
+    rsx! { NavigationMenuDefault {} }
 }
 fn UpaginationUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for pagination-demo"
-        }
-    }
+    rsx! { PaginationDefault {} }
 }
 fn UpopoverUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for popover-demo"
-        }
-    }
+    rsx! { PopoverDefault {} }
 }
 fn UradioUgroupUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for radio-group-demo"
-        }
-    }
+    rsx! { RadioGroupDefault {} }
 }
 fn UresizableUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for resizable-demo"
-        }
-    }
+    rsx! { ResizableHorizontal {} }
 }
 fn UscrollUareaUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for scroll-area-demo"
-        }
-    }
+    rsx! { ScrollAreaHorizontal {} }
 }
 fn UselectUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for select-demo"
-        }
-    }
+    rsx! { SelectDefault {} }
 }
 fn UsidebarUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for sidebar-demo"
-        }
-    }
+    rsx! { SidebarDefault {} }
 }
 fn UsliderUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for slider-demo"
-        }
-    }
+    rsx! { SliderDefault {} }
 }
 fn UsliderUwithUmin/maxUstepsDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for slider-with-min/max-steps"
-        }
-    }
+    rsx! { SliderWithMinMaxSteps {} }
 }
 fn UstepperUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for stepper-demo"
-        }
-    }
+    rsx! { StepperDefault {} }
 }
 fn UtableUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for table-demo"
-        }
-    }
+    rsx! { TableDefault {} }
 }
 fn UtabsUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for tabs-demo"
-        }
-    }
+    rsx! { TabsDefault {} }
 }
 fn UtoggleUgroupUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for toggle-group-demo"
-        }
-    }
+    rsx! { ToggleGroupSingle {} }
 }
 fn UtooltipUdemoDemo() -> Element {
-    rsx! {
-        div { class: "text-muted-foreground text-sm italic",
-            "Demo placeholder for tooltip-demo"
-        }
-    }
+    rsx! { TooltipDefault {} }
 }
 
 fn AlertDemo() -> Element {
@@ -2178,7 +2078,6 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "context-menu-default" => Some(rsx! { ContextMenuDefault {} }),
         "context-menu-with-submenus" => Some(rsx! { ContextMenuWithSubmenus {} }),
         "data-table-basic" => Some(rsx! { DataTableBasic {} }),
-        "data-table-sorting-&-filtering" => Some(rsx! { DataTableSortingAndFiltering {} }),
         "data-table-pagination" => Some(rsx! { DataTablePagination {} }),
         "date-picker-default" => Some(rsx! { DatePickerDefault {} }),
         "date-picker-with-presets" => Some(rsx! { DatePickerWithPresets {} }),
@@ -2219,6 +2118,74 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "toggle-group-outline" => Some(rsx! { ToggleGroupOutline {} }),
         "tooltip-default" => Some(rsx! { TooltipDefault {} }),
         "tooltip-with-arrow" => Some(rsx! { TooltipWithArrow {} }),
+
+        "tooltip-demo" => Some(rsx! { UtooltipUdemoDemo {} }),
+
+        "toggle-group-demo" => Some(rsx! { UtoggleUgroupUdemoDemo {} }),
+
+        "tabs-demo" => Some(rsx! { UtabsUdemoDemo {} }),
+
+        "table-demo" => Some(rsx! { UtableUdemoDemo {} }),
+
+        "stepper-demo" => Some(rsx! { UstepperUdemoDemo {} }),
+
+        "slider-with-min/max-steps" => Some(rsx! { UsliderUwithUmin/maxUstepsDemo {} }),
+
+        "slider-demo" => Some(rsx! { UsliderUdemoDemo {} }),
+
+        "sidebar-demo" => Some(rsx! { UsidebarUdemoDemo {} }),
+
+        "select-demo" => Some(rsx! { UselectUdemoDemo {} }),
+
+        "scroll-area-demo" => Some(rsx! { UscrollUareaUdemoDemo {} }),
+
+        "resizable-demo" => Some(rsx! { UresizableUdemoDemo {} }),
+
+        "radio-group-demo" => Some(rsx! { UradioUgroupUdemoDemo {} }),
+
+        "popover-demo" => Some(rsx! { UpopoverUdemoDemo {} }),
+
+        "pagination-demo" => Some(rsx! { UpaginationUdemoDemo {} }),
+
+        "navigation-menu-demo" => Some(rsx! { UnavigationUmenuUdemoDemo {} }),
+
+        "menubar-demo" => Some(rsx! { UmenubarUdemoDemo {} }),
+
+        "input-otp-demo" => Some(rsx! { UinputUotpUdemoDemo {} }),
+
+        "hover-card-demo" => Some(rsx! { UhoverUcardUdemoDemo {} }),
+
+        "dropdown-menu-demo" => Some(rsx! { UdropdownUmenuUdemoDemo {} }),
+
+        "drawer-demo" => Some(rsx! { UdrawerUdemoDemo {} }),
+
+        "date-picker-demo" => Some(rsx! { UdateUpickerUdemoDemo {} }),
+
+        "data-table-sorting-&-filtering" => Some(rsx! { UdataUtableUsorting&UfilteringDemo {} }),
+
+        "data-table-demo" => Some(rsx! { UdataUtableUdemoDemo {} }),
+
+        "context-menu-demo" => Some(rsx! { UcontextUmenuUdemoDemo {} }),
+
+        "command-demo" => Some(rsx! { UcommandUdemoDemo {} }),
+
+        "combobox-demo" => Some(rsx! { UcomboboxUdemoDemo {} }),
+
+        "color-picker-demo" => Some(rsx! { UcolorUpickerUdemoDemo {} }),
+
+        "collapsible-demo" => Some(rsx! { UcollapsibleUdemoDemo {} }),
+
+        "chart-demo" => Some(rsx! { UchartUdemoDemo {} }),
+
+        "carousel-demo" => Some(rsx! { UcarouselUdemoDemo {} }),
+
+        "calendar-demo" => Some(rsx! { UcalendarUdemoDemo {} }),
+
+        "alert-dialog-demo" => Some(rsx! { UalertUdialogUdemoDemo {} }),
+
+        "alert-default" => Some(rsx! { UalertUdefaultDemo {} }),
+
+        "accordion-demo" => Some(rsx! { UaccordionUdemoDemo {} }),
 
         _ => None,
     }
