@@ -7,17 +7,18 @@ pub fn DataTableBody() -> Element {
     let ctx = use_context::<DataTableContext>();
     let visible_column_ids = ctx.visible_column_ids;
     let processed_rows = ctx.processed_rows;
-    let selected_rows = ctx.selected_rows;
+    // *** declared mut to allow set() ***
+    let mut selected_rows = ctx.selected_rows;
     let columns = ctx.columns;
 
-    let rows = processed_rows();
+    let rows = processed_rows.read().clone();
 
     if rows.is_empty() {
         return rsx! {
             crate::table::TableBody {
                 crate::table::TableRow {
                     crate::table::TableCell {
-                        col_span: visible_column_ids().len() + 1,
+                        column_span: visible_column_ids().len() + 1,
                         class: "h-24 text-center",
                         div { class: "text-muted-foreground", "No results." }
                     }
@@ -28,15 +29,18 @@ pub fn DataTableBody() -> Element {
 
     rsx! {
         crate::table::TableBody {
-            {
-                rows.iter().map(|(original_idx, row_data)| {
+            for (original_idx, row_data) in rows.iter() {
+                {
                     let idx = *original_idx;
                     let row_clone = row_data.clone();
                     let is_selected = use_memo(move || selected_rows().contains(&idx));
+                    let cols = visible_column_ids();
+                    let all_cols = columns.read().clone();
                     rsx! {
                         crate::table::TableRow {
                             key: "{idx}",
                             class: "data-[state=selected]:bg-muted/50",
+                            // selection checkbox
                             crate::table::TableCell { class: "w-[40px]",
                                 button {
                                     r#type: "button",
@@ -57,10 +61,8 @@ pub fn DataTableBody() -> Element {
                                     }
                                 }
                             }
-                            {
-                                let cols = visible_column_ids();
-                                let all_cols = columns();
-                                cols.iter().map(|col_id| {
+                            for col_id in &cols {
+                                {
                                     let cell_value = all_cols
                                         .iter()
                                         .position(|c| &c.id == col_id)
@@ -69,11 +71,11 @@ pub fn DataTableBody() -> Element {
                                     rsx! {
                                         crate::table::TableCell { key: "{col_id}", "{cell_value}" }
                                     }
-                                }).collect::<Vec<_>>()
+                                }
                             }
                         }
                     }
-                }).collect::<Vec<_>>()
+                }
             }
         }
     }

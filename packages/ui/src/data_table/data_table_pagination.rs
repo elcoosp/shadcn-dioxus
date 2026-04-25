@@ -1,6 +1,5 @@
 use crate::cn;
 use crate::data_table::DataTableContext;
-use crate::native_select::{NativeSelect, NativeSelectOption};
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
@@ -14,12 +13,12 @@ pub struct DataTablePaginationProps {
 #[component]
 pub fn DataTablePagination(props: DataTablePaginationProps) -> Element {
     let ctx = use_context::<DataTableContext>();
-    let page = ctx.page;
-    let page_size = ctx.page_size;
+    let mut page = ctx.page;
+    let mut page_size = ctx.page_size;
     let total_filtered = ctx.total_filtered;
 
     let total_pages = use_memo(move || {
-        let ps = page_size();
+        let ps = page_size.read().clone();
         let total = total_filtered();
         if ps > 0 && total > 0 {
             (total + ps - 1) / ps
@@ -28,8 +27,8 @@ pub fn DataTablePagination(props: DataTablePaginationProps) -> Element {
         }
     });
 
-    let current_page = page();
-    let ps = page_size();
+    let current_page = *page.read();   // deref to usize (Copy)
+    let ps = *page_size.read();
     let total = total_filtered();
     let start = if total > 0 { current_page * ps + 1 } else { 0 };
     let end = std::cmp::min((current_page + 1) * ps, total);
@@ -54,26 +53,20 @@ pub fn DataTablePagination(props: DataTablePaginationProps) -> Element {
             div { class: "flex items-center gap-6 lg:gap-8",
                 div { class: "flex items-center gap-2",
                     label { class: "text-sm font-medium", "Rows per page" }
-                    NativeSelect {
-                        class: "h-8 w-[70px]",
-                        onchange: move |e| {
+                    select {
+                        class: "border-input shadow-xs h-8 w-[70px] rounded-md border bg-transparent px-1 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+                        oninput: move |e: FormEvent| {
                             if let Ok(val) = e.value().parse::<usize>() {
                                 page_size.set(val);
                                 page.set(0);
                             }
                         },
-                        {
-                            props.page_size_options.iter().map(|size| {
-                                let s = *size;
-                                let selected = s == ps;
-                                rsx! {
-                                    NativeSelectOption {
-                                        value: "{s}",
-                                        selected,
-                                        "{s}"
-                                    }
-                                }
-                            }).collect::<Vec<_>>()
+                        for size in &props.page_size_options {
+                            option {
+                                value: "{size}",
+                                selected: *size == ps,
+                                "{size}"
+                            }
                         }
                     }
                 }
@@ -82,7 +75,14 @@ pub fn DataTablePagination(props: DataTablePaginationProps) -> Element {
                         r#type: "button",
                         class: "inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-transparent text-sm font-medium disabled:pointer-events-none disabled:opacity-50",
                         disabled: !can_prev,
-                        onclick: move |_| page.set(page() - 1),
+                        // avoid overlapping borrows by reading into a local
+                        onclick: {
+                            let mut page = page.clone();
+                            move |_| {
+                                let current = *page.read();
+                                page.set(current - 1);
+                            }
+                        },
                         "‹"
                     }
                     span { class: "text-sm font-medium",
@@ -92,7 +92,13 @@ pub fn DataTablePagination(props: DataTablePaginationProps) -> Element {
                         r#type: "button",
                         class: "inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-transparent text-sm font-medium disabled:pointer-events-none disabled:opacity-50",
                         disabled: !can_next,
-                        onclick: move |_| page.set(page() + 1),
+                        onclick: {
+                            let mut page = page.clone();
+                            move |_| {
+                                let current = *page.read();
+                                page.set(current + 1);
+                            }
+                        },
                         "›"
                     }
                 }

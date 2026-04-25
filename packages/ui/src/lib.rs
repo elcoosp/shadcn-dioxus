@@ -2,7 +2,15 @@
 mod utils;
 pub use utils::{cn, RenderFn};
 mod button;
+pub mod chart;
+pub use chart::*;
+pub mod color_picker;
+pub use color_picker::*;
+pub mod combobox;
+pub use combobox::*;
+pub mod data_table;
 pub use button::*;
+pub use data_table::*;
 pub mod button_group;
 pub use button_group as ButtonGroup;
 pub mod spinner;
@@ -103,10 +111,10 @@ mod drawer;
 pub use drawer::*;
 mod calendar;
 mod date_picker;
-pub use date_picker::*;
 pub use calendar::*;
+pub use date_picker::*;
 mod toast;
-pub use toast::{ToastProvider, add_toast, remove_toast, clear_toasts};
+pub use toast::{add_toast, clear_toasts, remove_toast, ToastProvider};
 mod command;
 pub use command::*;
 mod carousel;
@@ -115,8 +123,6 @@ mod sidebar;
 pub use sidebar::*;
 mod stepper;
 pub use stepper::*;
-
-
 
 #[cfg(test)]
 mod tests {
@@ -127,17 +133,26 @@ mod tests {
     #[test]
     fn test_ring_arbitrary_value_merge() {
         let result = tw_merge!("ring-[3px]", "ring-0");
-        assert_eq!(result, "ring-0", "Arbitrary ring value should be overridden");
+        assert_eq!(
+            result, "ring-0",
+            "Arbitrary ring value should be overridden"
+        );
     }
     #[test]
     fn test_ring_arbitrary_value_with_variant() {
         let result = tw_merge!("focus-visible:ring-[3px]", "focus-visible:ring-0");
-        assert_eq!(result, "focus-visible:ring-0", "Variant with arbitrary ring should be overridden");
+        assert_eq!(
+            result, "focus-visible:ring-0",
+            "Variant with arbitrary ring should be overridden"
+        );
     }
     #[test]
     fn test_ring_width_and_inset_separate() {
         let result = tw_merge!("ring-1", "ring-inset");
-        assert_eq!(result, "ring-1 ring-inset", "ring-width and ring-inset should not conflict");
+        assert_eq!(
+            result, "ring-1 ring-inset",
+            "ring-width and ring-inset should not conflict"
+        );
     }
 
     // ── cn utility ───────────────────────────────────────────────────────
@@ -157,12 +172,18 @@ mod tests {
     fn test_cn_conflict_resolution() {
         let result = cn("p-2 text-sm", "p-4 text-lg");
         assert_eq!(result, "p-4 text-lg", "Later class should win in conflict");
-        assert!(!result.contains("text-sm"), "Conflicting class should be removed");
+        assert!(
+            !result.contains("text-sm"),
+            "Conflicting class should be removed"
+        );
     }
     #[test]
     fn test_cn_no_conflict() {
         let result = cn("p-2", "m-4");
-        assert!(result.contains("p-2"), "Non-conflicting class should be kept");
+        assert!(
+            result.contains("p-2"),
+            "Non-conflicting class should be kept"
+        );
         assert!(result.contains("m-4"), "Additional class should be added");
     }
 
@@ -171,16 +192,32 @@ mod tests {
     //       which does NOT require Debug on RenderFn.
     #[test]
     fn test_render_fn_always_unequal() {
-        fn a(_: super::ItemChildProps, _: dioxus::prelude::Element) -> dioxus::prelude::Element { unimplemented!() }
-        fn b(_: super::ItemChildProps, _: dioxus::prelude::Element) -> dioxus::prelude::Element { unimplemented!() }
+        fn a(_: super::ItemChildProps, _: dioxus::prelude::Element) -> dioxus::prelude::Element {
+            unimplemented!()
+        }
+        fn b(_: super::ItemChildProps, _: dioxus::prelude::Element) -> dioxus::prelude::Element {
+            unimplemented!()
+        }
         let r1 = super::RenderFn::new(a);
         let r2 = super::RenderFn::new(a);
-        assert!(!r1.eq(&r2), "Same-function RenderFn instances should be unequal");
+        assert!(
+            !r1.eq(&r2),
+            "Same-function RenderFn instances should be unequal"
+        );
         let r3 = super::RenderFn::new(b);
-        assert!(!r1.eq(&r2), "Same-function RenderFn instances should be unequal");
+        assert!(
+            !r1.eq(&r2),
+            "Same-function RenderFn instances should be unequal"
+        );
         let r3 = super::RenderFn::new(b);
-        assert!(!r1.eq(&r2), "Same-function RenderFn instances should be unequal");
-        assert!(!r1.eq(&r3), "Different-function RenderFn instances should be unequal");
+        assert!(
+            !r1.eq(&r2),
+            "Same-function RenderFn instances should be unequal"
+        );
+        assert!(
+            !r1.eq(&r3),
+            "Different-function RenderFn instances should be unequal"
+        );
     }
 
     // ── Badge ───────────────────────────────────────────────────────────
@@ -191,23 +228,38 @@ mod tests {
         fn test_badge_variant_default_class() {
             let c = BadgeVariant::Default.class();
             assert!(c.contains("bg-primary"), "Default should have bg-primary");
-            assert!(c.contains("text-primary-foreground"), "Default should have text-primary-foreground");
+            assert!(
+                c.contains("text-primary-foreground"),
+                "Default should have text-primary-foreground"
+            );
         }
         #[test]
         fn test_badge_variant_secondary_class() {
             let c = BadgeVariant::Secondary.class();
-            assert!(c.contains("bg-secondary"), "Secondary should have bg-secondary");
-            assert!(c.contains("text-secondary-foreground"), "Secondary should have text-secondary-foreground");
+            assert!(
+                c.contains("bg-secondary"),
+                "Secondary should have bg-secondary"
+            );
+            assert!(
+                c.contains("text-secondary-foreground"),
+                "Secondary should have text-secondary-foreground"
+            );
         }
         #[test]
         fn test_badge_variant_destructive_class() {
             let c = BadgeVariant::Destructive.class();
-            assert!(c.contains("bg-destructive"), "Destructive should have bg-destructive");
+            assert!(
+                c.contains("bg-destructive"),
+                "Destructive should have bg-destructive"
+            );
         }
         #[test]
         fn test_badge_variant_outline_class() {
             let c = BadgeVariant::Outline.class();
-            assert!(c.contains("text-foreground"), "Outline should have text-foreground");
+            assert!(
+                c.contains("text-foreground"),
+                "Outline should have text-foreground"
+            );
             assert!(!c.contains("bg-"), "Outline should have no background");
         }
         #[test]
@@ -219,16 +271,30 @@ mod tests {
         }
         #[test]
         fn test_badge_variants_includes_base() {
-            for v in [BadgeVariant::Default, BadgeVariant::Secondary, BadgeVariant::Destructive, BadgeVariant::Outline] {
+            for v in [
+                BadgeVariant::Default,
+                BadgeVariant::Secondary,
+                BadgeVariant::Destructive,
+                BadgeVariant::Outline,
+            ] {
                 let result = badge_variants(v);
-                assert!(result.contains("inline-flex"), "badge_variants should always include base inline-flex");
-                assert!(result.contains("rounded-full"), "badge_variants should always include rounded-full");
+                assert!(
+                    result.contains("inline-flex"),
+                    "badge_variants should always include base inline-flex"
+                );
+                assert!(
+                    result.contains("rounded-full"),
+                    "badge_variants should always include rounded-full"
+                );
             }
         }
         #[test]
         fn test_badge_variants_includes_variant_class() {
             let result = badge_variants(BadgeVariant::Destructive);
-            assert!(result.contains("bg-destructive"), "badge_variants should include variant class");
+            assert!(
+                result.contains("bg-destructive"),
+                "badge_variants should include variant class"
+            );
         }
     }
 
@@ -239,7 +305,9 @@ mod tests {
         #[test]
         fn test_button_variant_classes() {
             assert!(ButtonVariant::Default.class().contains("bg-primary"));
-            assert!(ButtonVariant::Destructive.class().contains("bg-destructive"));
+            assert!(ButtonVariant::Destructive
+                .class()
+                .contains("bg-destructive"));
             assert!(ButtonVariant::Outline.class().contains("border"));
             assert!(ButtonVariant::Secondary.class().contains("bg-secondary"));
             assert!(ButtonVariant::Ghost.class().contains("hover:bg-accent"));
@@ -256,20 +324,33 @@ mod tests {
         }
         #[test]
         fn test_button_variants_includes_base() {
-            for v in [ButtonVariant::Default, ButtonVariant::Outline, ButtonVariant::Ghost] {
+            for v in [
+                ButtonVariant::Default,
+                ButtonVariant::Outline,
+                ButtonVariant::Ghost,
+            ] {
                 let result = button_variants(v, ButtonSize::Default);
-                assert!(result.contains("inline-flex"), "button_variants should always include inline-flex");
+                assert!(
+                    result.contains("inline-flex"),
+                    "button_variants should always include inline-flex"
+                );
             }
         }
         #[test]
         fn test_button_variants_includes_size() {
             let result = button_variants(ButtonVariant::Default, ButtonSize::Lg);
-            assert!(result.contains("h-10"), "button_variants should include size class");
+            assert!(
+                result.contains("h-10"),
+                "button_variants should include size class"
+            );
         }
         #[test]
         fn test_button_variants_includes_variant() {
             let result = button_variants(ButtonVariant::Destructive, ButtonSize::Default);
-            assert!(result.contains("bg-destructive"), "button_variants should include variant class");
+            assert!(
+                result.contains("bg-destructive"),
+                "button_variants should include variant class"
+            );
         }
     }
 
@@ -301,21 +382,36 @@ mod tests {
         }
         #[test]
         fn test_get_progress_state_none() {
-            assert_eq!(get_progress_state(None, 100.0), ProgressState::Indeterminate);
+            assert_eq!(
+                get_progress_state(None, 100.0),
+                ProgressState::Indeterminate
+            );
         }
         #[test]
         fn test_get_progress_state_below_max() {
-            assert_eq!(get_progress_state(Some(50.0), 100.0), ProgressState::Loading);
+            assert_eq!(
+                get_progress_state(Some(50.0), 100.0),
+                ProgressState::Loading
+            );
             assert_eq!(get_progress_state(Some(0.0), 100.0), ProgressState::Loading);
-            assert_eq!(get_progress_state(Some(99.9), 100.0), ProgressState::Loading);
+            assert_eq!(
+                get_progress_state(Some(99.9), 100.0),
+                ProgressState::Loading
+            );
         }
         #[test]
         fn test_get_progress_state_at_max() {
-            assert_eq!(get_progress_state(Some(100.0), 100.0), ProgressState::Loaded);
+            assert_eq!(
+                get_progress_state(Some(100.0), 100.0),
+                ProgressState::Loaded
+            );
         }
         #[test]
         fn test_get_progress_state_above_max() {
-            assert_eq!(get_progress_state(Some(150.0), 100.0), ProgressState::Loaded);
+            assert_eq!(
+                get_progress_state(Some(150.0), 100.0),
+                ProgressState::Loaded
+            );
         }
         #[test]
         fn test_get_progress_state_zero_max() {
@@ -349,15 +445,30 @@ mod tests {
         #[test]
         fn test_input_classes_text() {
             let result = input_classes(InputType::Text);
-            assert!(result.contains("bg-background"), "Text input should have bg-background");
-            assert!(result.contains("dark:bg-input/30"), "Text input should have dark variant background");
-            assert!(!result.contains("pt-1.5"), "Text input should not have file padding");
+            assert!(
+                result.contains("bg-background"),
+                "Text input should have bg-background"
+            );
+            assert!(
+                result.contains("dark:bg-input/30"),
+                "Text input should have dark variant background"
+            );
+            assert!(
+                !result.contains("pt-1.5"),
+                "Text input should not have file padding"
+            );
         }
         #[test]
         fn test_input_classes_file() {
             let result = input_classes(InputType::File);
-            assert!(result.contains("bg-transparent"), "File input should have bg-transparent");
-            assert!(result.contains("pt-1.5"), "File input should have extra top padding");
+            assert!(
+                result.contains("bg-transparent"),
+                "File input should have bg-transparent"
+            );
+            assert!(
+                result.contains("pt-1.5"),
+                "File input should have extra top padding"
+            );
         }
     }
 
@@ -434,7 +545,9 @@ mod tests {
 
         #[test]
         fn test_empty_media_variant_class() {
-            assert!(EmptyMediaVariant::Default.class().contains("bg-transparent"));
+            assert!(EmptyMediaVariant::Default
+                .class()
+                .contains("bg-transparent"));
             assert!(EmptyMediaVariant::Icon.class().contains("bg-muted"));
             assert!(EmptyMediaVariant::Icon.class().contains("rounded-lg"));
         }

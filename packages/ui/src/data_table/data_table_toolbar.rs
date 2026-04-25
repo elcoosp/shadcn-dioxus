@@ -18,13 +18,13 @@ pub struct DataTableToolbarProps {
 pub fn DataTableToolbar(props: DataTableToolbarProps) -> Element {
     let ctx = use_context::<DataTableContext>();
     let columns = ctx.columns;
-    let filter_text = ctx.filter_text;
+    let mut filter_text = ctx.filter_text;
     let selected_rows = ctx.selected_rows;
     let total_filtered = ctx.total_filtered;
-    let column_visibility = ctx.column_visibility;
+    let mut column_visibility = ctx.column_visibility;
 
     let has_selection = use_memo(move || !selected_rows().is_empty());
-    let has_filter = use_memo(move || !filter_text().is_empty());
+    let has_filter = use_memo(move || !filter_text.read().is_empty());
 
     let classes = cn(
         "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between",
@@ -40,7 +40,7 @@ pub fn DataTableToolbar(props: DataTableToolbarProps) -> Element {
                         class: "pl-8",
                         placeholder: "Filter rows...",
                         value: "{filter_text}",
-                        oninput: move |e| filter_text.set(e.value()),
+                        oninput: move |e: FormEvent| filter_text.set(e.value()),
                     }
                     if has_filter() {
                         button {
@@ -67,31 +67,39 @@ pub fn DataTableToolbar(props: DataTableToolbarProps) -> Element {
                     }
                     DropdownMenuContent { side: "bottom".to_string(),
                         {
-                            let cols = columns();
-                            let vis = column_visibility();
-                            cols.iter().map(|col| {
-                                let col_id = col.id.clone();
-                                let col_header = col.header.clone();
-                                let is_visible = vis.contains(&col_id);
-                                rsx! {
-                                    DropdownMenuItem {
-                                        key: "{col_id}",
-                                        onclick: move |_| {
-                                            let mut vis = column_visibility();
-                                            if vis.contains(&col_id) {
-                                                vis.retain(|x| x != &col_id);
-                                            } else {
-                                                vis.push(col_id);
+                            let cols = columns.read().clone();
+                            let vis = column_visibility.read().clone();
+                            rsx! {
+                                for col in cols.iter() {
+                                    {
+                                        let col_id = col.id.clone();
+                                        let col_header = col.header.clone();
+                                        let is_visible = vis.contains(&col_id);
+                                        rsx! {
+                                            DropdownMenuItem {
+                                                key: "{col_id}",
+                                                onclick: {
+                                                    let col_id = col_id.clone();
+                                                    move |_| {
+                                                        let mut new_vis = column_visibility.read().clone();
+                                                        if new_vis.contains(&col_id) {
+                                                            new_vis.retain(|x| x != &col_id);
+                                                        } else {
+                                                            // Clone again to avoid moving the captured value
+                                                            new_vis.push(col_id.clone());
+                                                        }
+                                                        column_visibility.set(new_vis);
+                                                    }
+                                                },
+                                                if is_visible {
+                                                    Check { class: "mr-2 h-4 w-4" }
+                                                }
+                                                "{col_header}"
                                             }
-                                            column_visibility.set(vis);
-                                        },
-                                        if is_visible {
-                                            Check { class: "mr-2 h-4 w-4" }
                                         }
-                                        "{col_header}"
                                     }
                                 }
-                            }).collect::<Vec<_>>()
+                            }
                         }
                     }
                 }
