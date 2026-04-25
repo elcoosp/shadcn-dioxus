@@ -29,8 +29,8 @@
         button.addEventListener("click", function() {
           var code = pre.querySelector("code") || pre;
           navigator.clipboard.writeText(code.textContent).then(function() {
-            button.textContent = "Copied!";
-            setTimeout(function() { button.textContent = "Copy"; }, 2000);
+            button.classList.add("copied"); button.textContent = "Copy";
+            setTimeout(function() { button.classList.remove("copied"); }, 2000);
           });
         });
         pre.style.position = "relative";
@@ -41,20 +41,34 @@
   <style>
     .copy-button {
       position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-      line-height: 1;
-      background: var(--code-highlight);
-      color: var(--code-foreground);
-      border: 1px solid var(--border);
-      border-radius: 0.25rem;
+      top: 0.3rem;
+      right: 0.3rem;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.7rem;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      background: transparent;
+      color: inherit;
+      border: none;
       cursor: pointer;
-      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
     }
     .copy-button:hover { opacity: 1; }
+    .copy-button.copied::after { content: " ✓"; }
+
+    .copy-button:hover { opacity: 1; }
   </style>
+
+  <script>
+    window.addEventListener("popstate", function() { window.scrollTo(0, 0); });
+    document.addEventListener("click", function(e) {
+      if (e.target.tagName === "A" && e.target.getAttribute("href")?.startsWith("/")) {
+        window.scrollTo(0, 0);
+      }
+    });
+  </script>
 
   </body>
 </html>

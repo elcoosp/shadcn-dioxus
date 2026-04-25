@@ -18,7 +18,6 @@
     --container-sm: 24rem;
     --container-md: 28rem;
     --container-lg: 32rem;
-    --container-2xl: 42rem;
     --container-3xl: 48rem;
     --container-4xl: 56rem;
     --text-xs: 0.75rem;
@@ -290,6 +289,9 @@
   .top-2 {
     top: calc(var(--spacing) * 2);
   }
+  .top-3 {
+    top: calc(var(--spacing) * 3);
+  }
   .top-4 {
     top: calc(var(--spacing) * 4);
   }
@@ -346,6 +348,9 @@
   }
   .left-2\.5 {
     left: calc(var(--spacing) * 2.5);
+  }
+  .left-3 {
+    left: calc(var(--spacing) * 3);
   }
   .left-\[10\%\] {
     left: 10%;
@@ -815,9 +820,6 @@
   }
   .w-px {
     width: 1px;
-  }
-  .max-w-2xl {
-    max-width: var(--container-2xl);
   }
   .max-w-3xl {
     max-width: var(--container-3xl);
@@ -3157,9 +3159,9 @@
       padding: calc(var(--spacing) * 12);
     }
   }
-  .md\:px-0 {
+  .md\:px-6 {
     @media (width >= 48rem) {
-      padding-inline: calc(var(--spacing) * 0);
+      padding-inline: calc(var(--spacing) * 6);
     }
   }
   .md\:py-16 {
@@ -4133,6 +4135,13 @@
   .doc-content pre::-webkit-scrollbar-thumb {
     background-color: var(--border);
     border-radius: 3px;
+  }
+}
+@layer utilities {
+  .doc-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 @property --tw-translate-x {
