@@ -3,6 +3,8 @@ use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
 pub struct CarouselItemProps {
+    /// Slide index (0‑based)
+    pub index: usize,
     #[props(into, default)]
     pub class: String,
     pub children: Element,
@@ -14,16 +16,9 @@ pub struct CarouselItemProps {
 pub fn CarouselItem(props: CarouselItemProps) -> Element {
     let ctx = use_context::<CarouselContext>();
     let current_index = ctx.current_index;
+    let index = props.index;
 
-    // We need to track our own index; use a hook-based counter
-    let index = use_hook(|| {
-        // This will be set properly by the parent via key
-        0usize
-    });
-
-    let is_active = use_memo(move || {
-        current_index() == index
-    });
+    let is_active = use_memo(move || current_index() == index);
 
     let min_class = match ctx.orientation {
         crate::carousel::CarouselOrientation::Horizontal => "min-w-0 shrink-0",

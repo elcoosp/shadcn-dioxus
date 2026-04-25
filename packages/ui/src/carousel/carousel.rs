@@ -33,6 +33,8 @@ pub struct CarouselProps {
     pub auto_play: bool,
     #[props(default = 5000)]
     pub auto_play_interval_ms: u64,
+    /// Total number of slides (required for internal logic)
+    pub total: usize,
     #[props(into, default)]
     pub class: String,
     pub children: Element,
@@ -43,7 +45,7 @@ pub struct CarouselProps {
 #[component]
 pub fn Carousel(props: CarouselProps) -> Element {
     let mut current_index = use_signal(|| 0);
-    let total = use_signal(|| 0usize);
+    let total = use_signal(|| props.total);
     let auto_play = props.auto_play;
     let auto_play_interval_ms = props.auto_play_interval_ms;
 

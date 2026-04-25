@@ -11,6 +11,8 @@ pub struct StepperContext {
 pub struct StepperProps {
     #[props(default = 0)]
     pub default_step: usize,
+    /// Total number of steps (required for proper navigation)
+    pub total_steps: usize,
     pub children: Element,
     #[props(extends = GlobalAttributes)]
     pub attributes: Vec<Attribute>,
@@ -19,7 +21,7 @@ pub struct StepperProps {
 #[component]
 pub fn Stepper(props: StepperProps) -> Element {
     let mut current_step = use_signal(|| props.default_step);
-    let total_steps = use_signal(|| 0usize);
+    let total_steps = use_signal(|| props.total_steps);
     let set_step = use_callback(move |step: usize| {
         if step < total_steps() { current_step.set(step); }
     });

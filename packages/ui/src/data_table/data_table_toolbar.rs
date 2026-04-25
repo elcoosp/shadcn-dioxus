@@ -65,7 +65,7 @@ pub fn DataTableToolbar(props: DataTableToolbarProps) -> Element {
                             "Columns"
                         }
                     }
-                    DropdownMenuContent { align: "end".to_string(),
+                    DropdownMenuContent { side: "bottom".to_string(),
                         {
                             let cols = columns();
                             let vis = column_visibility();

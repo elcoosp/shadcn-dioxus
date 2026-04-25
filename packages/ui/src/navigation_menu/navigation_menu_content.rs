@@ -49,6 +49,7 @@ pub fn NavigationMenuContent(props: NavigationMenuContentProps) -> Element {
             ..props.attributes,
             div {
                 class: INNER_BASE,
+                {props.children}
             }
         }
     }

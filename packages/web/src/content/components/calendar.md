@@ -12,7 +12,7 @@ component: true
 use ui::Calendar;
 
 rsx! {
-    Calendar {}
+    Calendar { default_year: 2025, default_month: 5 }
 }
 ```
 
