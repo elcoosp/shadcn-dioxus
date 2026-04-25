@@ -9,10 +9,8 @@ pub fn DataTableBody() -> Element {
     let mut selected_rows = ctx.selected_rows;
     let columns = ctx.columns;
 
-    // Use total filtered count to decide emptiness reactively.
-    let total = (ctx.total_filtered)();
-
-    if total == 0 {
+    // Reactively read the memo to decide emptiness
+    if (ctx.total_filtered)() == 0 {
         return rsx! {
             crate::table::TableBody {
                 crate::table::TableRow {

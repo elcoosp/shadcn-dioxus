@@ -77,7 +77,7 @@ pub fn DataTable(props: DataTableProps) -> Element {
         cols.iter().filter(|c| vis.contains(&c.id)).map(|c| c.id.clone()).collect::<Vec<_>>()
     });
 
-    let processed_rows = use_memo(move || {
+    let processed_rows: Memo<Vec<(usize, Vec<String>)>> = use_memo(move || {
         let all_rows = rows();
         let mut result: Vec<(usize, Vec<String>)> = all_rows.into_iter().enumerate().collect();
         let filter = filter_text();
@@ -106,7 +106,7 @@ pub fn DataTable(props: DataTableProps) -> Element {
         result
     });
 
-    let total_filtered = use_memo(move || processed_rows().len());
+    let total_filtered: Memo<usize> = use_memo(move || processed_rows().len());
 
     use_context_provider(|| DataTableContext {
         columns: columns.clone(),
