@@ -13,7 +13,6 @@ pub struct BreadcrumbProps {
 pub fn Breadcrumb(props: BreadcrumbProps) -> Element {
     rsx! {
         nav {
-            "data-slot": "breadcrumb",
             "aria-label": "breadcrumb",
             class: "{props.class}",
             ..props.attributes,

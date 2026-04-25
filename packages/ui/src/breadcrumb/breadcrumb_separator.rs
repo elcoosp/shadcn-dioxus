@@ -11,9 +11,7 @@ pub fn BreadcrumbSeparator(props: BreadcrumbSeparatorProps) -> Element {
     rsx! {
         span {
             class: "text-muted-foreground mx-1 {props.class}",
-            role: "presentation",
             "aria-hidden": "true",
-            "data-slot": "breadcrumb-separator",
             "/"
         }
     }

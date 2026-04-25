@@ -127,17 +127,8 @@ fn AccordionMultiple() -> Element {
     }
 }
 
-fn BreadcrumbDefault() -> Element {
-    rsx! { div { "Breadcrumb demo (working)" } }
-}
 
-fn BreadcrumbSeparator() -> Element {
-    rsx! { div { "Breadcrumb separator demo (working)" } }
-}
 
-fn BreadcrumbCollapsible() -> Element {
-    rsx! { div { "Collapsible breadcrumb demo (working)" } }
-}
 
 fn CalendarDefault() -> Element {
     rsx! {

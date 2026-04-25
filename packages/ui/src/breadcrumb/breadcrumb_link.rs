@@ -17,7 +17,6 @@ pub fn BreadcrumbLink(props: BreadcrumbLinkProps) -> Element {
         a {
             class: "transition-colors hover:text-foreground {props.class}",
             href: props.href.as_deref().unwrap_or("#"),
-            "data-slot": "breadcrumb-link",
             ..props.attributes,
             {props.children}
         }

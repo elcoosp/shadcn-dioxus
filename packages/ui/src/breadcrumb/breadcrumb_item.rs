@@ -12,7 +12,6 @@ pub fn BreadcrumbItem(props: BreadcrumbItemProps) -> Element {
     rsx! {
         li {
             class: "inline-flex items-center gap-1.5 {props.class}",
-            "data-slot": "breadcrumb-item",
             {props.children}
         }
     }
