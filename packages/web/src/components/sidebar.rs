@@ -9,7 +9,7 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
 
     rsx! {
         // Mobile toggle button
-        div { class: "md:hidden fixed top-3 left-3 z-50",
+        div { class: "md:hidden fixed top-2 left-2 z-50",
             Button {
                 variant: ui::ButtonVariant::Outline,
                 size: ui::ButtonSize::IconSm,
