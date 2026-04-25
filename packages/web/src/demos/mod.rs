@@ -229,7 +229,6 @@ fn CarouselDefault() -> Element {
         }
     }
 }
-}
 
 fn CarouselAutoplay() -> Element {
     rsx! {
@@ -246,7 +245,6 @@ fn CarouselAutoplay() -> Element {
             CarouselIndicators {}
         }
     }
-}
 }
 
 fn CarouselOrientation() -> Element {
@@ -273,7 +271,6 @@ fn CarouselOrientation() -> Element {
             CarouselNext {}
         }
     }
-}
 }
 
 fn ChartBarChart() -> Element {

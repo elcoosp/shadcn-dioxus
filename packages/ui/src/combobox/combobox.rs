@@ -40,18 +40,17 @@ pub fn Combobox(props: ComboboxProps) -> Element {
         }
     });
 
-    let input_class = format!("{} {}", INPUT_CLASS, props.class);
     let has_results = !filtered().is_empty();
     let has_search = !search().is_empty();
 
     rsx! {
         div {
-            "data-slot": "combobox",
-            class: "{input_class}",
+            class: "relative {props.class}",
             ..props.attributes,
             input {
                 r#type: "text",
                 "data-slot": "combobox-input",
+                class: INPUT_CLASS,
                 placeholder: "{props.placeholder}",
                 disabled: props.disabled,
                 value: "{search}",
@@ -63,23 +62,35 @@ pub fn Combobox(props: ComboboxProps) -> Element {
                     "role": "listbox",
                     class: CONTENT_CLASS,
                     div { class: "p-1 overflow-y-auto max-h-[300px]",
-                        for option in filtered().iter() {
-                            div {
-                                key: "{option.value}",
-                                "data-slot": "combobox-item",
-                                role: "option",
-                                "data-value": "{option.value}",
-                                tabindex: "0",
-                                class: ITEM_CLASS,
-                                onclick: move |_| search.set(String::new()),
-                                "{option.label}"
+                        {
+                            let filtered_clone = filtered().clone();
+                            rsx! {
+                                for option in filtered_clone.iter() {
+                                    {
+                                        let opt = option.clone();
+                                        rsx! {
+                                            div {
+                                                key: "{opt.value}",
+                                                "data-slot": "combobox-item",
+                                                role: "option",
+                                                "data-value": "{opt.value}",
+                                                tabindex: "0",
+                                                class: ITEM_CLASS,
+                                                onclick: move |_| search.set(opt.value.clone()),
+                                                "{opt.label}"
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
             if has_search && !has_results {
-                div { class: "py-6 text-center text-sm text-muted-foreground", "No results found." }
+                div { class: "absolute left-0 top-full mt-1 w-full py-6 text-center text-sm text-muted-foreground border rounded-md bg-popover shadow-md z-50",
+                    "No results found."
+                }
             }
         }
     }
