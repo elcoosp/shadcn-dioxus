@@ -130,6 +130,66 @@ fn AccordionMultiple() -> Element {
 
 
 
+fn BreadcrumbDefault() -> Element {
+    rsx! {
+        Breadcrumb {
+            BreadcrumbList {
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Home" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Components" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbPage { "Breadcrumb" }
+                }
+            }
+        }
+    }
+}
+
+fn BreadcrumbSeparator() -> Element {
+    rsx! {
+        Breadcrumb {
+            BreadcrumbList {
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Settings" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Profile" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbPage { "Edit" }
+                }
+            }
+        }
+    }
+}
+
+fn BreadcrumbCollapsible() -> Element {
+    rsx! {
+        Breadcrumb {
+            BreadcrumbList {
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Home" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    span { "…" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbPage { "Current Page" }
+                }
+            }
+        }
+    }
+}
+
 fn CalendarDefault() -> Element {
     rsx! {
         ui::Calendar { default_year: 2025, default_month: 4 }
