@@ -12,7 +12,7 @@ pub fn ToastViewport() -> Element {
             class: "fixed bottom-0 right-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:flex-col md:max-w-[420px]",
             tabindex: "-1",
             for toast_signal in toasts.iter() {
-                Toast { key: "{toast_signal.with(|t| t.id)}", toast: toast_signal.clone() }
+                Toast { key: "{toast_signal.id}", toast: Signal::new(toast_signal.clone()) }
             }
         }
     }

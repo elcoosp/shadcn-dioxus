@@ -1,7 +1,8 @@
+use std::sync::atomic::{AtomicUsize, Ordering};
 use dioxus::prelude::*;
 use super::toast::{ToastData, ToastVariant};
 
-static TOAST_ID_COUNTER: Signal<usize> = Signal::global(|| 0);
+static TOAST_ID_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
 /// Global signal holding all active toasts.
 /// Safe because `GlobalSignal` does not require a component scope.
@@ -13,11 +14,7 @@ pub fn get_toasts() -> Vec<ToastData> {
 
 /// Add a toast notification
 pub fn add_toast(title: String, description: Option<String>, variant: ToastVariant, duration: u64) {
-    let id = TOAST_ID_COUNTER.with_mut(|c| {
-        let v = *c;
-        *c = v + 1;
-        v
-    });
+    let id = TOAST_ID_COUNTER.fetch_add(1, Ordering::Relaxed);
     let toast = ToastData {
         id,
         title,

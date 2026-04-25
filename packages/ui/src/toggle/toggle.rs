@@ -60,7 +60,7 @@ pub struct ToggleProps {
 pub fn Toggle(props: ToggleProps) -> Element {
     let mut internal_state = use_signal(|| props.default_pressed);
     let get_pressed = move || {
-        props.pressed.map(|s| s()).unwrap_or_else(&*internal_state)
+        props.pressed.map(|s| s()).unwrap_or_else(|| internal_state())
     };
     let mut set_pressed = move |new_state: bool| {
         if let Some(mut controlled) = props.pressed {

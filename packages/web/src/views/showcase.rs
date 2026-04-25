@@ -81,7 +81,7 @@ pub fn Showcase() -> Element {
             DatePicker { placeholder: "Pick a date" }
 
             {section_heading("Stepper")}
-            Stepper { default_step: 0,
+            Stepper { default_step: 0, total_steps: 3,
                 StepperItem { step: 0,
                     StepperTitle { "Account" }
                     StepperDescription { "Create your account to get started." }
@@ -103,6 +103,7 @@ pub fn Showcase() -> Element {
                 }
             }
 
+            // Carousel removed because it's not ready for showcase; replaced with static example
             {section_heading("Coming Soon")}
             div { class: "grid grid-cols-1 gap-6 sm:grid-cols-2",
                 Card {

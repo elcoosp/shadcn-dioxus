@@ -63,7 +63,7 @@ pub fn Dialog(props: DialogProps) -> Element {
 
     // Respect controlled vs uncontrolled
     let get_open = use_memo(move || {
-        props.open.map(|s| s()).unwrap_or_else(&*internal_open)
+        props.open.map(|s| s()).unwrap_or_else(|| internal_open())
     });
 
     let set_open = use_callback(move |new_state: bool| {
