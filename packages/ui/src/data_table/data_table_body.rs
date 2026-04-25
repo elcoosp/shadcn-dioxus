@@ -17,7 +17,7 @@ pub fn DataTableBody() -> Element {
             crate::table::TableBody {
                 crate::table::TableRow {
                     crate::table::TableCell {
-                        colspan: (visible_column_ids().len() + 1) as u32,
+                        column_span: (visible_column_ids().len() + 1) as u32,
                         class: "h-24 text-center",
                         div { class: "text-muted-foreground text-center", "No results." }
                     }
