@@ -5,6 +5,9 @@ use ui::{Button, ButtonVariant};
 
 #[component]
 pub fn FullLayout() -> Element {
+    let current_route = use_route::<Route>();
+    let route_key = format!("full-{:?}", current_route);
+
     rsx! {
         Hero {},
         div {
@@ -48,6 +51,9 @@ pub fn FullLayout() -> Element {
                 }
             }
         },
-        Outlet::<Route> {}
+        // Wrap Outlet in a div with a route-dependent key to force remount
+        div { key: "{route_key}",
+            Outlet::<Route> {}
+        }
     }
 }
