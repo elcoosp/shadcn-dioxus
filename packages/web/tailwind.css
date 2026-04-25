@@ -159,3 +159,22 @@
     --header-height: calc(var(--spacing) * 14);
   }
 }
+
+@layer utilities {
+  /* Make all pre elements inside markdown content scrollable */
+  .doc-content pre {
+    overflow-x: auto;
+    position: relative;
+  }
+  /* Add horizontal scrollbar styling */
+  .doc-content pre::-webkit-scrollbar {
+    height: 6px;
+  }
+  .doc-content pre::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .doc-content pre::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 3px;
+  }
+}
