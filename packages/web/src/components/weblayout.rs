@@ -7,7 +7,6 @@ const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css", CssAssetOptions::new(
 #[component]
 pub fn WebNavbar() -> Element {
     let route = use_route::<Route>();
-    let route_key = format!("{:?}", route);
 
     let is_docs = matches!(&route,
         Route::ComponentDoc { .. } |
@@ -34,11 +33,11 @@ pub fn WebNavbar() -> Element {
             div { class: "grow",
                 if is_docs {
                     SidebarLayout {
-                        Outlet::<Route> { key: "{route_key}" }
+                        Outlet::<Route> {}
                     }
                 } else {
                     FullLayout {
-                        Outlet::<Route> { key: "{route_key}" }
+                        Outlet::<Route> {}
                     }
                 }
             }
