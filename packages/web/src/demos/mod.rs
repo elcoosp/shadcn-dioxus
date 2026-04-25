@@ -1924,7 +1924,7 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "calendar-with-selected-date" => Some(rsx! { CalendarWithSelectedDate {} }),
         "carousel-default" => Some(rsx! { CarouselDefault {} }),
         "carousel-autoplay" => Some(rsx! { CarouselAutoplay {} }),
-        "carousel-orientation" => Some(rsx! { CarouselOrientation {} }),
+        "carousel-orientation" => Some(rsx! { CarouselOrientationDemo {} }),
         "chart-bar-chart" => Some(rsx! { ChartBarChart {} }),
         "chart-custom-colors" => Some(rsx! { ChartCustomColors {} }),
         "collapsible-default" => Some(rsx! { CollapsibleDefault {} }),
