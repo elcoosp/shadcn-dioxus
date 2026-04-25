@@ -56,7 +56,7 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
                 div { class: "py-4",
                     h4 { class: "text-sm font-semibold", "Components" }
                 }
-                SidebarNav { active_slug }
+                SidebarNav { active_slug: active_slug.clone() }
             }
         }
 
@@ -89,7 +89,7 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
                     }
                 }
                 div { class: "py-4", h4 { class: "text-sm font-semibold", "Components" } }
-                SidebarNav { active_slug large_text: true }
+                SidebarNav { active_slug: active_slug.clone(), large_text: true }
             }
         }
     }
