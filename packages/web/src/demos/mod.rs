@@ -205,20 +205,20 @@ fn CalendarWithSelectedDate() -> Element {
 
 fn CarouselDefault() -> Element {
     rsx! {
-        Carousel { total: 3, auto_play: false, class: "w-full max-w-xs",
+        Carousel { total: 3, auto_play: false, width: "100%".to_string(), class: "max-w-xs",
             CarouselContent {
-                CarouselItem { index: 0, class: "basis-full",
-                    div { class: "flex h-40 items-center justify-center rounded-md bg-muted",
+                CarouselItem { index: 0,
+                    div { class: "flex h-32 items-center justify-center rounded-md bg-muted",
                         span { class: "text-2xl font-semibold", "1" }
                     }
                 }
-                CarouselItem { index: 1, class: "basis-full",
-                    div { class: "flex h-40 items-center justify-center rounded-md bg-muted",
+                CarouselItem { index: 1,
+                    div { class: "flex h-32 items-center justify-center rounded-md bg-muted",
                         span { class: "text-2xl font-semibold", "2" }
                     }
                 }
-                CarouselItem { index: 2, class: "basis-full",
-                    div { class: "flex h-40 items-center justify-center rounded-md bg-muted",
+                CarouselItem { index: 2,
+                    div { class: "flex h-32 items-center justify-center rounded-md bg-muted",
                         span { class: "text-2xl font-semibold", "3" }
                     }
                 }
@@ -229,14 +229,15 @@ fn CarouselDefault() -> Element {
         }
     }
 }
+}
 
 fn CarouselAutoplay() -> Element {
     rsx! {
-        Carousel { total: 3, auto_play: true, auto_play_interval_ms: 1500, class: "w-full max-w-xs",
+        Carousel { total: 3, auto_play: true, auto_play_interval_ms: 1500, width: "100%".to_string(), class: "max-w-xs",
             CarouselContent {
                 for i in 0..3 {
-                    CarouselItem { index: i, class: "basis-full",
-                        div { class: "flex h-40 items-center justify-center rounded-md bg-muted",
+                    CarouselItem { index: i,
+                        div { class: "flex h-32 items-center justify-center rounded-md bg-muted",
                             span { class: "text-2xl font-semibold", "{i + 1}" }
                         }
                     }
@@ -246,16 +247,25 @@ fn CarouselAutoplay() -> Element {
         }
     }
 }
+}
 
 fn CarouselOrientation() -> Element {
     rsx! {
-        Carousel { orientation: CarouselOrientation::Vertical, total: 3, class: "h-48",
+        Carousel { orientation: CarouselOrientation::Vertical, total: 3, height: "16rem".to_string(), class: "w-48",
             CarouselContent {
-                for i in 0..3 {
-                    CarouselItem { index: i, class: "basis-full",
-                        div { class: "flex h-32 items-center justify-center rounded-md bg-muted",
-                            span { class: "text-xl font-semibold", "{i + 1}" }
-                        }
+                CarouselItem { index: 0,
+                    div { class: "flex h-full items-center justify-center rounded-md bg-muted",
+                        span { class: "text-xl font-semibold", "1" }
+                    }
+                }
+                CarouselItem { index: 1,
+                    div { class: "flex h-full items-center justify-center rounded-md bg-muted",
+                        span { class: "text-xl font-semibold", "2" }
+                    }
+                }
+                CarouselItem { index: 2,
+                    div { class: "flex h-full items-center justify-center rounded-md bg-muted",
+                        span { class: "text-xl font-semibold", "3" }
                     }
                 }
             }
@@ -263,6 +273,7 @@ fn CarouselOrientation() -> Element {
             CarouselNext {}
         }
     }
+}
 }
 
 fn ChartBarChart() -> Element {
