@@ -26,37 +26,38 @@ pub fn Sidebar(#[props(into, default)] active_slug: String) -> Element {
             }
         }
 
-        // Desktop sidebar content
-        div { class: "flex flex-col h-full py-6 px-4",
-            div {
-                class: "pb-4",
-                h4 { class: "text-sm font-semibold", "Sections" }
-            }
-            div {
-                class: "flex flex-col gap-1",
-                SidebarLinkv2 {
-                    to: Route::InstallationView {  }.into(),
-                    is_active: active_slug == "installation",
-                    "Installation"
+        // Sidebar content with minimal padding
+        div { class: "flex flex-col h-full",
+            // Top sections (Sections / Components heading)
+            div { class: "px-4 pt-6",
+                div { class: "pb-4",
+                    h4 { class: "text-sm font-semibold", "Sections" }
                 }
-                SidebarLinkv2 {
-                    to: Route::ComponentView {  }.into(),
-                    is_active: active_slug == "components",
-                    div { "Components" }
+                div { class: "flex flex-col gap-1",
+                    SidebarLinkv2 {
+                        to: Route::InstallationView {  }.into(),
+                        is_active: active_slug == "installation",
+                        "Installation"
+                    }
+                    SidebarLinkv2 {
+                        to: Route::ComponentView {  }.into(),
+                        is_active: active_slug == "components",
+                        div { "Components" }
+                    }
+                    SidebarLinkv2 {
+                        to: Route::ThemingView {  }.into(),
+                        is_active: active_slug == "theming",
+                        div { "Theming" }
+                    }
                 }
-                SidebarLinkv2 {
-                    to: Route::ThemingView {  }.into(),
-                    is_active: active_slug == "theming",
-                    div { "Theming" }
+
+                div { class: "py-4",
+                    h4 { class: "text-sm font-semibold", "Components" }
                 }
             }
 
-            div { class: "py-4",
-                h4 { class: "text-sm font-semibold", "Components" }
-            }
-
-            // Scrollable component list
-            div { class: "flex-1 overflow-y-auto",
+            // Scrollable component list with minimal horizontal padding
+            div { class: "flex-1 overflow-y-auto px-4 pb-6",
                 SidebarNav { active_slug: active_slug.clone() }
             }
         }

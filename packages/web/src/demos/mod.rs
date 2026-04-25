@@ -252,7 +252,7 @@ fn CarouselAutoplay() -> Element {
     }
 }
 
-fn CarouselOrientation() -> Element {
+fn CarouselOrientationDemo() -> Element {
     rsx! {
         Carousel { orientation: CarouselOrientation::Vertical, total: 3, height: "16rem".to_string(), class: "w-48",
             CarouselContent {
