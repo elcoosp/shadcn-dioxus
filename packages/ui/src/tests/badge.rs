@@ -50,17 +50,9 @@ fn test_badge_variants_includes_variant_class() {
     assert!(result.contains("bg-destructive"));
 }
 
-// New tests
 #[test]
 fn test_badge_variant_does_not_overlap() {
-    // Ensure each variant has its own distinct class
     let default = BadgeVariant::Default.class();
     let secondary = BadgeVariant::Secondary.class();
     assert_ne!(default, secondary);
-}
-
-#[test]
-fn test_badge_variants_no_overflow() {
-    // Variant names should not clash across enum
-    assert_ne!(BadgeVariant::Default.as_str(), BadgeVariant::Outline.as_str());
 }

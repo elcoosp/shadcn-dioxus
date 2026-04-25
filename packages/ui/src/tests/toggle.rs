@@ -21,13 +21,11 @@ fn test_toggle_variants_includes_base() {
 
 #[test]
 fn test_toggle_all_variants_distinct() {
-    let variants = [ToggleVariant::Default, ToggleVariant::Outline];
-    assert_ne!(variants[0].class(), variants[1].class());
+    assert_ne!(ToggleVariant::Default.class(), ToggleVariant::Outline.class());
 }
 
 #[test]
 fn test_toggle_all_sizes_distinct() {
-    let sizes = [ToggleSize::Default, ToggleSize::Sm, ToggleSize::Lg];
-    assert_ne!(sizes[0].class(), sizes[1].class());
-    assert_ne!(sizes[1].class(), sizes[2].class());
+    assert_ne!(ToggleSize::Default.class(), ToggleSize::Sm.class());
+    assert_ne!(ToggleSize::Sm.class(), ToggleSize::Lg.class());
 }

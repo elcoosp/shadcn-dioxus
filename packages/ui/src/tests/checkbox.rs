@@ -20,5 +20,5 @@ fn test_checkbox_into_bool() {
     let unchecked: bool = CheckboxState::Unchecked.into();
     assert!(!unchecked);
     let indeterminate: bool = CheckboxState::Indeterminate.into();
-    assert!(indeterminate); // Indeterminate is truthy
+    assert!(indeterminate);
 }

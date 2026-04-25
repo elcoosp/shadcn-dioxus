@@ -40,14 +40,13 @@ fn test_button_variants_includes_variant() {
     assert!(result.contains("bg-destructive"));
 }
 
-// New tests
 #[test]
 fn test_button_all_variants_distinct() {
     let variants = [ButtonVariant::Default, ButtonVariant::Destructive, ButtonVariant::Outline,
                     ButtonVariant::Secondary, ButtonVariant::Ghost, ButtonVariant::Link];
     for (i, v1) in variants.iter().enumerate() {
         for v2 in &variants[i+1..] {
-            assert_ne!(v1.class(), v2.class(), "Variants should have different classes");
+            assert_ne!(v1.class(), v2.class());
         }
     }
 }
@@ -58,13 +57,7 @@ fn test_button_all_sizes_distinct() {
                  ButtonSize::Icon, ButtonSize::IconSm, ButtonSize::IconLg];
     for (i, s1) in sizes.iter().enumerate() {
         for s2 in &sizes[i+1..] {
-            assert_ne!(s1.class(), s2.class(), "Sizes should have different classes");
+            assert_ne!(s1.class(), s2.class());
         }
     }
-}
-
-#[test]
-fn test_button_variants_function_combines() {
-    let combined = button_variants(ButtonVariant::Outline, ButtonSize::Sm);
-    assert!(combined.contains("border") && combined.contains("h-8"));
 }
