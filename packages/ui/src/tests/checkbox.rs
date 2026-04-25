@@ -1,5 +1,4 @@
 use crate::CheckboxState;
-use std::ops::Not;
 
 #[test]
 fn test_checkbox_default_is_unchecked() {

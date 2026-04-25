@@ -1,2 +1,2 @@
 #[test]
-fn test_table_placeholder() { assert!(true); }
+fn test_placeholder() { assert!(true); }
