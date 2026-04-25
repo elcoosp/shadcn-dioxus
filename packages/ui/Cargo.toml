@@ -10,3 +10,6 @@ lucide-dioxus = { version = "2", features = ["all-icons"] }
 tailwind_fuse = { git = "https://github.com/slack2450/tailwind-fuse", branch = "main" }
 [lints]
 workspace = true
+
+[dev-dependencies]
+proptest = "1"

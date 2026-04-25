@@ -53,3 +53,4 @@ mod scroll_area;
 mod separator;
 mod toast;
 mod calendar;
+mod proptest;
