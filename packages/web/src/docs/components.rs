@@ -2,105 +2,164 @@
 pub struct ComponentMeta {
     pub slug: &'static str,
     pub title: &'static str,
+    pub new: bool,
 }
 /// All available components. Components that do not exist are handled as well with a dedicated 404 page
 const COMPONENTS: &[ComponentMeta] = &[
     ComponentMeta {
         slug: "aspect-ratio",
-        title: "Aspect Ratio",
+        title: "Aspect Ratio",        new: false
+
     },
     ComponentMeta {
         slug: "avatar",
-        title: "Avatar",
+        title: "Avatar",        new: false
+
     },
     ComponentMeta {
         slug: "badge",
-        title: "Badge",
+        title: "Badge",        new: false
+
     },
     ComponentMeta {
         slug: "button",
-        title: "Button",
+        title: "Button",        new: false
+
     },
     ComponentMeta {
         slug: "button-group",
-        title: "Button Group",
+        title: "Button Group",        new: false
+
     },
     ComponentMeta {
         slug: "card",
-        title: "Card",
+        title: "Card",        new: false
+
     },
     ComponentMeta {
         slug: "checkbox",
-        title: "Checkbox",
+        title: "Checkbox",        new: false
+
     },
     ComponentMeta {
         slug: "dialog",
-        title: "Dialog",
+        title: "Dialog",        new: false
+
     },
     ComponentMeta {
         slug: "empty",
-        title: "Empty",
+        title: "Empty",        new: false
+
     },
     ComponentMeta {
         slug: "field",
-        title: "Field",
+        title: "Field",        new: false
+
     },
     ComponentMeta {
         slug: "input",
-        title: "Input",
+        title: "Input",        new: false
+
     },
     ComponentMeta {
         slug: "item",
-        title: "Item",
+        title: "Item",        new: false
+
     },
     ComponentMeta {
         slug: "kbd",
-        title: "Kbd",
+        title: "Kbd",        new: false
+
     },
     ComponentMeta {
         slug: "label",
-        title: "Label",
+        title: "Label",        new: false
+
     },
     ComponentMeta {
         slug: "native-select",
-        title: "Native Select",
+        title: "Native Select",        new: false
+
     },
     ComponentMeta {
         slug: "separator",
-        title: "Separator",
+        title: "Separator",        new: false
+
     },
     ComponentMeta {
         slug: "skeleton",
-        title: "Skeleton",
+        title: "Skeleton",        new: false
+
     },
     ComponentMeta {
         slug: "spinner",
-        title: "Spinner",
+        title: "Spinner",        new: false
+
     },
     ComponentMeta {
         slug: "switch",
-        title: "Switch",
+        title: "Switch",        new: false
+
     },
     ComponentMeta {
         slug: "textarea",
-        title: "Textarea",
+        title: "Textarea",        new: false
+
     },
     ComponentMeta {
         slug: "toggle",
-        title: "Toggle",
+        title: "Toggle",        new: false
+
     },
     ComponentMeta {
         slug: "alert",
-        title: "Alert",
+        title: "Alert",        new: false
+
     },
     ComponentMeta {
         slug: "input-group",
-        title: "Input Group",
+        title: "Input Group",        new: false
+
     },
     ComponentMeta {
         slug: "sheet",
-        title: "Sheet",
+        title: "Sheet",        new: false
+
     },
+    ComponentMeta { slug: "alert", title: "Alert", new: true },
+    ComponentMeta { slug: "alert_dialog", title: "Alert Dialog", new: true },
+    ComponentMeta { slug: "accordion", title: "Accordion", new: true },
+    ComponentMeta { slug: "breadcrumb", title: "Breadcrumb", new: true },
+    ComponentMeta { slug: "calendar", title: "Calendar", new: true },
+    ComponentMeta { slug: "carousel", title: "Carousel", new: true },
+    ComponentMeta { slug: "chart", title: "Chart", new: true },
+    ComponentMeta { slug: "collapsible", title: "Collapsible", new: true },
+    ComponentMeta { slug: "color_picker", title: "Color Picker", new: true },
+    ComponentMeta { slug: "combobox", title: "Combobox", new: true },
+    ComponentMeta { slug: "command", title: "Command Palette", new: true },
+    ComponentMeta { slug: "context_menu", title: "Context Menu", new: true },
+    ComponentMeta { slug: "data_table", title: "Data Table", new: true },
+    ComponentMeta { slug: "date_picker", title: "Date Picker", new: true },
+    ComponentMeta { slug: "drawer", title: "Drawer", new: true },
+    ComponentMeta { slug: "dropdown_menu", title: "Dropdown Menu", new: true },
+    ComponentMeta { slug: "hover_card", title: "Hover Card", new: true },
+    ComponentMeta { slug: "input_otp", title: "Input OTP", new: true },
+    ComponentMeta { slug: "menubar", title: "Menubar", new: true },
+    ComponentMeta { slug: "navigation_menu", title: "Navigation Menu", new: true },
+    ComponentMeta { slug: "pagination", title: "Pagination", new: true },
+    ComponentMeta { slug: "popover", title: "Popover", new: true },
+    ComponentMeta { slug: "radio_group", title: "Radio Group", new: true },
+    ComponentMeta { slug: "resizable", title: "Resizable", new: true },
+    ComponentMeta { slug: "scroll_area", title: "Scroll Area", new: true },
+    ComponentMeta { slug: "select", title: "Select", new: true },
+    ComponentMeta { slug: "sidebar", title: "Sidebar", new: true },
+    ComponentMeta { slug: "slider", title: "Slider", new: true },
+    ComponentMeta { slug: "stepper", title: "Stepper", new: true },
+    ComponentMeta { slug: "table", title: "Table", new: true },
+    ComponentMeta { slug: "tabs", title: "Tabs", new: true },
+    ComponentMeta { slug: "toggle_group", title: "Toggle Group", new: true },
+    ComponentMeta { slug: "tooltip", title: "Tooltip", new: true },
+
 ];
 pub fn get_all_components() -> &'static [ComponentMeta] {
     COMPONENTS
