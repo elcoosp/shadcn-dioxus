@@ -51,7 +51,7 @@ pub fn DatePicker(props: DatePickerProps) -> Element {
                     }
                 }
                 crate::PopoverContent {
-                    class: "!w-auto p-0",
+                    class: "p-0",
                     crate::date_picker::DatePickerContent {}
                 }
             }
