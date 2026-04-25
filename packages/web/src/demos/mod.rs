@@ -9,6 +9,247 @@ use ui::*;
 //  Helper demo components for newer UI elements
 // -----------------------------------------------------------------------------
 
+
+// Auto-generated placeholder demos
+fn UaccordionUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for accordion-demo"
+        }
+    }
+}
+fn UalertUdefaultDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for alert-default"
+        }
+    }
+}
+fn UalertUdialogUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for alert-dialog-demo"
+        }
+    }
+}
+fn UcalendarUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for calendar-demo"
+        }
+    }
+}
+fn UcarouselUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for carousel-demo"
+        }
+    }
+}
+fn UchartUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for chart-demo"
+        }
+    }
+}
+fn UcollapsibleUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for collapsible-demo"
+        }
+    }
+}
+fn UcolorUpickerUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for color-picker-demo"
+        }
+    }
+}
+fn UcomboboxUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for combobox-demo"
+        }
+    }
+}
+fn UcommandUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for command-demo"
+        }
+    }
+}
+fn UcontextUmenuUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for context-menu-demo"
+        }
+    }
+}
+fn UdataUtableUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for data-table-demo"
+        }
+    }
+}
+fn UdataUtableUsorting_&UfilteringDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for data-table-sorting-&-filtering"
+        }
+    }
+}
+fn UdateUpickerUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for date-picker-demo"
+        }
+    }
+}
+fn UdrawerUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for drawer-demo"
+        }
+    }
+}
+fn UdropdownUmenuUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for dropdown-menu-demo"
+        }
+    }
+}
+fn UhoverUcardUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for hover-card-demo"
+        }
+    }
+}
+fn UinputUotpUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for input-otp-demo"
+        }
+    }
+}
+fn UmenubarUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for menubar-demo"
+        }
+    }
+}
+fn UnavigationUmenuUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for navigation-menu-demo"
+        }
+    }
+}
+fn UpaginationUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for pagination-demo"
+        }
+    }
+}
+fn UpopoverUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for popover-demo"
+        }
+    }
+}
+fn UradioUgroupUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for radio-group-demo"
+        }
+    }
+}
+fn UresizableUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for resizable-demo"
+        }
+    }
+}
+fn UscrollUareaUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for scroll-area-demo"
+        }
+    }
+}
+fn UselectUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for select-demo"
+        }
+    }
+}
+fn UsidebarUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for sidebar-demo"
+        }
+    }
+}
+fn UsliderUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for slider-demo"
+        }
+    }
+}
+fn UsliderUwithUmin/maxUstepsDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for slider-with-min/max-steps"
+        }
+    }
+}
+fn UstepperUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for stepper-demo"
+        }
+    }
+}
+fn UtableUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for table-demo"
+        }
+    }
+}
+fn UtabsUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for tabs-demo"
+        }
+    }
+}
+fn UtoggleUgroupUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for toggle-group-demo"
+        }
+    }
+}
+fn UtooltipUdemoDemo() -> Element {
+    rsx! {
+        div { class: "text-muted-foreground text-sm italic",
+            "Demo placeholder for tooltip-demo"
+        }
+    }
+}
+
 fn AlertDemo() -> Element {
     rsx! {
         Alert {
