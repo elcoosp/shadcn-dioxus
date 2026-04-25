@@ -1,5 +1,6 @@
 use dioxus::prelude::*;
 use crate::demos::get_demo;
+
 #[component]
 pub fn ComponentPreview(name: String) -> Element {
     match get_demo(&name) {

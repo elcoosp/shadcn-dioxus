@@ -24,30 +24,6 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
                         }
                         div {
                             class: "doc-content mt-12 space-y-4 [&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
-                            onmounted: move |_| {
-                                // Add copy buttons to all <pre> elements once the content is in the DOM
-                                document::eval(
-                                    r#"
-                                    (function() {
-                                        document.querySelectorAll('.doc-content pre').forEach(function(pre) {
-                                            if (pre.querySelector('.copy-btn')) return;
-                                            var btn = document.createElement('button');
-                                            btn.className = 'copy-btn';
-                                            btn.textContent = 'Copy';
-                                            btn.addEventListener('click', function() {
-                                                var code = pre.querySelector('code') || pre;
-                                                navigator.clipboard.writeText(code.textContent).then(function() {
-                                                    btn.textContent = 'Copied!';
-                                                    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
-                                                });
-                                            });
-                                            pre.style.position = 'relative';
-                                            pre.appendChild(btn);
-                                        });
-                                    })();
-                                    "#
-                                );
-                            },
                             Markdown {
                                 src: parsed.content.clone(),
                                 components: custom_components,
