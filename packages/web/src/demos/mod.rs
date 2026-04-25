@@ -130,6 +130,27 @@ fn AccordionMultiple() -> Element {
 
 
 
+fn BreadcrumbDemo() -> Element {
+    rsx! {
+        Breadcrumb {
+            BreadcrumbList {
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Home" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbLink { href: "#", "Components" }
+                }
+                BreadcrumbSeparator {}
+                BreadcrumbItem {
+                    BreadcrumbPage { "Breadcrumb" }
+                }
+            }
+        }
+    }
+}
+
+
 fn BreadcrumbDefault() -> Element {
     rsx! {
         Breadcrumb {
@@ -1915,6 +1936,7 @@ pub fn get_demo(name: &str) -> Option<Element> {
         "alert-dialog-with-row" => Some(rsx! { AlertDialogWithRow {} }),
         "accordion-default" => Some(rsx! { AccordionDefault {} }),
         "accordion-multiple" => Some(rsx! { AccordionMultiple {} }),
+        "breadcrumb-demo" => Some(rsx! { BreadcrumbDemo {} }),
         "breadcrumb-default" => Some(rsx! { BreadcrumbDefault {} }),
         "breadcrumb-separator" => Some(rsx! { BreadcrumbSeparator {} }),
         "breadcrumb-collapsible" => Some(rsx! { BreadcrumbCollapsible {} }),
