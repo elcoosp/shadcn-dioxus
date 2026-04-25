@@ -127,3 +127,5 @@ pub use stepper::*;
 
 #[cfg(test)]
 mod tests;
+mod code_copy;
+pub use code_copy::CodeCopyWrapper;

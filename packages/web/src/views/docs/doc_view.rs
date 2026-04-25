@@ -3,7 +3,7 @@ use crate::views::docs::utils::create_doc_components;
 use crate::Route;
 use dioxus::prelude::*;
 use dioxus_markdown::Markdown;
-use ui::ButtonVariant;
+use ui::{ButtonVariant, CodeCopyWrapper};
 
 #[component]
 pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
@@ -22,12 +22,14 @@ pub fn DocView(parsed_content: Option<ParsedDoc>) -> Element {
                         p { class: "text-muted-foreground text-balance text-[1.05rem] sm:text-base",
                             "{parsed.frontmatter.description}"
                         }
-                        div {
-                            class: "doc-content mt-12 space-y-4 [&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
-                            Markdown {
-                                src: parsed.content.clone(),
-                                components: custom_components,
-                                theme: "base16-ocean.dark",
+                        CodeCopyWrapper {
+                            div {
+                                class: "mt-12 space-y-4 [&>*>pre]:p-4 [&>*>pre]:rounded-md [&>*>pre]:bg-code! [&>*>pre]:text-code-foreground [&>pre]:overflow-x-auto",
+                                Markdown {
+                                    src: parsed.content.clone(),
+                                    components: custom_components,
+                                    theme: "base16-ocean.dark",
+                                }
                             }
                         }
                     }
